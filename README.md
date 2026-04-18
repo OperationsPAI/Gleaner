@@ -42,7 +42,7 @@ pip install -e .
 
 ### 1. Download and Extract the Dataset
 
-First, download the dataset from Zenodo at [https://doi.org/10.5281/zenodo.18428570](https://doi.org/10.5281/zenodo.18428570) and place the archive in your workspace.
+First, download the dataset from Zenodo at [https://doi.org/10.5281/zenodo.19637628](https://doi.org/10.5281/zenodo.19637628) and place the archive in your workspace.
 
 Then, extract the dataset archive:
 
