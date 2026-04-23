@@ -1,0 +1,32 @@
+cff-version: 1.2.0
+message: "If you use Gleaner in your research, please cite the following work."
+title: "Gleaner: A Semantically-Rich and Efficient Online Sampler for Microservice Diagnostics"
+type: software
+authors:
+  - family-names: Yang
+    given-names: Yifan
+  - family-names: Fang
+    given-names: Aoyang
+  - family-names: Zhang
+    given-names: Songhan
+  - family-names: He
+    given-names: Pinjia
+repository-code: "https://github.com/OperationsPAI/Gleaner"
+url: "https://github.com/OperationsPAI/Gleaner"
+preferred-citation:
+  type: article
+  title: "Gleaner: A Semantically-Rich and Efficient Online Sampler for Microservice Diagnostics"
+  authors:
+    - family-names: Yang
+      given-names: Yifan
+    - family-names: Fang
+      given-names: Aoyang
+    - family-names: Zhang
+      given-names: Songhan
+    - family-names: He
+      given-names: Pinjia
+  year: 2026
+  archive: arXiv
+  archive-prefix: arXiv
+  eprint: "2604.16810"
+  url: "https://arxiv.org/abs/2604.16810"

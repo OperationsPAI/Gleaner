@@ -123,3 +123,19 @@ Logs file contains a time series of log events.
 |    level     |  string  | log level (e.g., INFO, ERROR)                    |
 |   message    |  string  | log message                                      |
 |    attr.*    |    *     | other attributes of a log event                  |
+
+## Citation
+
+If you use Gleaner in your research, please cite:
+
+```bibtex
+@misc{yang2026gleanersemanticallyrichefficientonline,
+  title={Gleaner: A Semantically-Rich and Efficient Online Sampler for Microservice Diagnostics},
+  author={Yifan Yang and Aoyang FANG and Songhan Zhang and Pinjia He},
+  year={2026},
+  eprint={2604.16810},
+  archivePrefix={arXiv},
+  primaryClass={cs.SE},
+  url={https://arxiv.org/abs/2604.16810},
+}
+```
