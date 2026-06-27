@@ -13,7 +13,7 @@ This is the short action list. The full progress checklist is in `docs/ISSTA_AE_
 - [x] Reduced manifest and checksum files are committed and verified by `scripts/prepare_reduced_data.sh`.
 - [x] Reduced evidence docs are present in `ARTIFACT_README.md`, `REQUIREMENTS.md`, and `STATUS.md`.
 - [x] Local archive/package script and release packaging documentation are present.
-- [x] Commit `edcd33fe6fde8b4b4173ef6b23585d6e4108bca2` and commit-SHA archive `dist/gleaner-issta2026-ae-edcd33f.tar.gz` with checksum `dist/gleaner-issta2026-ae-edcd33f.tar.gz.sha256` were locally verified (`sha256sum -c`: OK). If a later tracked commit changes docs or artifact files, regenerate the package and use the newest `dist/gleaner-issta2026-ae-<short-sha>.tar.gz` upload candidate.
+- [x] Commit-SHA archive/checksum packaging was locally verified for commit `edcd33fe6fde8b4b4173ef6b23585d6e4108bca2` using `dist/gleaner-issta2026-ae-edcd33f.tar.gz` and sibling `.sha256` (`sha256sum -c`: OK). For final upload, use the newest package regenerated after the final tracked commit: `dist/gleaner-issta2026-ae-<short-sha>.tar.gz` plus `.sha256`.
 
 ## P0: Still Open Before AE Submission
 
