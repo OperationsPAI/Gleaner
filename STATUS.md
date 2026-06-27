@@ -33,7 +33,7 @@ Third-party reuse status is evidence-based in `docs/THIRD_PARTY.md`: ShapleyIQ a
 
 ## Artifacts Available
 
-The reduced artifact manifest and checksum set are present for existing reduced evidence and expected outputs. A local package can be generated and verified with `bash scripts/package_artifact.sh`; the resulting archive contains `ARCHIVE_MANIFEST.tsv` and has a sibling `.sha256` file under `dist/`. The final public archive upload, DOI/release metadata, and HotCRP link remain external P0 items. Do not treat the artifact as publicly archived or DOI-backed until those items are completed and verified.
+The reduced artifact manifest and checksum set are present for existing reduced evidence and expected outputs. A local package can be generated and verified with `bash scripts/package_artifact.sh`; the resulting archive contains `ARCHIVE_MANIFEST.tsv` and has a sibling `.sha256` file under `dist/`. Human external-upload instructions are provided in `docs/EXTERNAL_SUBMISSION_GUIDE.md`, but the final public archive upload, DOI/release metadata, and HotCRP link remain external P0 items. Do not treat the artifact as publicly archived or DOI-backed until those items are completed and verified.
 
 ## Badge Justification
 

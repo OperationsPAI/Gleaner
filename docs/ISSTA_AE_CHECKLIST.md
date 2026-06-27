@@ -13,6 +13,7 @@ This checklist tracks the Gleaner artifact preparation status for ISSTA 2026 AE.
 - [ ] Decide final archival host and DOI plan for the artifact package.
 - [ ] Decide final submission link strategy for HotCRP.
 - [x] Document local archive builder state in `docs/RELEASE_PACKAGING.md` without placeholder DOI/release/HotCRP links.
+- [x] Add human submitter external-upload guide with GitHub Release, Zenodo, post-upload verification, and HotCRP checklist steps while keeping real public links/DOIs open.
 
 ## Branch And Repository State
 
@@ -165,6 +166,7 @@ This checklist tracks the Gleaner artifact preparation status for ISSTA 2026 AE.
 - [x] Add code layout and reuse guide for the reduced/offline artifact path.
 - [x] Add instructions for running Gleaner summaries on new compatible datapack reports.
 - [x] Add reduced data provenance and scope notes; third-party license checks remain tracked separately.
+- [x] Add external submission guide for human upload/DOI/HotCRP steps without fake public identifiers.
 
 ## Badge Readiness
 

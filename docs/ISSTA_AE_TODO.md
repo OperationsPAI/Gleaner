@@ -14,13 +14,14 @@ This is the short action list. The full progress checklist is in `docs/ISSTA_AE_
 - [x] Reduced evidence, CPU-only, claim-mapping, and reuse docs are present in `ARTIFACT_README.md`, `REQUIREMENTS.md`, and `STATUS.md`.
 - [x] Third-party license-file evidence, submodule URL accessibility, smoke-test coverage, and dependency-risk decisions are documented in `docs/THIRD_PARTY.md`.
 - [x] Local archive/package script and release packaging documentation are present.
+- [x] Human submitter guide for external GitHub/Zenodo upload, post-upload checksum verification, and HotCRP link submission is present in `docs/EXTERNAL_SUBMISSION_GUIDE.md`.
 - [x] Commit-SHA archive/checksum packaging workflow is locally verified. For final upload, regenerate after the final tracked commit with `bash scripts/package_artifact.sh`, then use `dist/gleaner-issta2026-ae-$(git rev-parse --short HEAD).tar.gz` plus `dist/gleaner-issta2026-ae-$(git rev-parse --short HEAD).tar.gz.sha256` and verify with `(cd dist && sha256sum -c gleaner-issta2026-ae-$(git rev-parse --short HEAD).tar.gz.sha256)`.
 
 ## P0: Still Open Before AE Submission
 
 - [x] Create local archive/package script.
 - [x] Generate local archive manifest and checksum via the dynamic HEAD-derived packaging workflow.
-- [ ] Decide final archive/DOI/release plan and prepare the submission link.
+- [ ] Decide final archive/DOI/release plan and prepare the submission link using `docs/EXTERNAL_SUBMISSION_GUIDE.md`.
 - [x] Record reviewer-facing reduced runtime estimates in `REQUIREMENTS.md`.
 - [x] Commit the reviewed artifact state.
 

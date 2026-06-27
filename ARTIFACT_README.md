@@ -18,7 +18,7 @@ Included components:
 - Reduced RQ2 RCA evidence under `data/artifact/reduced/rq2/`.
 - A guarded full-mode runner that intentionally exits non-zero because full reproduction is not implemented or reviewer-verified in this artifact snapshot.
 
-Open items are tracked in `STATUS.md` and `docs/ISSTA_AE_TODO.md`. The reduced RQ1-RQ4 path is the verified reproduction path; full-path implementation/verification remains incomplete. Local archive packaging is available through `scripts/package_artifact.sh` and documented in `docs/RELEASE_PACKAGING.md`, but public upload, DOI minting, and HotCRP link submission remain external/manual and are not yet complete.
+Open items are tracked in `STATUS.md` and `docs/ISSTA_AE_TODO.md`. The reduced RQ1-RQ4 path is the verified reproduction path; full-path implementation/verification remains incomplete. Local archive packaging is available through `scripts/package_artifact.sh` and documented in `docs/RELEASE_PACKAGING.md`; human external submission steps are documented in `docs/EXTERNAL_SUBMISSION_GUIDE.md`. Public upload, DOI minting if required, and HotCRP link submission remain external/manual and are not yet complete.
 
 Third-party source, license-file, public URL reachability, smoke-test scope, and dependency-risk notes are documented in `docs/THIRD_PARTY.md`. The reduced artifact uses pinned submodule contents and committed parquet evidence; it does not claim full component-level execution of every upstream baseline/RCA repository.
 
@@ -171,7 +171,7 @@ bash scripts/package_artifact.sh
 
 The script writes `dist/gleaner-issta2026-ae-<git-short-sha-or-worktree>.tar.gz`, an external `.sha256` file, and an internal `ARCHIVE_MANIFEST.tsv` inside the archive. It packages the reduced artifact contents, selected reduced sampler reports, and actual `third_party/` file contents while excluding `.git`, `.venv`, caches, generated `output/artifact/`, raw/full data, and `dist/` itself. See `docs/RELEASE_PACKAGING.md` for details.
 
-No public archive URL, DOI, or HotCRP artifact link has been minted or submitted yet. Do not add placeholder links or identifiers.
+No public archive URL, DOI, or HotCRP artifact link has been minted or submitted yet. Do not add placeholder links or identifiers. See `docs/EXTERNAL_SUBMISSION_GUIDE.md` for human upload and verification steps.
 
 ## Anonymous Review Considerations
 

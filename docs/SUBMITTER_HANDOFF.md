@@ -2,6 +2,8 @@
 
 This file records the final local steps for the human submitter. It intentionally leaves public metadata blank until the real upload/DOI/HotCRP steps are completed.
 
+For exact external upload, DOI, post-upload verification, and HotCRP checklist steps, see `docs/EXTERNAL_SUBMISSION_GUIDE.md`.
+
 ## Local Package Commands
 
 After the final tracked commit, regenerate the upload candidate:
