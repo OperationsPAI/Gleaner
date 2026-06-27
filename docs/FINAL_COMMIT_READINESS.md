@@ -4,30 +4,34 @@ Audit date: 2026-06-28 (local Asia/Hong_Kong time).
 
 ## Verdict
 
-The AE artifact was committed and locally packaged at HEAD `cfe2f7eec1ff423a42784f3c0d81440f68b47dd2` (`Prepare ISSTA AE artifact package`). The reduced verification path, local archive checksum, tar contents, and clean git state were verified for that post-commit package.
+The AE artifact was committed, locally packaged, and reviewer-verified after the documentation finalization commit `edcd33fe6fde8b4b4173ef6b23585d6e4108bca2` (`Finalize AE submission documentation`). The verified package from that audit was:
 
-This document is being finalized in a doc-only follow-up. After the follow-up commit, rerun `bash scripts/package_artifact.sh` so the upload candidate is named with the new commit SHA and includes these final documentation updates.
+- `dist/gleaner-issta2026-ae-edcd33f.tar.gz`
+- `dist/gleaner-issta2026-ae-edcd33f.tar.gz.sha256`
+
+That package passed checksum validation, tar required/forbidden path checks, reduced-data preparation, smoke testing, and the full reduced RQ1-RQ4 acceptance run.
+
+This file is a readiness report, not a pinned release manifest. If this report or any other tracked artifact file is changed and committed after the audit above, rerun `bash scripts/package_artifact.sh` and use the newest `dist/gleaner-issta2026-ae-<short-sha>.tar.gz` plus sibling `.sha256` as the upload candidate.
 
 ## Git State Evidence
 
-Commands run from `/home/nn/workspace/Gleaner`:
+Commands run from `/home/nn/workspace/Gleaner` for the verified audit:
 
-- `git status --short`: showed only the existing staged artifact changes before this report was added.
+- `git status --short`: clean / no output after commit `edcd33fe6fde8b4b4173ef6b23585d6e4108bca2`.
 - `git diff --name-only`: empty; no unstaged tracked-file drift.
-- `git diff --cached --name-status`: showed the staged artifact package/docs/code/data state; no `dist/` archive or checksum files were staged.
-
-Post-commit verification subsequently confirmed a clean tree at `cfe2f7eec1ff423a42784f3c0d81440f68b47dd2`; `dist/` remained ignored and unstaged.
+- `git log -1 --pretty=%H%n%s`: `edcd33fe6fde8b4b4173ef6b23585d6e4108bca2` / `Finalize AE submission documentation`.
+- `dist/` remained ignored and unstaged.
 
 ## Local Archive Verification
 
-Archive checked:
+Archive checked in the verified audit:
 
-- `dist/gleaner-issta2026-ae-cfe2f7e.tar.gz`
-- `dist/gleaner-issta2026-ae-cfe2f7e.tar.gz.sha256`
+- `dist/gleaner-issta2026-ae-edcd33f.tar.gz`
+- `dist/gleaner-issta2026-ae-edcd33f.tar.gz.sha256`
 
 Commands/results:
 
-- `cd dist && sha256sum -c gleaner-issta2026-ae-cfe2f7e.tar.gz.sha256` -> `gleaner-issta2026-ae-cfe2f7e.tar.gz: OK`.
+- `cd dist && sha256sum -c gleaner-issta2026-ae-edcd33f.tar.gz.sha256` -> `gleaner-issta2026-ae-edcd33f.tar.gz: OK`.
 - Tar listing required-path check passed for:
   - `ARTIFACT_README.md`
   - `REQUIREMENTS.md`
@@ -40,7 +44,7 @@ Commands/results:
   - `output/rcabench-platform-v2/sampler_reports/gleaner/detailed_perf.parquet`
 - Tar listing forbidden-path check passed: `.git/`, `.venv/`, `dist/`, `output/artifact/`, and `__pycache__/` were absent.
 
-Caveat: this was the verified package for commit `cfe2f7e`. After this final documentation follow-up commit, regenerate the package and use the new commit-SHA archive as the upload candidate.
+For any later commit, regenerate the package and repeat the checksum/tar checks before upload so the archive name and contents match the newest HEAD.
 
 ## Local Command Verification
 
@@ -51,7 +55,7 @@ Commands run from `/home/nn/workspace/Gleaner`:
 - `bash scripts/run_reduced_all.sh`: passed; RQ1/RQ2/RQ3/RQ4 reduced scripts wrote generated outputs under `output/artifact/reduced/` and each expected-output comparison passed for 3 files.
 - `time -p bash scripts/run_reduced_all.sh`: passed on the local host with `real 2.96`, `user 16.51`, `sys 10.91`.
 
-The reduced artifact path is therefore locally verified. Docker/container verification is already recorded in `STATUS.md` and `docs/ISSTA_AE_TODO.md`; this final pass did not rerun Docker.
+The reduced artifact path is locally verified. Docker/container verification is recorded in `STATUS.md` and `docs/ISSTA_AE_TODO.md`; this final pass did not rerun Docker.
 
 ## Known Scope Limits
 
@@ -59,12 +63,12 @@ The reduced artifact path is therefore locally verified. Docker/container verifi
 - Public release URL, DOI, and HotCRP artifact link are still external manual steps. No placeholder DOI, release URL, or HotCRP link has been added.
 - `dist/` archives and checksum files remain local build products and should not be staged.
 
-## Required Next Step After Documentation Follow-up Commit
+## Required Next Step Before External Submission
 
-After committing the final documentation updates, run:
+Use the archive generated from the final tracked commit. If any tracked files changed after the verified audit above, first run:
 
 ```bash
 bash scripts/package_artifact.sh
 ```
 
-Use the resulting commit-SHA archive and sibling `.sha256` as the upload candidate, then perform the external upload/DOI/HotCRP steps with real links only.
+Then upload the resulting `dist/gleaner-issta2026-ae-<short-sha>.tar.gz` and sibling `.sha256`, and complete the external release/DOI/HotCRP steps with real links only.
