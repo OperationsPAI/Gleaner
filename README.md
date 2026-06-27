@@ -1,5 +1,16 @@
 # Gleaner
 
+## ISSTA 2026 AE Artifact
+
+Reviewer entry points for the staged artifact:
+
+- `ARTIFACT_README.md`: artifact overview, Docker path, reduced reproduction, and claim mapping.
+- `REQUIREMENTS.md`: platform, dependency, and runtime requirements.
+- `STATUS.md`: current verified state and remaining packaging blockers.
+- Verified AE reproduction path: `bash scripts/run_reduced_all.sh` for reduced RQ1-RQ4.
+
+Note: the full path is not reviewer-verified in this artifact; reviewers should use `bash scripts/run_reduced_all.sh` for the verified AE path.
+
 ## Getting Started
 
 ### 0. Installation

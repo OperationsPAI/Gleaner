@@ -1,0 +1,12 @@
+samplers:
+  - gleaner
+  - tracepicker
+  - trastrainer
+  - sieve
+  - sifter
+rca_algorithms:
+  - microrca
+  - shapleyiq
+  - nezha
+platform:
+  rcabench_platform: 0.4.1

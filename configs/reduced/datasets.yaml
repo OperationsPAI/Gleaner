@@ -1,0 +1,10 @@
+# Reduced AE dataset plan.
+# The TracePicker dataset is used in full. The Gleaner dataset is reduced to a fixed list of 10 datapacks.
+tracepicker:
+  split: full
+  path: data/rcabench-platform-v2/data/tracepicker
+gleaner:
+  split: reduced_10_datapacks
+  path: data/rcabench-platform-v2/data/gleaner
+  datapacks:
+    # TODO: fill with 10 representative datapack directory names.

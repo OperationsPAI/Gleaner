@@ -1,0 +1,112 @@
+{
+  "schema_version": "1.0",
+  "created_for": "Gleaner ISSTA 2026 reduced artifact acceptance increment",
+  "scope": "Existing reduced evidence and expected outputs only; excludes raw full/reduced datapack directories.",
+  "notes": [
+    "This manifest lists only files that already exist in the repository/worktree at generation time.",
+    "It does not describe or fabricate the raw 10 datapacks used by full experiments.",
+    "Run scripts/prepare_reduced_data.sh to verify file presence, byte size, and SHA-256 checksum."
+  ],
+  "files": [
+    {
+      "path": "artifact_expected/reduced/rq1/rq1_sampling_quality_results.md",
+      "role": "expected_output",
+      "bytes": 2795,
+      "sha256": "6c87e33f1ad1b4a8ffb35136cabf1240446e903bb6df13ffef46debdc683eae2"
+    },
+    {
+      "path": "artifact_expected/reduced/rq1/rq1_sampling_quality_summary.csv",
+      "role": "expected_output",
+      "bytes": 1997,
+      "sha256": "515074fa61c9b5da9f08a01a0c473c96278081e2c1f18fe26d8f75e2c8d7d587"
+    },
+    {
+      "path": "artifact_expected/reduced/rq1/rq1_sampling_quality_summary.json",
+      "role": "expected_output",
+      "bytes": 8820,
+      "sha256": "49200da85ec0e09684ba6a60bd0974c4fc04a543db6b61967e27be1a04774839"
+    },
+    {
+      "path": "artifact_expected/reduced/rq2/rq2_rca_effectiveness_results.md",
+      "role": "expected_output",
+      "bytes": 4550,
+      "sha256": "c933301255ae994baa40b3d131a7994825fd35230547f9b5ea0259f73a37a78b"
+    },
+    {
+      "path": "artifact_expected/reduced/rq2/rq2_rca_effectiveness_summary.csv",
+      "role": "expected_output",
+      "bytes": 5565,
+      "sha256": "d7dd3c93822cc02055cd7d0dad7c38f12e34c36d2e197f9ef3681785f6b0c7fc"
+    },
+    {
+      "path": "artifact_expected/reduced/rq2/rq2_rca_effectiveness_summary.json",
+      "role": "expected_output",
+      "bytes": 13211,
+      "sha256": "560283cd459835d5e8d0fee4e2b1bdb66abb86590fabd0b856656fc47e92ff8f"
+    },
+    {
+      "path": "artifact_expected/reduced/rq3/rq3_ablation_results.md",
+      "role": "expected_output",
+      "bytes": 2517,
+      "sha256": "6a3a03cdc9b5431dfe290593a4b739d56407219808f8472148c9578e4fa20e61"
+    },
+    {
+      "path": "artifact_expected/reduced/rq3/rq3_ablation_summary.csv",
+      "role": "expected_output",
+      "bytes": 1723,
+      "sha256": "4b816bfda3e064962eb5089e2c0fadf67a1a59b86d34f0292b2dda8324802027"
+    },
+    {
+      "path": "artifact_expected/reduced/rq3/rq3_ablation_summary.json",
+      "role": "expected_output",
+      "bytes": 5112,
+      "sha256": "d5fd77099d93ee6f7cabb28719a42055057a8912fa7c232e53548048d9dab3e0"
+    },
+    {
+      "path": "artifact_expected/reduced/rq4/rq4_efficiency_results.md",
+      "role": "expected_output",
+      "bytes": 4260,
+      "sha256": "aa21d73e5bc4f3878d9c2a0abfca91552cc7f130d2e242feef26004bbd1e6972"
+    },
+    {
+      "path": "artifact_expected/reduced/rq4/rq4_efficiency_summary.csv",
+      "role": "expected_output",
+      "bytes": 3612,
+      "sha256": "964e94d1f8b914ef5297b39767445ba3bbaae074ffdfeb8928aefad198779666"
+    },
+    {
+      "path": "artifact_expected/reduced/rq4/rq4_efficiency_summary.json",
+      "role": "expected_output",
+      "bytes": 9898,
+      "sha256": "93fc7ce8221bf693bb6fbf16f3f8c67ee0ef5b3f9aaa561137b24a88fea32a04"
+    },
+    {
+      "path": "data/artifact/reduced/rq2/nezha/sampler.grouped.perf.parquet",
+      "role": "reduced_rq2_rca_evidence",
+      "bytes": 12478,
+      "sha256": "ea560396123d5e2a52bb29bcc7b7332ecc93d7471a8360795bccf98f1bf27074"
+    },
+    {
+      "path": "data/artifact/reduced/rq2/shapleyiq_microrca/sampler.grouped.perf.parquet",
+      "role": "reduced_rq2_rca_evidence",
+      "bytes": 14461,
+      "sha256": "19e7068581709948cf0aba920d2747d41d819825a44976b96519d7de6b9100c5"
+    },
+    {
+      "path": "output/rcabench-platform-v2/sampler_reports/gleaner/aggregated_perf.parquet",
+      "role": "reduced_rq1_sampler_report",
+      "bytes": 41930,
+      "sha256": "1a428cfa799584e8dee7cdf80f11eeb24209e3eb6a8eb248d3f5a2cfec1f8a45"
+    },
+    {
+      "path": "output/rcabench-platform-v2/sampler_reports/gleaner/detailed_perf.parquet",
+      "role": "reduced_rq1_sampler_report",
+      "bytes": 317178,
+      "sha256": "603705e30d07334ea2972d992239068aaa61c7f443d76668abd561a690f35a9f"
+    }
+  ],
+  "totals": {
+    "file_count": 16,
+    "bytes": 450107
+  }
+}

@@ -1,0 +1,12 @@
+[submodule "third_party/ShapleyIQ"]
+	path = third_party/ShapleyIQ
+	url = https://github.com/LGU-SE-Internal/ShapleyIQ.git
+[submodule "third_party/Nezha"]
+	path = third_party/Nezha
+	url = https://github.com/LGU-SE-Internal/Nezha.git
+[submodule "third_party/TracePicker"]
+	path = third_party/TracePicker
+	url = https://github.com/LGU-SE-Internal/TracePicker.git
+[submodule "third_party/TraStrainer"]
+	path = third_party/TraStrainer
+	url = https://github.com/LGU-SE-Internal/TraStrainer.git

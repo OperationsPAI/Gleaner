@@ -1,0 +1,6 @@
+tracepicker:
+  split: full
+  path: data/rcabench-platform-v2/data/tracepicker
+gleaner:
+  split: full
+  path: data/rcabench-platform-v2/data/gleaner

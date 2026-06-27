@@ -1,0 +1,146 @@
+{
+  "config": {
+    "exclude_sampling_rate": [
+      0.005
+    ],
+    "input_parquet": "output/rcabench-platform-v2/sampler_reports/gleaner/aggregated_perf.parquet",
+    "mode": "offline",
+    "output_dir": "output/artifact/reduced/rq3"
+  },
+  "metrics": [
+    "avg_api_coverage",
+    "avg_unique_trace_coverage",
+    "avg_shannon_entropy",
+    "avg_proportion_anomaly",
+    "avg_path_coverage_dedup",
+    "avg_benefit_cost_ratio"
+  ],
+  "rows": [
+    {
+      "avg_api_coverage": 0.9936123658949747,
+      "avg_benefit_cost_ratio": 0.8165009631766786,
+      "avg_path_coverage_dedup": 0.8922336250753395,
+      "avg_proportion_anomaly": 0.11210811866631877,
+      "avg_shannon_entropy": 7.432832723181125,
+      "avg_unique_trace_coverage": 0.2144499933762152,
+      "display_name": "Gleaner Latency-Dominant",
+      "sample_rate_count": 2,
+      "sampler": "gleaner_latency_dominate"
+    },
+    {
+      "avg_api_coverage": 0.9936123658949747,
+      "avg_benefit_cost_ratio": 0.818132303460523,
+      "avg_path_coverage_dedup": 0.8879825837406292,
+      "avg_proportion_anomaly": 0.1120683838044283,
+      "avg_shannon_entropy": 7.4374105155418615,
+      "avg_unique_trace_coverage": 0.21530919905363638,
+      "display_name": "Gleaner Log-Dominant",
+      "sample_rate_count": 2,
+      "sampler": "gleaner_log_dominate"
+    },
+    {
+      "avg_api_coverage": 0.9933300395256917,
+      "avg_benefit_cost_ratio": 0.8312259097053689,
+      "avg_path_coverage_dedup": 0.8943890876273761,
+      "avg_proportion_anomaly": 0.07139087258552594,
+      "avg_shannon_entropy": 7.513298115502879,
+      "avg_unique_trace_coverage": 0.21931617414861315,
+      "display_name": "Gleaner w/o AD",
+      "sample_rate_count": 2,
+      "sampler": "gleaner_no_ad"
+    },
+    {
+      "avg_api_coverage": 0.9965767927724452,
+      "avg_benefit_cost_ratio": 0.7747495354632442,
+      "avg_path_coverage_dedup": 0.8513244894452654,
+      "avg_proportion_anomaly": 0.10647316732521828,
+      "avg_shannon_entropy": 7.250374660255904,
+      "avg_unique_trace_coverage": 0.19168431299387262,
+      "display_name": "Gleaner w/o DPP",
+      "sample_rate_count": 2,
+      "sampler": "gleaner_no_dpp"
+    },
+    {
+      "avg_api_coverage": 0.994741671372106,
+      "avg_benefit_cost_ratio": 0.807019321695721,
+      "avg_path_coverage_dedup": 0.8875321786082603,
+      "avg_proportion_anomaly": 0.10771366686328167,
+      "avg_shannon_entropy": 7.404364440813854,
+      "avg_unique_trace_coverage": 0.20997285284007877,
+      "display_name": "Gleaner w/o Logs",
+      "sample_rate_count": 2,
+      "sampler": "gleaner_no_logs"
+    },
+    {
+      "avg_api_coverage": 0.994741671372106,
+      "avg_benefit_cost_ratio": 0.7960665166257326,
+      "avg_path_coverage_dedup": 0.9081595451430594,
+      "avg_proportion_anomaly": 0.07399272257103827,
+      "avg_shannon_entropy": 7.393178526761194,
+      "avg_unique_trace_coverage": 0.20441247221567715,
+      "display_name": "Gleaner w/o Logs + AD",
+      "sample_rate_count": 2,
+      "sampler": "gleaner_no_logs_no_ad"
+    },
+    {
+      "avg_api_coverage": 0.9967061923583664,
+      "avg_benefit_cost_ratio": 0.8361642817979649,
+      "avg_path_coverage_dedup": 0.8956387368016592,
+      "avg_proportion_anomaly": 0.10085075199951288,
+      "avg_shannon_entropy": 7.499066080317934,
+      "avg_unique_trace_coverage": 0.2209961051942077,
+      "display_name": "Gleaner w/o Rebalance",
+      "sample_rate_count": 2,
+      "sampler": "gleaner_no_rebalance"
+    },
+    {
+      "avg_api_coverage": 0.8076863354037269,
+      "avg_benefit_cost_ratio": 0.575129045152098,
+      "avg_path_coverage_dedup": 0.6601082194650973,
+      "avg_proportion_anomaly": 0.0176477242003612,
+      "avg_shannon_entropy": 6.722697213542127,
+      "avg_unique_trace_coverage": 0.18228799393274023,
+      "display_name": "Gleaner Pure Diversity",
+      "sample_rate_count": 2,
+      "sampler": "gleaner_pure_diversity"
+    },
+    {
+      "avg_api_coverage": 0.47947722567287776,
+      "avg_benefit_cost_ratio": 0.869003893479328,
+      "avg_path_coverage_dedup": 0.519908229056669,
+      "avg_proportion_anomaly": 0.14455501430761375,
+      "avg_shannon_entropy": 7.594045385918971,
+      "avg_unique_trace_coverage": 0.22747226309983076,
+      "display_name": "Gleaner Top Score",
+      "sample_rate_count": 2,
+      "sampler": "gleaner_top_score"
+    },
+    {
+      "avg_api_coverage": 0.9967179559570867,
+      "avg_benefit_cost_ratio": 0.7641019433454381,
+      "avg_path_coverage_dedup": 0.8958370459832259,
+      "avg_proportion_anomaly": 0.09806629724090125,
+      "avg_shannon_entropy": 7.162294148529174,
+      "avg_unique_trace_coverage": 0.18737595946043373,
+      "display_name": "Gleaner WL Kernel",
+      "sample_rate_count": 2,
+      "sampler": "gleaner_wl_kernel"
+    }
+  ],
+  "samplers": [
+    "gleaner_latency_dominate",
+    "gleaner_log_dominate",
+    "gleaner_no_ad",
+    "gleaner_no_dpp",
+    "gleaner_no_logs",
+    "gleaner_no_logs_no_ad",
+    "gleaner_no_rebalance",
+    "gleaner_pure_diversity",
+    "gleaner_top_score",
+    "gleaner_wl_kernel"
+  ],
+  "sampling_rates": [
+    0.01,
+    0.1
+  ]
+}
