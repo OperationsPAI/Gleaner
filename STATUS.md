@@ -1,6 +1,6 @@
 # Artifact Status
 
-This status file reflects the current staged / reviewer-verified state.
+This status file reflects the current committed / reviewer-verified local artifact state.
 
 ## Artifacts Evaluated - Functional
 
@@ -10,13 +10,14 @@ Current functional evidence:
 - Expected reduced outputs are provided under `artifact_expected/reduced/rq1/` through `artifact_expected/reduced/rq4/`.
 - Each reduced RQ wrapper invokes `scripts/compare_expected.py` to validate expected vs actual outputs.
 - `scripts/run_reduced_all.sh` is reviewer-verified as passing end to end in the current reduced state.
-- Reduced RQ2 RCA evidence is staged under `data/artifact/reduced/rq2/`.
+- Reduced RQ2 RCA evidence is committed under `data/artifact/reduced/rq2/`.
 - Reduced manifest/checksum verification is provided by `data/artifact/reduced/MANIFEST.json`, `data/artifact/reduced/SHA256SUMS`, and `scripts/prepare_reduced_data.sh`.
 - Host smoke testing has passed.
 - Docker image build has passed with `docker build -t gleaner-issta2026-ae .`.
 - Container smoke testing has passed with `docker run --rm gleaner-issta2026-ae bash scripts/smoke_test.sh`.
 - Container reduced reproduction has passed with `docker run --rm gleaner-issta2026-ae bash scripts/run_reduced_all.sh`.
-- Local release/archive packaging is implemented by `scripts/package_artifact.sh`; it generates a tarball, internal manifest, and external SHA-256 checksum for local verification.
+- Local release/archive packaging is implemented by `scripts/package_artifact.sh`; it generates a HEAD-derived tarball, internal manifest, and external SHA-256 checksum for local verification.
+- The reduced path is CPU-only compatible: it runs with `CUDA_VISIBLE_DEVICES='' bash scripts/run_reduced_all.sh`.
 
 Still open before claiming a final functional artifact:
 
@@ -25,8 +26,14 @@ Still open before claiming a final functional artifact:
 
 ## Artifacts Evaluated - Reusable
 
-The reduced command entry points and expected-output validation are now present. Reusability documentation is still incomplete: data format, sampler/RCA adapter layout, troubleshooting, new-datapack usage, and baseline extension points remain to be documented.
+The reduced command entry points, expected-output validation, schema notes, claim mapping, and new-datapack reuse guidance are documented in `ARTIFACT_README.md`. The reusable scope is the reduced/offline artifact path: users can regenerate RQ summaries from compatible sampler-report and RCA parquet inputs, inspect expected-output comparisons, and extend baseline/RCA adapters by producing the documented report schemas. Full-dataset orchestration and full baseline environment integration remain outside the reviewer-verified scope.
 
 ## Artifacts Available
 
 The reduced artifact manifest and checksum set are present for existing reduced evidence and expected outputs. A local package can be generated and verified with `bash scripts/package_artifact.sh`; the resulting archive contains `ARCHIVE_MANIFEST.tsv` and has a sibling `.sha256` file under `dist/`. The final public archive upload, DOI/release metadata, and HotCRP link remain external P0 items. Do not treat the artifact as publicly archived or DOI-backed until those items are completed and verified.
+
+## Badge Justification
+
+- Functional: locally supportable for the reduced artifact path because smoke tests, RQ1-RQ4 reduced commands, expected-output comparisons, CPU-only execution, Docker execution, and archive packaging have been verified. The full reproduction path is explicitly not claimed.
+- Reusable: partially supportable for the reduced/offline path because data schemas, command entry points, output locations, new-datapack guidance, and extension points are documented. Full-dataset reuse and every third-party baseline environment are not fully verified.
+- Available: not yet supportable as a public archival claim until a real public archive/release URL, DOI if required, and HotCRP artifact link are created and verified.

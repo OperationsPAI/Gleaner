@@ -6,12 +6,12 @@ This is the short action list. The full progress checklist is in `docs/ISSTA_AE_
 
 - [x] Docker image build, container smoke test, and container reduced run are verified.
 - [x] Reduced RQ1/RQ2/RQ3/RQ4 artifact scripts exist and are connected to `scripts/run_rq*.sh` wrappers.
-- [x] Expected reduced outputs are staged under `artifact_expected/reduced/rq1/` through `artifact_expected/reduced/rq4/`.
+- [x] Expected reduced outputs are committed under `artifact_expected/reduced/rq1/` through `artifact_expected/reduced/rq4/`.
 - [x] Each `scripts/run_rq*.sh` wrapper calls `scripts/compare_expected.py` to validate expected vs actual outputs.
 - [x] `scripts/run_reduced_all.sh` is reviewer-verified as passing end to end in the current reduced state.
 - [x] Reduced RQ2 RCA evidence is committed under `data/artifact/reduced/rq2/`.
 - [x] Reduced manifest and checksum files are committed and verified by `scripts/prepare_reduced_data.sh`.
-- [x] Reduced evidence docs are present in `ARTIFACT_README.md`, `REQUIREMENTS.md`, and `STATUS.md`.
+- [x] Reduced evidence, CPU-only, claim-mapping, and reuse docs are present in `ARTIFACT_README.md`, `REQUIREMENTS.md`, and `STATUS.md`.
 - [x] Local archive/package script and release packaging documentation are present.
 - [x] Commit-SHA archive/checksum packaging workflow is locally verified. For final upload, regenerate after the final tracked commit with `bash scripts/package_artifact.sh`, then use `dist/gleaner-issta2026-ae-$(git rev-parse --short HEAD).tar.gz` plus `dist/gleaner-issta2026-ae-$(git rev-parse --short HEAD).tar.gz.sha256` and verify with `(cd dist && sha256sum -c gleaner-issta2026-ae-$(git rev-parse --short HEAD).tar.gz.sha256)`.
 
@@ -28,8 +28,8 @@ This is the short action list. The full progress checklist is in `docs/ISSTA_AE_
 - [x] Make `scripts/run_full_all.sh` explicitly fail non-zero because the full path is not implemented/reviewer-verified in this artifact snapshot.
 - [ ] Implement and reviewer-verify final `scripts/run_full_all.sh` behavior.
 - [ ] Document full dataset download/extract/path setup.
-- [x] Document reduced generated inputs, staged evidence, and reviewer refresh/reverification path via `bash scripts/prepare_reduced_data.sh`, manifest checksums, and the artifact docs.
-- [ ] Confirm all reduced experiments can run in CPU-only mode.
+- [x] Document reduced generated inputs, committed evidence, and reviewer refresh/reverification path via `bash scripts/prepare_reduced_data.sh`, manifest checksums, and the artifact docs.
+- [x] Confirm all reduced experiments can run in CPU-only mode (`CUDA_VISIBLE_DEVICES='' bash scripts/run_reduced_all.sh`).
 
 ## P1: Validation And Claims
 
@@ -38,10 +38,10 @@ This is the short action list. The full progress checklist is in `docs/ISSTA_AE_
 - [x] Validation calls are present in the reduced RQ wrappers.
 - [x] Reviewer-verify `scripts/run_reduced_all.sh` end to end.
 - [x] Define and document numerical tolerances or trend-based checks.
-- [ ] Fill exact paper claim/table/figure mapping in `ARTIFACT_README.md`.
+- [x] Fill exact paper claim/table/figure mapping in `ARTIFACT_README.md` from `pdftotext paper/main.pdf -` output.
 - [x] Add troubleshooting section.
-- [ ] Add reuse guide for running Gleaner on new datapacks.
-- [ ] Finalize `STATUS.md` badge justification after archive/release packaging checks.
+- [x] Add reuse guide for running Gleaner on new datapacks.
+- [x] Finalize local `STATUS.md` badge justification; available/public-archive badge remains open until real upload/DOI/HotCRP metadata exists.
 
 ## P2: Release Package
 

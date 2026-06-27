@@ -28,7 +28,7 @@ This checklist tracks the Gleaner artifact preparation status for ISSTA 2026 AE.
 - [x] Built Docker image locally with `docker build -t gleaner-issta2026-ae .`.
 - [x] Ran container smoke test with `docker run --rm gleaner-issta2026-ae bash scripts/smoke_test.sh`.
 - [x] Ran reduced all-in-one command inside Docker with `docker run --rm gleaner-issta2026-ae bash scripts/run_reduced_all.sh`.
-- [x] Commit the current AE artifact state (`cfe2f7eec1ff423a42784f3c0d81440f68b47dd2`, `Prepare ISSTA AE artifact package`).
+- [x] Commit reviewed AE artifact states; final upload packaging uses the dynamic HEAD-derived archive workflow.
 
 ## dev2 RQ Script Sources
 
@@ -69,7 +69,7 @@ This checklist tracks the Gleaner artifact preparation status for ISSTA 2026 AE.
 - [ ] Resolve TracePicker heavy dependencies: torch, dgl, geatpy.
 - [ ] Resolve TraStrainer platform mismatch: current TraStrainer pyproject still pins `rcabench-platform==0.3.34rc19`.
 - [ ] Decide whether to use one unified Python 3.13 environment or per-baseline isolated environments.
-- [ ] Confirm all reduced experiments can run in CPU-only mode.
+- [x] Confirm all reduced experiments can run in CPU-only mode (`CUDA_VISIBLE_DEVICES='' bash scripts/run_reduced_all.sh`).
 
 ## Dataset Plan
 
@@ -77,7 +77,7 @@ This checklist tracks the Gleaner artifact preparation status for ISSTA 2026 AE.
 - [x] Confirmed local full TracePicker dataset path: `data/rcabench-platform-v2/data/tracepicker`.
 - [x] Confirmed local full Gleaner dataset path: `data/rcabench-platform-v2/data/gleaner`.
 - [x] Chosen reduced dataset strategy: full TracePicker dataset plus selected Gleaner datapacks.
-- [x] Added staged reduced RQ2 RCA evidence under `data/artifact/reduced/rq2/` for ShapleyIQ/MicroRCA and Nezha.
+- [x] Added committed reduced RQ2 RCA evidence under `data/artifact/reduced/rq2/` for ShapleyIQ/MicroRCA and Nezha.
 - [x] Finalize and document the reduced dataset/data-evidence manifest for existing reduced evidence and expected outputs.
 - [x] Add `scripts/prepare_reduced_data.sh`.
 - [x] Compute reduced artifact manifest sizes for existing reduced evidence and expected outputs.
@@ -127,10 +127,10 @@ This checklist tracks the Gleaner artifact preparation status for ISSTA 2026 AE.
 - [x] Generated expected reduced outputs under `artifact_expected/reduced/rq1/` through `artifact_expected/reduced/rq4/`.
 - [x] Added expected-vs-actual comparison calls to each reduced RQ wrapper.
 - [x] Reviewer-verified the current reduced all-in-one command passes with expected-output validation.
-- [ ] Define and document final sampler output schema.
-- [ ] Define and document final RCA ranking output schema.
-- [ ] Define and document final aggregate metric schema.
-- [ ] Define and document final figure/table input schema.
+- [x] Define and document reduced sampler output schema.
+- [x] Define and document reduced RCA ranking output schema.
+- [x] Define and document reduced aggregate metric schema.
+- [x] Define and document reduced table/input schema; paper plotting scripts remain outside this snapshot.
 - [x] Document numerical tolerance policy for expected-vs-actual comparisons.
 - [x] Document what counts as a successful reduced reproduction.
 
@@ -138,12 +138,12 @@ This checklist tracks the Gleaner artifact preparation status for ISSTA 2026 AE.
 
 - [x] Added claim mapping skeleton in `ARTIFACT_README.md`.
 - [x] Mapped RQ1/RQ2/RQ3/RQ4 to reduced commands, output paths, and expected-output directories.
-- [ ] Map RQ1 to exact paper table/figure names.
-- [ ] Map RQ2 to exact paper table/figure names.
-- [ ] Map RQ3 to exact paper table/figure names.
-- [ ] Map RQ4 to exact paper table/figure names.
+- [x] Map RQ1 to exact paper table/figure/section names recovered from `paper/main.pdf`.
+- [x] Map RQ2 to exact paper table/figure/section names recovered from `paper/main.pdf`.
+- [x] Map RQ3 to exact paper table/figure/section names recovered from `paper/main.pdf`.
+- [x] Map RQ4 to exact paper table/figure/section names recovered from `paper/main.pdf`.
 - [x] For each claim, document expected runtime.
-- [ ] List unsupported paper claims, if any, and explain why.
+- [x] List unsupported full-dataset / full-plot claims and explain reduced-scope limits.
 - [ ] Integrate paper plotting scripts when available.
 
 ## Documentation
@@ -160,9 +160,9 @@ This checklist tracks the Gleaner artifact preparation status for ISSTA 2026 AE.
 - [x] Add artifact entry point to root `README.md`.
 - [x] Added final Docker instructions after Docker/container smoke verification.
 - [x] Add troubleshooting section.
-- [ ] Add code layout and reuse guide.
-- [ ] Add instructions for running Gleaner on new datapacks.
-- [ ] Add data provenance, ethics, and license notes.
+- [x] Add code layout and reuse guide for the reduced/offline artifact path.
+- [x] Add instructions for running Gleaner summaries on new compatible datapack reports.
+- [x] Add reduced data provenance and scope notes; third-party license checks remain tracked separately.
 
 ## Badge Readiness
 
@@ -175,21 +175,21 @@ This checklist tracks the Gleaner artifact preparation status for ISSTA 2026 AE.
 - [x] Current `scripts/run_reduced_all.sh` path is reviewer-verified as passing end to end.
 - [x] Reduced reproduction runtime is benchmarked and documented.
 - [x] Docker build, container smoke test, and container reduced-all run are verified.
-- [ ] Documentation maps claims to exact paper tables/figures.
+- [x] Documentation maps claims to exact paper tables/figures recovered from `paper/main.pdf`.
 
 ### Reusable
 
-- [ ] Adapter layout is documented.
-- [ ] Data format is documented.
-- [ ] New-data usage is documented.
-- [ ] Baseline/RCA extension points are documented.
-- [ ] Scripts are robust enough for users beyond AE reviewers.
+- [x] Reduced adapter/report layout is documented.
+- [x] Reduced data/report format is documented.
+- [x] New-data usage is documented for compatible reduced/offline reports.
+- [x] Baseline/RCA extension points are documented for the reduced/offline path.
+- [x] Reduced scripts expose CLI input/output paths and strict validation for reviewer/user reruns.
 
 ### Available
 
 - [ ] Public archival artifact link is prepared.
 - [ ] DOI is prepared if feasible.
-- [ ] Dataset archival link and checksum are documented.
+- [x] Local reduced manifest/checksums are documented; public dataset/archive link remains open.
 - [ ] HotCRP submission link does not compromise reviewer anonymity.
 
 ## Immediate Next Steps
@@ -197,4 +197,4 @@ This checklist tracks the Gleaner artifact preparation status for ISSTA 2026 AE.
 1. Regenerate the package after any final follow-up commit and use the new commit-SHA archive as the upload candidate.
 2. Choose final artifact hosting location, upload the locally verified package, and record real DOI/release/HotCRP metadata.
 3. Implement and reviewer-verify full-path behavior for `scripts/run_full_all.sh` and full RQ inputs if full reproduction is required.
-4. Fill exact paper table/figure names and reusable adapter documentation.
+4. If full reproduction is required later, add full plotting scripts and full-dataset adapter documentation beyond the reduced reviewer path.
