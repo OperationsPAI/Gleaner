@@ -1,6 +1,6 @@
 # ISSTA 2026 AE TODO
 
-This is the short action list. The full progress checklist is in `docs/ISSTA_AE_CHECKLIST.md`. It reflects the current committed / reviewer-verified artifact state.
+This is the short action list. The full progress checklist is in `docs/ISSTA_AE_CHECKLIST.md`. It summarizes local reviewer-verified artifact readiness without pinning a current upload package SHA.
 
 ## Current Reviewer-Verified State
 
@@ -13,12 +13,12 @@ This is the short action list. The full progress checklist is in `docs/ISSTA_AE_
 - [x] Reduced manifest and checksum files are committed and verified by `scripts/prepare_reduced_data.sh`.
 - [x] Reduced evidence docs are present in `ARTIFACT_README.md`, `REQUIREMENTS.md`, and `STATUS.md`.
 - [x] Local archive/package script and release packaging documentation are present.
-- [x] Commit-SHA archive/checksum packaging was locally verified for commit `edcd33fe6fde8b4b4173ef6b23585d6e4108bca2` using `dist/gleaner-issta2026-ae-edcd33f.tar.gz` and sibling `.sha256` (`sha256sum -c`: OK). For final upload, use the newest package regenerated after the final tracked commit: `dist/gleaner-issta2026-ae-<short-sha>.tar.gz` plus `.sha256`.
+- [x] Commit-SHA archive/checksum packaging workflow is locally verified. For final upload, regenerate after the final tracked commit with `bash scripts/package_artifact.sh`, then use `dist/gleaner-issta2026-ae-$(git rev-parse --short HEAD).tar.gz` plus `dist/gleaner-issta2026-ae-$(git rev-parse --short HEAD).tar.gz.sha256` and verify with `(cd dist && sha256sum -c gleaner-issta2026-ae-$(git rev-parse --short HEAD).tar.gz.sha256)`.
 
 ## P0: Still Open Before AE Submission
 
 - [x] Create local archive/package script.
-- [x] Generate local final archive manifest and checksum.
+- [x] Generate local archive manifest and checksum via the dynamic HEAD-derived packaging workflow.
 - [ ] Decide final archive/DOI/release plan and prepare the submission link.
 - [x] Record reviewer-facing reduced runtime estimates in `REQUIREMENTS.md`.
 - [x] Commit the reviewed artifact state.
@@ -47,8 +47,8 @@ This is the short action list. The full progress checklist is in `docs/ISSTA_AE_
 
 - [ ] Decide final artifact hosting location.
 - [x] Create archive/package script.
-- [x] Generate local final manifest with checksums.
-- [x] Generate and verify a commit-SHA local archive/checksum after the artifact commit.
+- [x] Generate local manifest with checksums via the dynamic HEAD-derived packaging workflow.
+- [x] Generate and verify a commit-SHA local archive/checksum after tracked commits; final upload uses the regenerated HEAD-derived archive and checksum.
 - [ ] Upload source/package/data or Docker image tarball.
 - [ ] Prepare DOI/release metadata if feasible.
 - [ ] Verify final link does not require login and does not compromise reviewer anonymity.

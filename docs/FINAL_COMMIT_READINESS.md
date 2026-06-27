@@ -4,71 +4,79 @@ Audit date: 2026-06-28 (local Asia/Hong_Kong time).
 
 ## Verdict
 
-The AE artifact was committed, locally packaged, and reviewer-verified after the documentation finalization commit `edcd33fe6fde8b4b4173ef6b23585d6e4108bca2` (`Finalize AE submission documentation`). The verified package from that audit was:
+The local reduced AE artifact path has been implemented, committed, packaged, and reviewer-verified. The verified scope includes reduced-data preparation, smoke testing, RQ1-RQ4 reduced acceptance scripts, expected-output comparisons, archive checksum verification, and archive required/forbidden path checks.
 
-- `dist/gleaner-issta2026-ae-edcd33f.tar.gz`
-- `dist/gleaner-issta2026-ae-edcd33f.tar.gz.sha256`
+This file is a readiness report, not a pinned release manifest. Tracked documentation must not name an exact archive SHA as the current upload candidate, because any later tracked commit changes the authoritative package name. The final upload package must be regenerated after the last tracked commit by running:
 
-That package passed checksum validation, tar required/forbidden path checks, reduced-data preparation, smoke testing, and the full reduced RQ1-RQ4 acceptance run.
+```bash
+bash scripts/package_artifact.sh
+sha="$(git rev-parse --short HEAD)"
+archive="dist/gleaner-issta2026-ae-${sha}.tar.gz"
+checksum="${archive}.sha256"
+test -s "$archive"
+test -s "$checksum"
+(cd dist && sha256sum -c "$(basename "$checksum")")
+```
 
-This file is a readiness report, not a pinned release manifest. If this report or any other tracked artifact file is changed and committed after the audit above, rerun `bash scripts/package_artifact.sh` and use the newest `dist/gleaner-issta2026-ae-<short-sha>.tar.gz` plus sibling `.sha256` as the upload candidate.
+Upload the archive and checksum derived from the final `git rev-parse --short HEAD` value only.
 
-## Git State Evidence
+## Local Verification Evidence
 
-Commands run from `/home/nn/workspace/Gleaner` for the verified audit:
+Commands run from `/home/nn/workspace/Gleaner` in the final local acceptance passes:
 
-- `git status --short`: clean / no output after commit `edcd33fe6fde8b4b4173ef6b23585d6e4108bca2`.
+- `git status --short`: clean / no output after tracked commits used for the audit.
 - `git diff --name-only`: empty; no unstaged tracked-file drift.
-- `git log -1 --pretty=%H%n%s`: `edcd33fe6fde8b4b4173ef6b23585d6e4108bca2` / `Finalize AE submission documentation`.
+- `git diff --check`: passed before committing tracked documentation updates.
 - `dist/` remained ignored and unstaged.
 
-## Local Archive Verification
-
-Archive checked in the verified audit:
-
-- `dist/gleaner-issta2026-ae-edcd33f.tar.gz`
-- `dist/gleaner-issta2026-ae-edcd33f.tar.gz.sha256`
-
-Commands/results:
-
-- `cd dist && sha256sum -c gleaner-issta2026-ae-edcd33f.tar.gz.sha256` -> `gleaner-issta2026-ae-edcd33f.tar.gz: OK`.
-- Tar listing required-path check passed for:
-  - `ARTIFACT_README.md`
-  - `REQUIREMENTS.md`
-  - `STATUS.md`
-  - `docs/RELEASE_PACKAGING.md`
-  - `ARCHIVE_MANIFEST.tsv`
-  - `data/artifact/reduced/MANIFEST.json`
-  - `third_party/Nezha/`
-  - `output/rcabench-platform-v2/sampler_reports/gleaner/aggregated_perf.parquet`
-  - `output/rcabench-platform-v2/sampler_reports/gleaner/detailed_perf.parquet`
-- Tar listing forbidden-path check passed: `.git/`, `.venv/`, `dist/`, `output/artifact/`, and `__pycache__/` were absent.
-
-For any later commit, regenerate the package and repeat the checksum/tar checks before upload so the archive name and contents match the newest HEAD.
-
-## Local Command Verification
-
-Commands run from `/home/nn/workspace/Gleaner`:
+Reduced-path commands:
 
 - `bash scripts/prepare_reduced_data.sh`: passed; verified 16 files from `data/artifact/reduced/MANIFEST.json`, total 450107 bytes.
 - `bash scripts/smoke_test.sh`: passed; submodule pins matched and Python imports succeeded (`gleaner import OK`, `rcabench-platform 0.4.1`).
 - `bash scripts/run_reduced_all.sh`: passed; RQ1/RQ2/RQ3/RQ4 reduced scripts wrote generated outputs under `output/artifact/reduced/` and each expected-output comparison passed for 3 files.
 - `time -p bash scripts/run_reduced_all.sh`: passed on the local host with `real 2.96`, `user 16.51`, `sys 10.91`.
 
-The reduced artifact path is locally verified. Docker/container verification is recorded in `STATUS.md` and `docs/ISSTA_AE_TODO.md`; this final pass did not rerun Docker.
+The reduced artifact path is locally verified. Docker/container verification is recorded in `STATUS.md` and `docs/ISSTA_AE_TODO.md`; this final readiness report does not require rerunning Docker unless the container inputs change.
+
+## Final Package Verification Rule
+
+After the final tracked commit, regenerate and verify the upload package with the dynamic HEAD-derived names:
+
+```bash
+bash scripts/package_artifact.sh
+sha="$(git rev-parse --short HEAD)"
+archive="dist/gleaner-issta2026-ae-${sha}.tar.gz"
+checksum="${archive}.sha256"
+test -s "$archive"
+test -s "$checksum"
+(cd dist && sha256sum -c "$(basename "$checksum")")
+```
+
+Then check archive contents before upload:
+
+```bash
+tar -tzf "$archive" | grep -Fx ARTIFACT_README.md
+tar -tzf "$archive" | grep -Fx REQUIREMENTS.md
+tar -tzf "$archive" | grep -Fx STATUS.md
+tar -tzf "$archive" | grep -Fx docs/RELEASE_PACKAGING.md
+tar -tzf "$archive" | grep -Fx ARCHIVE_MANIFEST.tsv
+tar -tzf "$archive" | grep -Fx data/artifact/reduced/MANIFEST.json
+tar -tzf "$archive" | grep -Fx third_party/Nezha/
+tar -tzf "$archive" | grep -Fx output/rcabench-platform-v2/sampler_reports/gleaner/aggregated_perf.parquet
+tar -tzf "$archive" | grep -Fx output/rcabench-platform-v2/sampler_reports/gleaner/detailed_perf.parquet
+! tar -tzf "$archive" | grep -E '(^|/)\.git(/|$)'
+! tar -tzf "$archive" | grep -E '(^|/)\.venv(/|$)'
+! tar -tzf "$archive" | grep -E '^dist(/|$)'
+! tar -tzf "$archive" | grep -E '^output/artifact(/|$)'
+! tar -tzf "$archive" | grep -E '(^|/)__pycache__(/|$)'
+```
 
 ## Known Scope Limits
 
 - The full path is intentionally guarded and not verified in this artifact snapshot; `scripts/run_full_all.sh` is documented as non-final and should not be treated as reviewer-verified.
-- Public release URL, DOI, and HotCRP artifact link are still external manual steps. No placeholder DOI, release URL, or HotCRP link has been added.
+- Public release URL, DOI if required, and HotCRP artifact link submission are still external manual steps. No placeholder DOI, release URL, or HotCRP link has been added.
 - `dist/` archives and checksum files remain local build products and should not be staged.
 
 ## Required Next Step Before External Submission
 
-Use the archive generated from the final tracked commit. If any tracked files changed after the verified audit above, first run:
-
-```bash
-bash scripts/package_artifact.sh
-```
-
-Then upload the resulting `dist/gleaner-issta2026-ae-<short-sha>.tar.gz` and sibling `.sha256`, and complete the external release/DOI/HotCRP steps with real links only.
+Use the archive generated from the final tracked commit. If any tracked file changes, commit it first, rerun `bash scripts/package_artifact.sh`, verify the checksum and tar contents with the commands above, then upload the resulting `dist/gleaner-issta2026-ae-$(git rev-parse --short HEAD).tar.gz` and sibling `.sha256`. Complete the external release/DOI/HotCRP steps with real links only.
