@@ -4,7 +4,9 @@ Audit date: 2026-06-28 (local Asia/Hong_Kong time).
 
 ## Verdict
 
-The current staged artifact state is locally commit-ready, subject to the external release steps listed below. The pre-commit audit found no unstaged source drift: `git diff --name-only` was empty before this report was written, and the reduced verification commands completed successfully.
+The AE artifact was committed and locally packaged at HEAD `cfe2f7eec1ff423a42784f3c0d81440f68b47dd2` (`Prepare ISSTA AE artifact package`). The reduced verification path, local archive checksum, tar contents, and clean git state were verified for that post-commit package.
+
+This document is being finalized in a doc-only follow-up. After the follow-up commit, rerun `bash scripts/package_artifact.sh` so the upload candidate is named with the new commit SHA and includes these final documentation updates.
 
 ## Git State Evidence
 
@@ -14,18 +16,18 @@ Commands run from `/home/nn/workspace/Gleaner`:
 - `git diff --name-only`: empty; no unstaged tracked-file drift.
 - `git diff --cached --name-status`: showed the staged artifact package/docs/code/data state; no `dist/` archive or checksum files were staged.
 
-After this audit, only `docs/FINAL_COMMIT_READINESS.md` should be newly staged by the final readiness worker.
+Post-commit verification subsequently confirmed a clean tree at `cfe2f7eec1ff423a42784f3c0d81440f68b47dd2`; `dist/` remained ignored and unstaged.
 
 ## Local Archive Verification
 
 Archive checked:
 
-- `dist/gleaner-issta2026-ae-worktree.tar.gz`
-- `dist/gleaner-issta2026-ae-worktree.tar.gz.sha256`
+- `dist/gleaner-issta2026-ae-cfe2f7e.tar.gz`
+- `dist/gleaner-issta2026-ae-cfe2f7e.tar.gz.sha256`
 
 Commands/results:
 
-- `cd dist && sha256sum -c gleaner-issta2026-ae-worktree.tar.gz.sha256` -> `gleaner-issta2026-ae-worktree.tar.gz: OK`.
+- `cd dist && sha256sum -c gleaner-issta2026-ae-cfe2f7e.tar.gz.sha256` -> `gleaner-issta2026-ae-cfe2f7e.tar.gz: OK`.
 - Tar listing required-path check passed for:
   - `ARTIFACT_README.md`
   - `REQUIREMENTS.md`
@@ -34,12 +36,11 @@ Commands/results:
   - `ARCHIVE_MANIFEST.tsv`
   - `data/artifact/reduced/MANIFEST.json`
   - `third_party/Nezha/`
-  - `data/artifact/reduced/rq2/nezha/sampler.grouped.perf.parquet`
-  - `data/artifact/reduced/rq2/shapleyiq_microrca/sampler.grouped.perf.parquet`
-- Tar listing forbidden-path check passed: `.git/`, `.venv/`, `dist/`, and `output/artifact/` were absent.
-- Archive listing contained 2042 entries.
+  - `output/rcabench-platform-v2/sampler_reports/gleaner/aggregated_perf.parquet`
+  - `output/rcabench-platform-v2/sampler_reports/gleaner/detailed_perf.parquet`
+- Tar listing forbidden-path check passed: `.git/`, `.venv/`, `dist/`, `output/artifact/`, and `__pycache__/` were absent.
 
-Caveat: the checked archive is the current `worktree` archive because the artifact state is staged but not yet committed. After committing, rerun `bash scripts/package_artifact.sh` so the upload candidate is named with the commit SHA and reflects the committed tree.
+Caveat: this was the verified package for commit `cfe2f7e`. After this final documentation follow-up commit, regenerate the package and use the new commit-SHA archive as the upload candidate.
 
 ## Local Command Verification
 
@@ -48,6 +49,7 @@ Commands run from `/home/nn/workspace/Gleaner`:
 - `bash scripts/prepare_reduced_data.sh`: passed; verified 16 files from `data/artifact/reduced/MANIFEST.json`, total 450107 bytes.
 - `bash scripts/smoke_test.sh`: passed; submodule pins matched and Python imports succeeded (`gleaner import OK`, `rcabench-platform 0.4.1`).
 - `bash scripts/run_reduced_all.sh`: passed; RQ1/RQ2/RQ3/RQ4 reduced scripts wrote generated outputs under `output/artifact/reduced/` and each expected-output comparison passed for 3 files.
+- `time -p bash scripts/run_reduced_all.sh`: passed on the local host with `real 2.96`, `user 16.51`, `sys 10.91`.
 
 The reduced artifact path is therefore locally verified. Docker/container verification is already recorded in `STATUS.md` and `docs/ISSTA_AE_TODO.md`; this final pass did not rerun Docker.
 
@@ -57,9 +59,9 @@ The reduced artifact path is therefore locally verified. Docker/container verifi
 - Public release URL, DOI, and HotCRP artifact link are still external manual steps. No placeholder DOI, release URL, or HotCRP link has been added.
 - `dist/` archives and checksum files remain local build products and should not be staged.
 
-## Required Next Step After Commit
+## Required Next Step After Documentation Follow-up Commit
 
-After committing the current staged artifact state, run:
+After committing the final documentation updates, run:
 
 ```bash
 bash scripts/package_artifact.sh

@@ -1,6 +1,6 @@
 # ISSTA 2026 Artifact Evaluation Checklist
 
-This checklist tracks the Gleaner artifact preparation status for ISSTA 2026 AE. It reflects the current staged / reviewer-verified artifact state.
+This checklist tracks the Gleaner artifact preparation status for ISSTA 2026 AE. It reflects the current committed / reviewer-verified artifact state.
 
 ## Official Requirements
 
@@ -28,7 +28,7 @@ This checklist tracks the Gleaner artifact preparation status for ISSTA 2026 AE.
 - [x] Built Docker image locally with `docker build -t gleaner-issta2026-ae .`.
 - [x] Ran container smoke test with `docker run --rm gleaner-issta2026-ae bash scripts/smoke_test.sh`.
 - [x] Ran reduced all-in-one command inside Docker with `docker run --rm gleaner-issta2026-ae bash scripts/run_reduced_all.sh`.
-- [ ] Commit the current AE artifact state.
+- [x] Commit the current AE artifact state (`cfe2f7eec1ff423a42784f3c0d81440f68b47dd2`, `Prepare ISSTA AE artifact package`).
 
 ## dev2 RQ Script Sources
 
@@ -93,7 +93,7 @@ This checklist tracks the Gleaner artifact preparation status for ISSTA 2026 AE.
 - [x] Tested `docker build -t gleaner-issta2026-ae .`.
 - [x] Tested container command: `bash scripts/smoke_test.sh`.
 - [x] Added final Docker build/run instructions to `ARTIFACT_README.md` after container smoke testing.
-- [ ] Decide final artifact package contents: source, submodules, Docker image, reduced data, expected outputs.
+- [x] Decide final artifact package contents: source, third-party contents, reduced data/evidence, selected reduced sampler reports, expected outputs, docs, and scripts.
 - [x] Prepare reduced artifact manifest with file sizes and checksums.
 - [x] Add final local archive creation script: `scripts/package_artifact.sh`.
 - [x] Generate local archive manifest and external checksum via `scripts/package_artifact.sh`.
@@ -119,7 +119,7 @@ This checklist tracks the Gleaner artifact preparation status for ISSTA 2026 AE.
 - [x] Reviewer-verified `scripts/run_reduced_all.sh` completes the reduced end-to-end path.
 - [x] Make `scripts/run_full_all.sh` explicitly non-placeholder-safe with a non-zero not-implemented/not-verified exit.
 - [ ] Add final full-suite execution behavior beyond the reduced reviewer path.
-- [ ] Benchmark and document reduced runtimes.
+- [x] Benchmark and document reduced runtimes.
 
 ## Result Validation
 
@@ -131,8 +131,8 @@ This checklist tracks the Gleaner artifact preparation status for ISSTA 2026 AE.
 - [ ] Define and document final RCA ranking output schema.
 - [ ] Define and document final aggregate metric schema.
 - [ ] Define and document final figure/table input schema.
-- [ ] Document numerical tolerance policy for expected-vs-actual comparisons.
-- [ ] Document what counts as a successful reduced reproduction.
+- [x] Document numerical tolerance policy for expected-vs-actual comparisons.
+- [x] Document what counts as a successful reduced reproduction.
 
 ## Paper Claim Mapping
 
@@ -142,7 +142,7 @@ This checklist tracks the Gleaner artifact preparation status for ISSTA 2026 AE.
 - [ ] Map RQ2 to exact paper table/figure names.
 - [ ] Map RQ3 to exact paper table/figure names.
 - [ ] Map RQ4 to exact paper table/figure names.
-- [ ] For each claim, document expected runtime.
+- [x] For each claim, document expected runtime.
 - [ ] List unsupported paper claims, if any, and explain why.
 - [ ] Integrate paper plotting scripts when available.
 
@@ -159,7 +159,7 @@ This checklist tracks the Gleaner artifact preparation status for ISSTA 2026 AE.
 - [x] Added output and expected-output directory layout.
 - [x] Add artifact entry point to root `README.md`.
 - [x] Added final Docker instructions after Docker/container smoke verification.
-- [ ] Add troubleshooting section.
+- [x] Add troubleshooting section.
 - [ ] Add code layout and reuse guide.
 - [ ] Add instructions for running Gleaner on new datapacks.
 - [ ] Add data provenance, ethics, and license notes.
@@ -173,7 +173,7 @@ This checklist tracks the Gleaner artifact preparation status for ISSTA 2026 AE.
 - [x] Reduced RQ1/RQ2/RQ3/RQ4 wrappers validate actual outputs against expected outputs.
 - [x] Expected reduced outputs are provided under `artifact_expected/reduced/`.
 - [x] Current `scripts/run_reduced_all.sh` path is reviewer-verified as passing end to end.
-- [ ] Reduced reproduction runtime is benchmarked and documented.
+- [x] Reduced reproduction runtime is benchmarked and documented.
 - [x] Docker build, container smoke test, and container reduced-all run are verified.
 - [ ] Documentation maps claims to exact paper tables/figures.
 
@@ -194,7 +194,7 @@ This checklist tracks the Gleaner artifact preparation status for ISSTA 2026 AE.
 
 ## Immediate Next Steps
 
-1. Choose final artifact hosting location, upload the locally verified package, and record real DOI/release/HotCRP metadata.
-2. Implement and reviewer-verify full-path behavior for `scripts/run_full_all.sh` and full RQ inputs.
-3. Fill exact paper table/figure names and reduced runtime estimates.
-4. Add troubleshooting and reusable adapter documentation.
+1. Regenerate the package after any final follow-up commit and use the new commit-SHA archive as the upload candidate.
+2. Choose final artifact hosting location, upload the locally verified package, and record real DOI/release/HotCRP metadata.
+3. Implement and reviewer-verify full-path behavior for `scripts/run_full_all.sh` and full RQ inputs if full reproduction is required.
+4. Fill exact paper table/figure names and reusable adapter documentation.

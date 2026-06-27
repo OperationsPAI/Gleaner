@@ -1,6 +1,6 @@
 # ISSTA 2026 AE TODO
 
-This is the short action list. The full progress checklist is in `docs/ISSTA_AE_CHECKLIST.md`. It reflects the current staged / reviewer-verified artifact state.
+This is the short action list. The full progress checklist is in `docs/ISSTA_AE_CHECKLIST.md`. It reflects the current committed / reviewer-verified artifact state.
 
 ## Current Reviewer-Verified State
 
@@ -9,18 +9,19 @@ This is the short action list. The full progress checklist is in `docs/ISSTA_AE_
 - [x] Expected reduced outputs are staged under `artifact_expected/reduced/rq1/` through `artifact_expected/reduced/rq4/`.
 - [x] Each `scripts/run_rq*.sh` wrapper calls `scripts/compare_expected.py` to validate expected vs actual outputs.
 - [x] `scripts/run_reduced_all.sh` is reviewer-verified as passing end to end in the current reduced state.
-- [x] Reduced RQ2 RCA evidence is staged under `data/artifact/reduced/rq2/`.
-- [x] Reduced manifest and checksum files are staged and verified by `scripts/prepare_reduced_data.sh`.
+- [x] Reduced RQ2 RCA evidence is committed under `data/artifact/reduced/rq2/`.
+- [x] Reduced manifest and checksum files are committed and verified by `scripts/prepare_reduced_data.sh`.
 - [x] Reduced evidence docs are present in `ARTIFACT_README.md`, `REQUIREMENTS.md`, and `STATUS.md`.
 - [x] Local archive/package script and release packaging documentation are present.
+- [x] Commit `cfe2f7eec1ff423a42784f3c0d81440f68b47dd2` and commit-SHA archive `dist/gleaner-issta2026-ae-cfe2f7e.tar.gz` were locally verified.
 
 ## P0: Still Open Before AE Submission
 
 - [x] Create local archive/package script.
 - [x] Generate local final archive manifest and checksum.
 - [ ] Decide final archive/DOI/release plan and prepare the submission link.
-- [ ] Record reviewer-facing reduced runtime estimates in `REQUIREMENTS.md`.
-- [ ] Commit the current staged artifact state once reviewed.
+- [x] Record reviewer-facing reduced runtime estimates in `REQUIREMENTS.md`.
+- [x] Commit the reviewed artifact state.
 
 ## P0: Full Path And Dataset Documentation
 
@@ -36,9 +37,9 @@ This is the short action list. The full progress checklist is in `docs/ISSTA_AE_
 - [x] Expected reduced outputs exist for each RQ.
 - [x] Validation calls are present in the reduced RQ wrappers.
 - [x] Reviewer-verify `scripts/run_reduced_all.sh` end to end.
-- [ ] Define and document numerical tolerances or trend-based checks.
+- [x] Define and document numerical tolerances or trend-based checks.
 - [ ] Fill exact paper claim/table/figure mapping in `ARTIFACT_README.md`.
-- [ ] Add troubleshooting section.
+- [x] Add troubleshooting section.
 - [ ] Add reuse guide for running Gleaner on new datapacks.
 - [ ] Finalize `STATUS.md` badge justification after archive/release packaging checks.
 
@@ -47,6 +48,7 @@ This is the short action list. The full progress checklist is in `docs/ISSTA_AE_
 - [ ] Decide final artifact hosting location.
 - [x] Create archive/package script.
 - [x] Generate local final manifest with checksums.
+- [x] Generate and verify a commit-SHA local archive/checksum after the artifact commit.
 - [ ] Upload source/package/data or Docker image tarball.
 - [ ] Prepare DOI/release metadata if feasible.
 - [ ] Verify final link does not require login and does not compromise reviewer anonymity.

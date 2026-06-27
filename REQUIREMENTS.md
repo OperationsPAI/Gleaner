@@ -16,11 +16,26 @@
 - Reduced RQ2 evidence: staged parquet inputs are under `data/artifact/reduced/rq2/`.
 - GPU: not required unless a baseline's original implementation is explicitly configured to use GPU.
 - Network: not required after the container/artifact and datasets have been obtained.
-- Expected runtime: to be filled after the reduced scripts are benchmarked.
+- Expected runtime: the full reduced command completed on the local host in 2.96 seconds wall-clock time (`time -p bash scripts/run_reduced_all.sh`, 2026-06-28). Reviewers should budget under 5 minutes for this path on a typical x86_64 Linux machine, including environment startup variability.
 - Reduced evidence manifest: `data/artifact/reduced/MANIFEST.json`.
 - Reduced evidence checksum list: `data/artifact/reduced/SHA256SUMS`.
 - Reduced evidence verification: `bash scripts/prepare_reduced_data.sh`.
 - Reduced manifest totals: 16 files, 450107 bytes. Scope is existing reduced evidence and expected outputs, not raw full/reduced datapack directories.
+
+## Validation And Tolerances
+
+- Successful reduced reproduction means `bash scripts/prepare_reduced_data.sh`, `bash scripts/smoke_test.sh`, and `bash scripts/run_reduced_all.sh` all exit with status 0.
+- `scripts/compare_expected.py` compares JSON, CSV, and Markdown outputs against `artifact_expected/reduced/rqX/`.
+- Numeric JSON/CSV values use strict default tolerances of `abs_tol=1e-12` and `rel_tol=1e-12`.
+- JSON comparison ignores `config.output_dir` by default so reviewers can choose a different output directory.
+- Markdown comparison normalizes lines named `output directory` or `output_dir` by default; all other Markdown content must match.
+- Boolean JSON values are type-checked separately from numbers, so `true`/`false` cannot silently match `1`/`0`.
+
+## Troubleshooting
+
+- If `scripts/prepare_reduced_data.sh` reports a checksum or size mismatch, restore the reduced files listed in `data/artifact/reduced/MANIFEST.json` before rerunning experiments.
+- If an expected-output comparison fails, inspect the reported JSON path, CSV row/column, or Markdown unified diff; generated outputs remain under `output/artifact/reduced/`.
+- If the smoke test reports skipped SHA verification, the run is likely from an archive or container without `.git`; this is expected only when `third_party/` directories are present and non-empty.
 
 ## Full Evaluation
 

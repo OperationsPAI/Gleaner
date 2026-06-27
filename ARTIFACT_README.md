@@ -63,6 +63,17 @@ bash scripts/run_reduced_all.sh
 
 The current `scripts/run_reduced_all.sh` path is reviewer-verified as passing end to end. It runs the smoke test and then RQ1/RQ2/RQ3/RQ4 in sequence.
 
+Observed host runtime on 2026-06-28:
+
+```text
+time -p bash scripts/run_reduced_all.sh
+real 2.96
+user 16.51
+sys 10.91
+```
+
+Reviewers should budget under 5 minutes for the reduced path on a typical x86_64 Linux machine. Container startup and first-time dependency setup may add extra time.
+
 Or run individual RQs:
 
 ```bash
@@ -75,6 +86,8 @@ bash scripts/run_rq4_efficiency.sh
 Each individual wrapper runs its corresponding `scripts/artifact/rq*.py` script and then invokes `scripts/compare_expected.py` to compare actual outputs with the expected files under `artifact_expected/reduced/rqX/`.
 
 Actual outputs are written under `output/artifact/reduced/`. Expected outputs are staged under `artifact_expected/reduced/`.
+
+Expected-output checks are intentionally strict. JSON and CSV numeric values use default absolute and relative tolerances of `1e-12`; JSON `config.output_dir` is ignored by default; Markdown lines named `output directory` or `output_dir` are normalized by default; boolean JSON values are not treated as numeric aliases.
 
 ## Reduced Input Evidence
 
@@ -112,7 +125,14 @@ A future full path is expected to cover the complete TracePicker and Gleaner dat
 | RQ3 Gleaner ablations | `bash scripts/run_rq3_ablation.sh` | `output/artifact/reduced/rq3/` | `artifact_expected/reduced/rq3/` | Reduced script implemented and wrapper validates expected vs actual. |
 | RQ4 sampling efficiency | `bash scripts/run_rq4_efficiency.sh` | `output/artifact/reduced/rq4/` | `artifact_expected/reduced/rq4/` | Reduced script implemented and wrapper validates expected vs actual. |
 
-The exact paper table/figure names and final runtime estimates still need to be filled after the remaining documentation checks. Full-dataset claims are not reviewer-verified by this artifact snapshot.
+The combined reduced path was measured at 2.96 seconds wall-clock time on the local host. Exact paper table/figure names still need to be filled after paper integration. Full-dataset claims are not reviewer-verified by this artifact snapshot.
+
+## Troubleshooting
+
+- If `bash scripts/prepare_reduced_data.sh` fails, compare the reported path against `data/artifact/reduced/MANIFEST.json`; the reduced files must match the recorded byte sizes and SHA256 values.
+- If `scripts/compare_expected.py` fails, use its reported JSON path, CSV row/column, or Markdown diff to inspect the generated files under `output/artifact/reduced/`.
+- If Markdown differs only by output directory, ensure the wrappers are using the default comparison mode; output-directory lines are normalized by default.
+- If `scripts/smoke_test.sh` reports skipped submodule SHA checks, confirm the run is from a packaged archive/container without `.git` and that each `third_party/` directory is present and non-empty.
 
 ## Local Release Packaging
 
