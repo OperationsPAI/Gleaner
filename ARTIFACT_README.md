@@ -20,6 +20,8 @@ Included components:
 
 Open items are tracked in `STATUS.md` and `docs/ISSTA_AE_TODO.md`. The reduced RQ1-RQ4 path is the verified reproduction path; full-path implementation/verification remains incomplete. Local archive packaging is available through `scripts/package_artifact.sh` and documented in `docs/RELEASE_PACKAGING.md`, but public upload, DOI minting, and HotCRP link submission remain external/manual and are not yet complete.
 
+Third-party source, license-file, public URL reachability, smoke-test scope, and dependency-risk notes are documented in `docs/THIRD_PARTY.md`. The reduced artifact uses pinned submodule contents and committed parquet evidence; it does not claim full component-level execution of every upstream baseline/RCA repository.
+
 ## Getting Started: 30-minute Path
 
 ```bash
@@ -116,6 +118,8 @@ bash scripts/run_reduced_all.sh
 
 A future full path is expected to cover the complete TracePicker and Gleaner datasets and may take substantially longer than one day depending on hardware.
 
+Full baseline/RCA component execution also requires dependency isolation beyond the reduced artifact environment. TracePicker and TraStrainer have known Python/package-version conflicts with the reduced environment, and their full upstream execution smoke tests are documented as future full-path work in `docs/THIRD_PARTY.md`.
+
 ## Claim Mapping
 
 The exact paper locations below were extracted from `paper/main.pdf` with `pdftotext`. The artifact wrapper numbering differs from the current paper for two middle results: the artifact keeps dev2 script names where `run_rq2_rca_effectiveness.sh` is RCA and `run_rq3_ablation.sh` is ablation; the paper labels ablation as RQ2 and downstream RCA as RQ3.
@@ -155,6 +159,7 @@ The committed reduced data is a compact evidence bundle derived from local RCAbe
 - If `scripts/compare_expected.py` fails, use its reported JSON path, CSV row/column, or Markdown diff to inspect the generated files under `output/artifact/reduced/`.
 - If Markdown differs only by output directory, ensure the wrappers are using the default comparison mode; output-directory lines are normalized by default.
 - If `scripts/smoke_test.sh` reports skipped submodule SHA checks, confirm the run is from a packaged archive/container without `.git` and that each `third_party/` directory is present and non-empty.
+- If a third-party license question arises, use `docs/THIRD_PARTY.md` as the evidence record. ShapleyIQ and Nezha include license files in the vendored tree; TracePicker and TraStrainer do not, so their license status is intentionally recorded as unknown rather than inferred.
 
 ## Local Release Packaging
 

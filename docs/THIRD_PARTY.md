@@ -1,12 +1,51 @@
 # Third-party Components
 
-The artifact vendors baseline samplers and RCA algorithms as git submodules pinned to the exact commits used by the AE workspace.
+The artifact vendors baseline samplers and RCA algorithms as git submodules pinned to the exact commits used by the AE workspace. These repositories are included in the local archive as file contents, not as bare gitlinks, so reviewers can inspect the referenced code from the package.
 
-| Component | Purpose | Repository | Commit | License/notes |
-|---|---|---|---|---|
-| ShapleyIQ | RCA: ShapleyIQ and MicroRCA | https://github.com/LGU-SE-Internal/ShapleyIQ | f45c02e55f5614f8c9e5d54ba1882780c694ce90 | Public LGU fork |
-| Nezha | RCA: Nezha | https://github.com/LGU-SE-Internal/Nezha | f0de4db8123a566e13c5fcfe6ac0d9137009f99a | MIT license |
-| TracePicker | Baseline sampler | https://github.com/LGU-SE-Internal/TracePicker | 31e5fc8130c9b2c315220bb91397f2756dda8378 | MIT license in original version |
-| TraStrainer | Baseline samplers: TraStrainer, Sieve, Sifter | https://github.com/LGU-SE-Internal/TraStrainer | 82b133d9a0209997e3337506988776ab07ac4ada | Public LGU fork; original repository has no license |
+## Pinned Sources And Access Checks
 
-Submodules are intentionally not added as uv workspace members yet because some baselines have conflicting Python/runtime requirements. The artifact runner will invoke them through adapters with pinned environments or compatibility shims.
+The public URL checks below were performed with non-mutating `git ls-remote <url>` commands on 2026-06-28. They verify that the configured `.gitmodules` URLs are reachable without credentials from the current environment; they do not upload, mutate, or reserve any external artifact link.
+
+| Component | Purpose | Repository | Pinned commit | `git ls-remote` status | Remote HEAD observed | Pin note |
+|---|---|---|---|---|---|---|
+| ShapleyIQ | RCA: ShapleyIQ and MicroRCA | https://github.com/LGU-SE-Internal/ShapleyIQ.git | `f45c02e55f5614f8c9e5d54ba1882780c694ce90` | OK, 4 refs visible | `ceac113d2d1a3a571013ca58358e8b9f9e61933f` | Pinned to the reviewed `dev-note` submodule commit, not the remote default HEAD. |
+| Nezha | RCA: Nezha | https://github.com/LGU-SE-Internal/Nezha.git | `f0de4db8123a566e13c5fcfe6ac0d9137009f99a` | OK, 8 refs visible | `7b048e7a7fdb2c1237ad7d442f9ada9f929a8ae8` | Pinned to the reviewed submodule commit, not the remote default HEAD. |
+| TracePicker | Baseline sampler | https://github.com/LGU-SE-Internal/TracePicker.git | `31e5fc8130c9b2c315220bb91397f2756dda8378` | OK, 3 refs visible | `31e5fc8130c9b2c315220bb91397f2756dda8378` | Pinned commit matches remote HEAD observed during the check. |
+| TraStrainer | Baseline samplers: TraStrainer, Sieve, Sifter | https://github.com/LGU-SE-Internal/TraStrainer.git | `82b133d9a0209997e3337506988776ab07ac4ada` | OK, 5 refs visible | `82b133d9a0209997e3337506988776ab07ac4ada` | Pinned commit matches remote HEAD observed during the check. |
+
+The local submodule pin smoke test in `scripts/smoke_test.sh` checks these exact commits when Git metadata is available. In archive/container contexts without `.git`, it checks that each `third_party/` directory exists and is non-empty, then clearly reports that strict SHA verification was skipped.
+
+## License File Evidence
+
+License status is based only on files present in the vendored submodule directories at the pinned commits. If no license file is present, this document records that fact instead of inferring license terms from upstream history.
+
+| Component | License files found in vendored tree | Evidence-based status |
+|---|---|---|
+| ShapleyIQ | `third_party/ShapleyIQ/LICENSE` | Apache License 2.0 text is present in the vendored tree. |
+| Nezha | `third_party/Nezha/LICENSE` | MIT License text is present in the vendored tree. |
+| TracePicker | none found under `third_party/TracePicker/` by the AE license-file scan | License is unknown in the vendored LGU fork snapshot; needs upstream/project-owner confirmation before making a license claim. |
+| TraStrainer | none found under `third_party/TraStrainer/` by the AE license-file scan | License is unknown in the vendored LGU fork snapshot; needs upstream/project-owner confirmation before making a license claim. |
+
+## Smoke-test Coverage
+
+`scripts/smoke_test.sh` is intentionally a fast artifact smoke test, not a full third-party component test suite. It verifies:
+
+- exact submodule SHAs in a Git checkout;
+- non-empty `third_party/` directories in archive/container contexts where `.git` is unavailable;
+- importability of the local `gleaner` package;
+- installed `rcabench-platform` package metadata.
+
+The reduced RQ wrappers exercise committed reduced reports and RCA evidence, but they do not execute the full TracePicker, TraStrainer, Nezha, MicroRCA, or ShapleyIQ upstream training/inference pipelines. Full component-level execution is outside the reviewer-verified reduced scope because the upstream components have separate or conflicting runtime requirements and the full raw datasets are not packaged.
+
+## Dependency-risk Decisions
+
+The third-party repositories are intentionally not added as uv workspace members for this AE snapshot. The reduced/offline artifact path consumes committed parquet reports and expected outputs instead of rebuilding every baseline environment.
+
+Known risks that remain outside the reduced reviewer path:
+
+- TracePicker requests Python `==3.12.*` in `third_party/TracePicker/pyproject.toml`, while this artifact environment uses Python 3.13.
+- TracePicker pins heavy CUDA-oriented dependencies through direct wheel URLs, including `torch==2.4.0`, `dgl`, and `geatpy==2.7.0`.
+- TraStrainer pins `rcabench-platform==0.3.34rc19`, while the artifact environment uses `rcabench-platform==0.4.1`.
+- The older ShapleyIQ internal requirements file under `third_party/ShapleyIQ/ShapleyIQ/requirements.txt` contains a legacy Python stack; the artifact uses the top-level pinned submodule code and committed reduced RCA evidence for the verified path.
+
+A future full-path artifact should isolate these components in per-baseline environments or compatibility containers and add component-level smoke tests only after those environments are pinned and verified.

@@ -18,6 +18,7 @@ Current functional evidence:
 - Container reduced reproduction has passed with `docker run --rm gleaner-issta2026-ae bash scripts/run_reduced_all.sh`.
 - Local release/archive packaging is implemented by `scripts/package_artifact.sh`; it generates a HEAD-derived tarball, internal manifest, and external SHA-256 checksum for local verification.
 - The reduced path is CPU-only compatible: it runs with `CUDA_VISIBLE_DEVICES='' bash scripts/run_reduced_all.sh`.
+- Third-party submodule pins, license-file evidence, public URL reachability, smoke-test coverage, and reduced-scope dependency risks are documented in `docs/THIRD_PARTY.md`.
 
 Still open before claiming a final functional artifact:
 
@@ -28,6 +29,8 @@ Still open before claiming a final functional artifact:
 
 The reduced command entry points, expected-output validation, schema notes, claim mapping, and new-datapack reuse guidance are documented in `ARTIFACT_README.md`. The reusable scope is the reduced/offline artifact path: users can regenerate RQ summaries from compatible sampler-report and RCA parquet inputs, inspect expected-output comparisons, and extend baseline/RCA adapters by producing the documented report schemas. Full-dataset orchestration and full baseline environment integration remain outside the reviewer-verified scope.
 
+Third-party reuse status is evidence-based in `docs/THIRD_PARTY.md`: ShapleyIQ and Nezha include license files in the vendored tree; TracePicker and TraStrainer do not include license files in the vendored snapshot and therefore remain unknown pending upstream/project-owner confirmation. Configured submodule URLs are reachable via public `git ls-remote` checks, but full third-party component execution remains outside the reduced reviewer-verified scope because TracePicker and TraStrainer have conflicting or heavy environment requirements.
+
 ## Artifacts Available
 
 The reduced artifact manifest and checksum set are present for existing reduced evidence and expected outputs. A local package can be generated and verified with `bash scripts/package_artifact.sh`; the resulting archive contains `ARCHIVE_MANIFEST.tsv` and has a sibling `.sha256` file under `dist/`. The final public archive upload, DOI/release metadata, and HotCRP link remain external P0 items. Do not treat the artifact as publicly archived or DOI-backed until those items are completed and verified.
@@ -35,5 +38,5 @@ The reduced artifact manifest and checksum set are present for existing reduced 
 ## Badge Justification
 
 - Functional: locally supportable for the reduced artifact path because smoke tests, RQ1-RQ4 reduced commands, expected-output comparisons, CPU-only execution, Docker execution, and archive packaging have been verified. The full reproduction path is explicitly not claimed.
-- Reusable: partially supportable for the reduced/offline path because data schemas, command entry points, output locations, new-datapack guidance, and extension points are documented. Full-dataset reuse and every third-party baseline environment are not fully verified.
+- Reusable: partially supportable for the reduced/offline path because data schemas, command entry points, output locations, new-datapack guidance, extension points, and third-party readiness notes are documented. Full-dataset reuse, unknown-license follow-up for TracePicker/TraStrainer, and every third-party baseline execution environment are not fully verified.
 - Available: not yet supportable as a public archival claim until a real public archive/release URL, DOI if required, and HotCRP artifact link are created and verified.

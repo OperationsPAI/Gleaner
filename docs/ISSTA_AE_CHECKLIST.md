@@ -58,13 +58,15 @@ This checklist tracks the Gleaner artifact preparation status for ISSTA 2026 AE.
 - [x] Added `third_party/TraStrainer` as a submodule.
 - [x] Pinned TraStrainer to latest main commit `82b133d9a0209997e3337506988776ab07ac4ada`.
 - [x] Documented third-party sources in `docs/THIRD_PARTY.md`.
-- [ ] Check license files and license notes for every submodule.
-- [ ] Confirm final public accessibility of all submodule URLs.
-- [ ] Add component-level smoke tests for each third-party algorithm.
+- [x] Checked license files and license notes for every submodule in `docs/THIRD_PARTY.md`; TracePicker and TraStrainer are documented as unknown because no license file is present in the vendored snapshot.
+- [x] Confirmed configured submodule URLs are publicly reachable with non-mutating `git ls-remote` checks and recorded observed remote HEADs in `docs/THIRD_PARTY.md`.
+- [x] Documented component-level smoke-test coverage and reduced-scope limits in `docs/THIRD_PARTY.md`.
+- [ ] Add full component-level execution smoke tests for each third-party algorithm after per-baseline environments and full inputs are pinned.
 
 ## Known Dependency Risks
 
 - [x] Avoided adding third-party repos directly as uv workspace members for now.
+- [x] Documented the reduced-scope dependency-risk decision in `docs/THIRD_PARTY.md`: the verified artifact consumes committed parquet reports instead of rebuilding every third-party baseline environment.
 - [ ] Resolve TracePicker Python version mismatch: TracePicker requests Python 3.12, while Gleaner uses Python 3.13.
 - [ ] Resolve TracePicker heavy dependencies: torch, dgl, geatpy.
 - [ ] Resolve TraStrainer platform mismatch: current TraStrainer pyproject still pins `rcabench-platform==0.3.34rc19`.
