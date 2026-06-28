@@ -7,11 +7,12 @@ This is the short action list. The full progress checklist is in `docs/ISSTA_AE_
 - [x] Docker image build, container smoke test, and container reduced run are verified.
 - [x] Reduced RQ1/RQ2/RQ3/RQ4 artifact scripts exist and are connected to `scripts/run_rq*.sh` wrappers.
 - [x] Expected reduced outputs are committed under `artifact_expected/reduced/rq1/` through `artifact_expected/reduced/rq4/`.
+- [x] Expected reduced plot-data/report outputs are committed under `artifact_expected/reduced/figures/`.
 - [x] Each `scripts/run_rq*.sh` wrapper calls `scripts/compare_expected.py` to validate expected vs actual outputs.
-- [x] `scripts/run_reduced_all.sh` is reviewer-verified as passing end to end in the current reduced state.
+- [x] `scripts/run_reduced_all.sh` is reviewer-verified as passing end to end in the current reduced state, including reduced illustrative plots and `output/artifact/reduced/REPORT.md`.
 - [x] Reduced RQ2 RCA evidence is committed under `data/artifact/reduced/rq2/`.
 - [x] Reduced manifest and checksum files are committed and verified by `scripts/prepare_reduced_data.sh`.
-- [x] Reduced evidence, CPU-only, claim-mapping, and reuse docs are present in `ARTIFACT_README.md`, `REQUIREMENTS.md`, and `STATUS.md`.
+- [x] Reduced evidence, reduced plots/report, CPU-only, claim-mapping, and reuse docs are present in `ARTIFACT_README.md`, `REQUIREMENTS.md`, and `STATUS.md`.
 - [x] Third-party license-file evidence, submodule URL accessibility, smoke-test coverage, and dependency-risk decisions are documented in `docs/THIRD_PARTY.md`.
 - [x] Local archive/package script and release packaging documentation are present.
 - [x] Human submitter guide for external GitHub/Zenodo upload, post-upload checksum verification, and HotCRP link submission is present in `docs/EXTERNAL_SUBMISSION_GUIDE.md`.
@@ -39,6 +40,7 @@ This is the short action list. The full progress checklist is in `docs/ISSTA_AE_
 - [x] Expected reduced outputs exist for each RQ.
 - [x] Validation calls are present in the reduced RQ wrappers.
 - [x] Reviewer-verify `scripts/run_reduced_all.sh` end to end.
+- [x] Generate reduced illustrative RQ plots and final reduced report from generated RQ summary CSVs.
 - [x] Define and document numerical tolerances or trend-based checks.
 - [x] Fill exact paper claim/table/figure mapping in `ARTIFACT_README.md` from `pdftotext paper/main.pdf -` output.
 - [x] Add troubleshooting section.

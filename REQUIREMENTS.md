@@ -11,25 +11,26 @@
 
 - Command: `bash scripts/run_reduced_all.sh`.
 - Current verification: reviewer-verified as passing end to end on host and verified inside Docker with `docker run --rm gleaner-issta2026-ae bash scripts/run_reduced_all.sh`.
-- RQ coverage: reduced RQ1, RQ2, RQ3, and RQ4 scripts are implemented and connected to wrappers.
-- Validation: each `scripts/run_rq*.sh` wrapper invokes `scripts/compare_expected.py` against expected outputs under `artifact_expected/reduced/rqX/`.
+- RQ coverage: reduced RQ1, RQ2, RQ3, and RQ4 scripts are implemented and connected to wrappers; `scripts/run_reduced_plots.sh` generates reduced illustrative plots and `output/artifact/reduced/REPORT.md` after the summaries exist.
+- Validation: each `scripts/run_rq*.sh` wrapper invokes `scripts/compare_expected.py` against expected outputs under `artifact_expected/reduced/rqX/`; the plot/report wrapper validates non-empty PNGs and compares plot-data/report files against `artifact_expected/reduced/figures/`.
 - Reduced RQ2 evidence: staged parquet inputs are under `data/artifact/reduced/rq2/`.
 - GPU: not required unless a baseline's original implementation is explicitly configured to use GPU.
 - Network: not required after the container/artifact and datasets have been obtained.
-- Expected runtime: the full reduced command completed on the local host in 2.96 seconds wall-clock time (`time -p bash scripts/run_reduced_all.sh`, 2026-06-28). Reviewers should budget under 5 minutes for this path on a typical x86_64 Linux machine, including environment startup variability.
+- Expected runtime: the full reduced command, including reduced plot/report generation, completed on the local host in 4.31 seconds wall-clock time (`time -p bash scripts/run_reduced_all.sh`, 2026-06-28). Reviewers should budget under 5 minutes for this path on a typical x86_64 Linux machine, including environment startup variability.
 - Reduced evidence manifest: `data/artifact/reduced/MANIFEST.json`.
 - Reduced evidence checksum list: `data/artifact/reduced/SHA256SUMS`.
 - Reduced evidence verification: `bash scripts/prepare_reduced_data.sh`.
-- Reduced manifest totals: 16 files, 450107 bytes. Scope is existing reduced evidence and expected outputs, not raw full/reduced datapack directories.
+- Reduced manifest totals: 23 files, 513364 bytes. Scope is existing reduced evidence, expected outputs, and expected plot-data/report files, not raw full/reduced datapack directories.
 
 ## Validation And Tolerances
 
 - Successful reduced reproduction means `bash scripts/prepare_reduced_data.sh`, `bash scripts/smoke_test.sh`, and `bash scripts/run_reduced_all.sh` all exit with status 0.
-- `scripts/compare_expected.py` compares JSON, CSV, and Markdown outputs against `artifact_expected/reduced/rqX/`.
+- `scripts/compare_expected.py` compares JSON, CSV, and Markdown outputs against `artifact_expected/reduced/rqX/` and `artifact_expected/reduced/figures/`.
 - Numeric JSON/CSV values use strict default tolerances of `abs_tol=1e-12` and `rel_tol=1e-12`.
 - JSON comparison ignores `config.output_dir` by default so reviewers can choose a different output directory.
 - Markdown comparison normalizes lines named `output directory` or `output_dir` by default; all other Markdown content must match.
 - Boolean JSON values are type-checked separately from numbers, so `true`/`false` cannot silently match `1`/`0`.
+- Plot images are validated by existence and non-empty file size; image bytes are not compared because rendering metadata can vary across environments.
 
 ## Troubleshooting
 

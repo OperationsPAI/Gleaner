@@ -63,15 +63,15 @@ Run all reduced experiments:
 bash scripts/run_reduced_all.sh
 ```
 
-The current `scripts/run_reduced_all.sh` path is reviewer-verified as passing end to end. It runs the smoke test and then RQ1/RQ2/RQ3/RQ4 in sequence. The reduced path is CPU-only compatible and has been verified with `CUDA_VISIBLE_DEVICES='' bash scripts/run_reduced_all.sh`.
+The current `scripts/run_reduced_all.sh` path is reviewer-verified as passing end to end. It runs the smoke test, RQ1/RQ2/RQ3/RQ4, and the reduced plot/report generation step in sequence. The reduced path is CPU-only compatible and has been verified with `CUDA_VISIBLE_DEVICES='' bash scripts/run_reduced_all.sh`.
 
-Observed host runtime on 2026-06-28:
+Observed host runtime on 2026-06-28 after adding the reduced plot/report step:
 
 ```text
 time -p bash scripts/run_reduced_all.sh
-real 2.96
-user 16.51
-sys 10.91
+real 4.31
+user 26.82
+sys 8.51
 ```
 
 Reviewers should budget under 5 minutes for the reduced path on a typical x86_64 Linux machine. Container startup and first-time dependency setup may add extra time.
@@ -89,6 +89,14 @@ Each individual wrapper runs its corresponding `scripts/artifact/rq*.py` script 
 
 Actual outputs are written under `output/artifact/reduced/`. Expected outputs are committed under `artifact_expected/reduced/`.
 
+Generate the reduced illustrative plots and final report after the RQ summaries exist:
+
+```bash
+bash scripts/run_reduced_plots.sh
+```
+
+`scripts/run_reduced_all.sh` runs this step automatically. It reads the generated RQ summary CSVs, writes reduced illustrative PNGs under `output/artifact/reduced/figures/`, writes plot-data CSV/JSON summaries under the same directory, and writes the final report to `output/artifact/reduced/REPORT.md`. The expected checks compare plot-data CSV/JSON/Markdown outputs under `artifact_expected/reduced/figures/`; PNG bytes are not compared, but the wrapper checks that each image exists and is non-empty.
+
 Expected-output checks are intentionally strict. JSON and CSV numeric values use default absolute and relative tolerances of `1e-12`; JSON `config.output_dir` is ignored by default; Markdown lines named `output directory` or `output_dir` are normalized by default; boolean JSON values are not treated as numeric aliases.
 
 ## Reduced Input Evidence
@@ -99,7 +107,7 @@ Verify the reduced evidence and expected-output files before running the reduced
 bash scripts/prepare_reduced_data.sh
 ```
 
-The reduced manifest is `data/artifact/reduced/MANIFEST.json`, with optional checksum list `data/artifact/reduced/SHA256SUMS`. Its scope is the committed reduced evidence plus expected outputs: the reduced RQ1 Gleaner sampler reports, reduced RQ2 RCA evidence, and `artifact_expected/reduced/rq1/` through `artifact_expected/reduced/rq4/`. It does not include or synthesize raw 10-datapack directories.
+The reduced manifest is `data/artifact/reduced/MANIFEST.json`, with optional checksum list `data/artifact/reduced/SHA256SUMS`. Its scope is the committed reduced evidence plus expected outputs: the reduced RQ1 Gleaner sampler reports, reduced RQ2 RCA evidence, `artifact_expected/reduced/rq1/` through `artifact_expected/reduced/rq4/`, and reduced plot/report expected files under `artifact_expected/reduced/figures/`. It does not include or synthesize raw 10-datapack directories.
 
 The reduced RQ2 RCA evidence needed by `scripts/run_rq2_rca_effectiveness.sh` is committed at:
 
@@ -126,19 +134,22 @@ The exact paper locations below were extracted from `paper/main.pdf` with `pdfto
 
 | Paper claim/result | Paper location recovered from `paper/main.pdf` | Reduced command | Actual output | Expected output | Current status |
 |---|---|---|---|---|---|
-| Sampling quality and diversity | Paper RQ1 "Sampling Quality and Diversity"; Fig. 4 "Sampling quality evaluation on Dataset A"; Fig. 5 "Cross-system evaluation on Dataset B (5 microservice benchmarks)"; Finding 1 | `bash scripts/run_rq1_sampling_quality.sh` | `output/artifact/reduced/rq1/` | `artifact_expected/reduced/rq1/` | Reduced script summarizes committed Gleaner variant reports. It does not reproduce the full cross-baseline Figure 4/Figure 5 plots. |
-| Ablation study | Paper RQ2 "Ablation Study"; Table 5 "Summary of Gleaner variants designed for ablation study"; Fig. 6 "Ablation study Group 1"; Fig. 7 "Ablation study Group 2"; Table 7 "Ablation analysis on RCA accuracy"; Finding 2 | `bash scripts/run_rq3_ablation.sh` | `output/artifact/reduced/rq3/` | `artifact_expected/reduced/rq3/` | Reduced artifact computes tabular Gleaner-variant ablation summaries from `aggregated_perf.parquet`; paper plotting scripts are not included. |
-| Downstream RCA accuracy | Paper RQ3 "Impact on Downstream Root Cause Analysis"; Table 6 "RCA accuracy comparison on Dataset A"; Table 7 "Ablation analysis on RCA accuracy"; Finding 3 | `bash scripts/run_rq2_rca_effectiveness.sh` | `output/artifact/reduced/rq2/` | `artifact_expected/reduced/rq2/` | Reduced script summarizes committed MicroRCA/ShapleyIQ and Nezha RCA parquet evidence for AC@1/AC@3 at 1% and 10%. |
-| Efficiency analysis | Paper RQ4 "Efficiency Analysis"; Table 8 "Efficiency comparison on Dataset A at 5% target sampling rate"; Finding 4 | `bash scripts/run_rq4_efficiency.sh` | `output/artifact/reduced/rq4/` | `artifact_expected/reduced/rq4/` | Reduced script summarizes runtime, benefit-cost ratio, actual sampling rate, and controllability from the committed sampler report. |
+| Sampling quality and diversity | Paper RQ1 "Sampling Quality and Diversity"; Fig. 4 "Sampling quality evaluation on Dataset A"; Fig. 5 "Cross-system evaluation on Dataset B (5 microservice benchmarks)"; Finding 1 | `bash scripts/run_rq1_sampling_quality.sh` | `output/artifact/reduced/rq1/` plus `output/artifact/reduced/figures/rq1_sampling_quality_metrics.png` | `artifact_expected/reduced/rq1/` plus plot data under `artifact_expected/reduced/figures/` | Reduced script summarizes committed Gleaner variant reports and generates a reduced illustrative plot. It does not reproduce the full cross-baseline Figure 4/Figure 5 plots. |
+| Ablation study | Paper RQ2 "Ablation Study"; Table 5 "Summary of Gleaner variants designed for ablation study"; Fig. 6 "Ablation study Group 1"; Fig. 7 "Ablation study Group 2"; Table 7 "Ablation analysis on RCA accuracy"; Finding 2 | `bash scripts/run_rq3_ablation.sh` | `output/artifact/reduced/rq3/` plus `output/artifact/reduced/figures/rq3_ablation_metrics.png` | `artifact_expected/reduced/rq3/` plus plot data under `artifact_expected/reduced/figures/` | Reduced artifact computes tabular Gleaner-variant ablation summaries and a reduced illustrative plot from `aggregated_perf.parquet`; exact paper Figure 6/Figure 7 reproduction remains outside this snapshot. |
+| Downstream RCA accuracy | Paper RQ3 "Impact on Downstream Root Cause Analysis"; Table 6 "RCA accuracy comparison on Dataset A"; Table 7 "Ablation analysis on RCA accuracy"; Finding 3 | `bash scripts/run_rq2_rca_effectiveness.sh` | `output/artifact/reduced/rq2/` plus `output/artifact/reduced/figures/rq2_rca_effectiveness_ac.png` | `artifact_expected/reduced/rq2/` plus plot data under `artifact_expected/reduced/figures/` | Reduced script summarizes committed MicroRCA/ShapleyIQ and Nezha RCA parquet evidence for AC@1/AC@3 at 1% and 10%, then generates a reduced illustrative RCA plot. |
+| Efficiency analysis | Paper RQ4 "Efficiency Analysis"; Table 8 "Efficiency comparison on Dataset A at 5% target sampling rate"; Finding 4 | `bash scripts/run_rq4_efficiency.sh` | `output/artifact/reduced/rq4/` plus `output/artifact/reduced/figures/rq4_efficiency_metrics.png` | `artifact_expected/reduced/rq4/` plus plot data under `artifact_expected/reduced/figures/` | Reduced script summarizes runtime, benefit-cost ratio, actual sampling rate, and controllability from the committed sampler report and generates a reduced illustrative plot. |
 
-The combined reduced path was measured at 2.96 seconds wall-clock time on the local host. Full-dataset claims, full cross-baseline plots, and paper-ready figure generation are not reviewer-verified by this artifact snapshot. The reduced outputs are intended as deterministic evidence that the included scripts and committed reduced inputs reproduce the summarized metrics.
+`scripts/run_reduced_plots.sh` also generates `output/artifact/reduced/figures/rq2_rca_effectiveness_ac.png` for the artifact RQ2 / paper RQ3 RCA summary and `output/artifact/reduced/REPORT.md` as a final reduced artifact report. These plots are reduced illustrative plots generated from the reduced artifact summaries. They are not claimed to be exact reproductions of full-paper Fig. 4-Fig. 7 or paper-ready formatted tables.
+
+The combined reduced path including plot/report generation was measured at 4.31 seconds wall-clock time on the local host; reviewers should still budget under 5 minutes for the reduced path. Full-dataset claims, full cross-baseline plots, and exact paper-ready figure generation are not reviewer-verified by this artifact snapshot. The reduced outputs are intended as deterministic evidence that the included scripts and committed reduced inputs reproduce the summarized metrics.
 
 ## Output Schemas
 
 - Sampler reports for RQ1/RQ3/RQ4 use parquet files with at least `sampler`, `mode`, and `sampling_rate`. `detailed_perf.parquet` additionally needs `datapack` for per-datapack counts. Optional metric columns consumed when present include coverage, entropy, anomaly proportion, benefit-cost, runtime, actual sampling rate, and controllability fields documented in the generated JSON `schema` blocks.
 - RCA reports for RQ2 use parquet files with `algorithm`, `sampler.name`, `sampler.rate`, `AC@1`, and `AC@3`. The wrapper accepts ShapleyIQ/MicroRCA and Nezha parquet paths via CLI flags or the default reduced-data locations.
-- Reduced outputs are emitted as Markdown, CSV, and JSON under `output/artifact/reduced/rqX/`. JSON files include configuration metadata and machine-readable rows; CSV files provide stable tabular comparison inputs; Markdown files are reviewer-readable summaries.
-- Expected-output validation compares generated files against `artifact_expected/reduced/rqX/` with `scripts/compare_expected.py` using the strict tolerance policy described above.
+- Reduced RQ outputs are emitted as Markdown, CSV, and JSON under `output/artifact/reduced/rqX/`. JSON files include configuration metadata and machine-readable rows; CSV files provide stable tabular comparison inputs; Markdown files are reviewer-readable summaries.
+- Reduced plot/report outputs are emitted under `output/artifact/reduced/figures/` plus `output/artifact/reduced/REPORT.md`. Plot-data CSV files use a stable `row_id` first column for expected-output comparison.
+- Expected-output validation compares generated files against `artifact_expected/reduced/rqX/` and `artifact_expected/reduced/figures/` with `scripts/compare_expected.py` using the strict tolerance policy described above.
 
 ## Reuse Guide For New Datapacks
 

@@ -9,6 +9,48 @@
   ],
   "files": [
     {
+      "path": "artifact_expected/reduced/figures/REPORT.md",
+      "role": "expected_plot_report",
+      "bytes": 3266,
+      "sha256": "ce7bf75a78fdd0f42728362060d5683070136c08c38989e4949f748727c2952a"
+    },
+    {
+      "path": "artifact_expected/reduced/figures/plot_data_summary.csv",
+      "role": "expected_plot_data",
+      "bytes": 1476,
+      "sha256": "d2ebe4a86e6a269fd67ba1bc697ab2f17d45cfd15ed2279d9d75533dacb35531"
+    },
+    {
+      "path": "artifact_expected/reduced/figures/plot_manifest.json",
+      "role": "expected_plot_data",
+      "bytes": 2433,
+      "sha256": "a35ba4c5c4449dd988e9c06b4bbfe7c3d66c13cdfd8ee6bcd5c0a7a16c8dbdd6"
+    },
+    {
+      "path": "artifact_expected/reduced/figures/rq1_sampling_quality_plot_data.csv",
+      "role": "expected_plot_data",
+      "bytes": 9851,
+      "sha256": "eba901d95e293dc7ae902a6e68a07a51abebc76f1423e8dd6b0aaee4c4800c9e"
+    },
+    {
+      "path": "artifact_expected/reduced/figures/rq2_rca_effectiveness_plot_data.csv",
+      "role": "expected_plot_data",
+      "bytes": 26890,
+      "sha256": "21e2fec063b0e696bda3abea32a702c81fb711925aa4a8bbd9f370395ca129dc"
+    },
+    {
+      "path": "artifact_expected/reduced/figures/rq3_ablation_plot_data.csv",
+      "role": "expected_plot_data",
+      "bytes": 11975,
+      "sha256": "dd593d09fbb0400aeee9691b7f795ac812a289f49ea44fdbb7c1184ecce6ed18"
+    },
+    {
+      "path": "artifact_expected/reduced/figures/rq4_efficiency_plot_data.csv",
+      "role": "expected_plot_data",
+      "bytes": 7366,
+      "sha256": "01b73ee704f94520dbe435ca6f22219f22e8578db140a0999d50039829d1552b"
+    },
+    {
       "path": "artifact_expected/reduced/rq1/rq1_sampling_quality_results.md",
       "role": "expected_output",
       "bytes": 2795,
@@ -106,7 +148,7 @@
     }
   ],
   "totals": {
-    "file_count": 16,
-    "bytes": 450107
+    "file_count": 23,
+    "bytes": 513364
   }
 }

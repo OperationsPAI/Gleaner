@@ -1,0 +1,41 @@
+row_id,rq,paper_mapping,item,metric,metric_label,value
+rq4|gleaner_latency_dominate|avg_runtime_per_trace_ms,rq4,"Paper RQ4: Efficiency Analysis (Table 8, Finding 4)",gleaner_latency_dominate,avg_runtime_per_trace_ms,Runtime / trace (ms),1.14097468611
+rq4|gleaner_latency_dominate|avg_benefit_cost_ratio,rq4,"Paper RQ4: Efficiency Analysis (Table 8, Finding 4)",gleaner_latency_dominate,avg_benefit_cost_ratio,Benefit-cost ratio,0.73232178996
+rq4|gleaner_latency_dominate|avg_actual_sampling_rate,rq4,"Paper RQ4: Efficiency Analysis (Table 8, Finding 4)",gleaner_latency_dominate,avg_actual_sampling_rate,Actual sampling rate,0.100039735581
+rq4|gleaner_latency_dominate|avg_controllability,rq4,"Paper RQ4: Efficiency Analysis (Table 8, Finding 4)",gleaner_latency_dominate,avg_controllability,Controllability,0.00100500452732
+rq4|gleaner_log_dominate|avg_runtime_per_trace_ms,rq4,"Paper RQ4: Efficiency Analysis (Table 8, Finding 4)",gleaner_log_dominate,avg_runtime_per_trace_ms,Runtime / trace (ms),1.15927003243
+rq4|gleaner_log_dominate|avg_benefit_cost_ratio,rq4,"Paper RQ4: Efficiency Analysis (Table 8, Finding 4)",gleaner_log_dominate,avg_benefit_cost_ratio,Benefit-cost ratio,0.736519187961
+rq4|gleaner_log_dominate|avg_actual_sampling_rate,rq4,"Paper RQ4: Efficiency Analysis (Table 8, Finding 4)",gleaner_log_dominate,avg_actual_sampling_rate,Actual sampling rate,0.100039735581
+rq4|gleaner_log_dominate|avg_controllability,rq4,"Paper RQ4: Efficiency Analysis (Table 8, Finding 4)",gleaner_log_dominate,avg_controllability,Controllability,0.00100500452732
+rq4|gleaner_no_ad|avg_runtime_per_trace_ms,rq4,"Paper RQ4: Efficiency Analysis (Table 8, Finding 4)",gleaner_no_ad,avg_runtime_per_trace_ms,Runtime / trace (ms),12.4984875186
+rq4|gleaner_no_ad|avg_benefit_cost_ratio,rq4,"Paper RQ4: Efficiency Analysis (Table 8, Finding 4)",gleaner_no_ad,avg_benefit_cost_ratio,Benefit-cost ratio,0.752224086417
+rq4|gleaner_no_ad|avg_actual_sampling_rate,rq4,"Paper RQ4: Efficiency Analysis (Table 8, Finding 4)",gleaner_no_ad,avg_actual_sampling_rate,Actual sampling rate,0.0998978413963
+rq4|gleaner_no_ad|avg_controllability,rq4,"Paper RQ4: Efficiency Analysis (Table 8, Finding 4)",gleaner_no_ad,avg_controllability,Controllability,0.00207474628829
+rq4|gleaner_no_dpp|avg_runtime_per_trace_ms,rq4,"Paper RQ4: Efficiency Analysis (Table 8, Finding 4)",gleaner_no_dpp,avg_runtime_per_trace_ms,Runtime / trace (ms),0.588752632902
+rq4|gleaner_no_dpp|avg_benefit_cost_ratio,rq4,"Paper RQ4: Efficiency Analysis (Table 8, Finding 4)",gleaner_no_dpp,avg_benefit_cost_ratio,Benefit-cost ratio,0.651402721475
+rq4|gleaner_no_dpp|avg_actual_sampling_rate,rq4,"Paper RQ4: Efficiency Analysis (Table 8, Finding 4)",gleaner_no_dpp,avg_actual_sampling_rate,Actual sampling rate,0.100039735581
+rq4|gleaner_no_dpp|avg_controllability,rq4,"Paper RQ4: Efficiency Analysis (Table 8, Finding 4)",gleaner_no_dpp,avg_controllability,Controllability,0.00100500452732
+rq4|gleaner_no_logs|avg_runtime_per_trace_ms,rq4,"Paper RQ4: Efficiency Analysis (Table 8, Finding 4)",gleaner_no_logs,avg_runtime_per_trace_ms,Runtime / trace (ms),0.931894588594
+rq4|gleaner_no_logs|avg_benefit_cost_ratio,rq4,"Paper RQ4: Efficiency Analysis (Table 8, Finding 4)",gleaner_no_logs,avg_benefit_cost_ratio,Benefit-cost ratio,0.717129666613
+rq4|gleaner_no_logs|avg_actual_sampling_rate,rq4,"Paper RQ4: Efficiency Analysis (Table 8, Finding 4)",gleaner_no_logs,avg_actual_sampling_rate,Actual sampling rate,0.0998978413963
+rq4|gleaner_no_logs|avg_controllability,rq4,"Paper RQ4: Efficiency Analysis (Table 8, Finding 4)",gleaner_no_logs,avg_controllability,Controllability,0.00207474628829
+rq4|gleaner_no_logs_no_ad|avg_runtime_per_trace_ms,rq4,"Paper RQ4: Efficiency Analysis (Table 8, Finding 4)",gleaner_no_logs_no_ad,avg_runtime_per_trace_ms,Runtime / trace (ms),0.825365040574
+rq4|gleaner_no_logs_no_ad|avg_benefit_cost_ratio,rq4,"Paper RQ4: Efficiency Analysis (Table 8, Finding 4)",gleaner_no_logs_no_ad,avg_benefit_cost_ratio,Benefit-cost ratio,0.691561903475
+rq4|gleaner_no_logs_no_ad|avg_actual_sampling_rate,rq4,"Paper RQ4: Efficiency Analysis (Table 8, Finding 4)",gleaner_no_logs_no_ad,avg_actual_sampling_rate,Actual sampling rate,0.100039735581
+rq4|gleaner_no_logs_no_ad|avg_controllability,rq4,"Paper RQ4: Efficiency Analysis (Table 8, Finding 4)",gleaner_no_logs_no_ad,avg_controllability,Controllability,0.00100500452732
+rq4|gleaner_no_rebalance|avg_runtime_per_trace_ms,rq4,"Paper RQ4: Efficiency Analysis (Table 8, Finding 4)",gleaner_no_rebalance,avg_runtime_per_trace_ms,Runtime / trace (ms),1.20173471498
+rq4|gleaner_no_rebalance|avg_benefit_cost_ratio,rq4,"Paper RQ4: Efficiency Analysis (Table 8, Finding 4)",gleaner_no_rebalance,avg_benefit_cost_ratio,Benefit-cost ratio,0.758607645271
+rq4|gleaner_no_rebalance|avg_actual_sampling_rate,rq4,"Paper RQ4: Efficiency Analysis (Table 8, Finding 4)",gleaner_no_rebalance,avg_actual_sampling_rate,Actual sampling rate,0.100039735581
+rq4|gleaner_no_rebalance|avg_controllability,rq4,"Paper RQ4: Efficiency Analysis (Table 8, Finding 4)",gleaner_no_rebalance,avg_controllability,Controllability,0.00100500452732
+rq4|gleaner_pure_diversity|avg_runtime_per_trace_ms,rq4,"Paper RQ4: Efficiency Analysis (Table 8, Finding 4)",gleaner_pure_diversity,avg_runtime_per_trace_ms,Runtime / trace (ms),1.68461363222
+rq4|gleaner_pure_diversity|avg_benefit_cost_ratio,rq4,"Paper RQ4: Efficiency Analysis (Table 8, Finding 4)",gleaner_pure_diversity,avg_benefit_cost_ratio,Benefit-cost ratio,0.652528603299
+rq4|gleaner_pure_diversity|avg_actual_sampling_rate,rq4,"Paper RQ4: Efficiency Analysis (Table 8, Finding 4)",gleaner_pure_diversity,avg_actual_sampling_rate,Actual sampling rate,0.0998978413963
+rq4|gleaner_pure_diversity|avg_controllability,rq4,"Paper RQ4: Efficiency Analysis (Table 8, Finding 4)",gleaner_pure_diversity,avg_controllability,Controllability,0.00207474628829
+rq4|gleaner_top_score|avg_runtime_per_trace_ms,rq4,"Paper RQ4: Efficiency Analysis (Table 8, Finding 4)",gleaner_top_score,avg_runtime_per_trace_ms,Runtime / trace (ms),0.516755897756
+rq4|gleaner_top_score|avg_benefit_cost_ratio,rq4,"Paper RQ4: Efficiency Analysis (Table 8, Finding 4)",gleaner_top_score,avg_benefit_cost_ratio,Benefit-cost ratio,0.781323712259
+rq4|gleaner_top_score|avg_actual_sampling_rate,rq4,"Paper RQ4: Efficiency Analysis (Table 8, Finding 4)",gleaner_top_score,avg_actual_sampling_rate,Actual sampling rate,0.100039735581
+rq4|gleaner_top_score|avg_controllability,rq4,"Paper RQ4: Efficiency Analysis (Table 8, Finding 4)",gleaner_top_score,avg_controllability,Controllability,0.00100500452732
+rq4|gleaner_wl_kernel|avg_runtime_per_trace_ms,rq4,"Paper RQ4: Efficiency Analysis (Table 8, Finding 4)",gleaner_wl_kernel,avg_runtime_per_trace_ms,Runtime / trace (ms),8.39797015979
+rq4|gleaner_wl_kernel|avg_benefit_cost_ratio,rq4,"Paper RQ4: Efficiency Analysis (Table 8, Finding 4)",gleaner_wl_kernel,avg_benefit_cost_ratio,Benefit-cost ratio,0.635178765853
+rq4|gleaner_wl_kernel|avg_actual_sampling_rate,rq4,"Paper RQ4: Efficiency Analysis (Table 8, Finding 4)",gleaner_wl_kernel,avg_actual_sampling_rate,Actual sampling rate,0.100039735581
+rq4|gleaner_wl_kernel|avg_controllability,rq4,"Paper RQ4: Efficiency Analysis (Table 8, Finding 4)",gleaner_wl_kernel,avg_controllability,Controllability,0.00100500452732

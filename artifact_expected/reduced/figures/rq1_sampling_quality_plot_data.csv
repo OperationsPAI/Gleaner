@@ -1,0 +1,51 @@
+row_id,rq,paper_mapping,item,metric,metric_label,value
+rq1|Gleaner Latency-Dominant|avg_api_coverage,rq1,"Paper RQ1: Sampling Quality and Diversity (Fig. 4, Fig. 5, Finding 1)",Gleaner Latency-Dominant,avg_api_coverage,API coverage,0.993612365895
+rq1|Gleaner Latency-Dominant|avg_path_coverage_dedup,rq1,"Paper RQ1: Sampling Quality and Diversity (Fig. 4, Fig. 5, Finding 1)",Gleaner Latency-Dominant,avg_path_coverage_dedup,Path coverage,0.892233625075
+rq1|Gleaner Latency-Dominant|avg_unique_trace_coverage,rq1,"Paper RQ1: Sampling Quality and Diversity (Fig. 4, Fig. 5, Finding 1)",Gleaner Latency-Dominant,avg_unique_trace_coverage,Unique trace coverage,0.214449993376
+rq1|Gleaner Latency-Dominant|avg_shannon_entropy,rq1,"Paper RQ1: Sampling Quality and Diversity (Fig. 4, Fig. 5, Finding 1)",Gleaner Latency-Dominant,avg_shannon_entropy,Shannon entropy,7.43283272318
+rq1|Gleaner Latency-Dominant|avg_proportion_anomaly,rq1,"Paper RQ1: Sampling Quality and Diversity (Fig. 4, Fig. 5, Finding 1)",Gleaner Latency-Dominant,avg_proportion_anomaly,Anomaly proportion,0.112108118666
+rq1|Gleaner Log-Dominant|avg_api_coverage,rq1,"Paper RQ1: Sampling Quality and Diversity (Fig. 4, Fig. 5, Finding 1)",Gleaner Log-Dominant,avg_api_coverage,API coverage,0.993612365895
+rq1|Gleaner Log-Dominant|avg_path_coverage_dedup,rq1,"Paper RQ1: Sampling Quality and Diversity (Fig. 4, Fig. 5, Finding 1)",Gleaner Log-Dominant,avg_path_coverage_dedup,Path coverage,0.887982583741
+rq1|Gleaner Log-Dominant|avg_unique_trace_coverage,rq1,"Paper RQ1: Sampling Quality and Diversity (Fig. 4, Fig. 5, Finding 1)",Gleaner Log-Dominant,avg_unique_trace_coverage,Unique trace coverage,0.215309199054
+rq1|Gleaner Log-Dominant|avg_shannon_entropy,rq1,"Paper RQ1: Sampling Quality and Diversity (Fig. 4, Fig. 5, Finding 1)",Gleaner Log-Dominant,avg_shannon_entropy,Shannon entropy,7.43741051554
+rq1|Gleaner Log-Dominant|avg_proportion_anomaly,rq1,"Paper RQ1: Sampling Quality and Diversity (Fig. 4, Fig. 5, Finding 1)",Gleaner Log-Dominant,avg_proportion_anomaly,Anomaly proportion,0.112068383804
+rq1|Gleaner Pure Diversity|avg_api_coverage,rq1,"Paper RQ1: Sampling Quality and Diversity (Fig. 4, Fig. 5, Finding 1)",Gleaner Pure Diversity,avg_api_coverage,API coverage,0.807686335404
+rq1|Gleaner Pure Diversity|avg_path_coverage_dedup,rq1,"Paper RQ1: Sampling Quality and Diversity (Fig. 4, Fig. 5, Finding 1)",Gleaner Pure Diversity,avg_path_coverage_dedup,Path coverage,0.660108219465
+rq1|Gleaner Pure Diversity|avg_unique_trace_coverage,rq1,"Paper RQ1: Sampling Quality and Diversity (Fig. 4, Fig. 5, Finding 1)",Gleaner Pure Diversity,avg_unique_trace_coverage,Unique trace coverage,0.182287993933
+rq1|Gleaner Pure Diversity|avg_shannon_entropy,rq1,"Paper RQ1: Sampling Quality and Diversity (Fig. 4, Fig. 5, Finding 1)",Gleaner Pure Diversity,avg_shannon_entropy,Shannon entropy,6.72269721354
+rq1|Gleaner Pure Diversity|avg_proportion_anomaly,rq1,"Paper RQ1: Sampling Quality and Diversity (Fig. 4, Fig. 5, Finding 1)",Gleaner Pure Diversity,avg_proportion_anomaly,Anomaly proportion,0.0176477242004
+rq1|Gleaner Top Score|avg_api_coverage,rq1,"Paper RQ1: Sampling Quality and Diversity (Fig. 4, Fig. 5, Finding 1)",Gleaner Top Score,avg_api_coverage,API coverage,0.479477225673
+rq1|Gleaner Top Score|avg_path_coverage_dedup,rq1,"Paper RQ1: Sampling Quality and Diversity (Fig. 4, Fig. 5, Finding 1)",Gleaner Top Score,avg_path_coverage_dedup,Path coverage,0.519908229057
+rq1|Gleaner Top Score|avg_unique_trace_coverage,rq1,"Paper RQ1: Sampling Quality and Diversity (Fig. 4, Fig. 5, Finding 1)",Gleaner Top Score,avg_unique_trace_coverage,Unique trace coverage,0.2274722631
+rq1|Gleaner Top Score|avg_shannon_entropy,rq1,"Paper RQ1: Sampling Quality and Diversity (Fig. 4, Fig. 5, Finding 1)",Gleaner Top Score,avg_shannon_entropy,Shannon entropy,7.59404538592
+rq1|Gleaner Top Score|avg_proportion_anomaly,rq1,"Paper RQ1: Sampling Quality and Diversity (Fig. 4, Fig. 5, Finding 1)",Gleaner Top Score,avg_proportion_anomaly,Anomaly proportion,0.144555014308
+rq1|Gleaner WL Kernel|avg_api_coverage,rq1,"Paper RQ1: Sampling Quality and Diversity (Fig. 4, Fig. 5, Finding 1)",Gleaner WL Kernel,avg_api_coverage,API coverage,0.996717955957
+rq1|Gleaner WL Kernel|avg_path_coverage_dedup,rq1,"Paper RQ1: Sampling Quality and Diversity (Fig. 4, Fig. 5, Finding 1)",Gleaner WL Kernel,avg_path_coverage_dedup,Path coverage,0.895837045983
+rq1|Gleaner WL Kernel|avg_unique_trace_coverage,rq1,"Paper RQ1: Sampling Quality and Diversity (Fig. 4, Fig. 5, Finding 1)",Gleaner WL Kernel,avg_unique_trace_coverage,Unique trace coverage,0.18737595946
+rq1|Gleaner WL Kernel|avg_shannon_entropy,rq1,"Paper RQ1: Sampling Quality and Diversity (Fig. 4, Fig. 5, Finding 1)",Gleaner WL Kernel,avg_shannon_entropy,Shannon entropy,7.16229414853
+rq1|Gleaner WL Kernel|avg_proportion_anomaly,rq1,"Paper RQ1: Sampling Quality and Diversity (Fig. 4, Fig. 5, Finding 1)",Gleaner WL Kernel,avg_proportion_anomaly,Anomaly proportion,0.0980662972409
+rq1|Gleaner w/o AD|avg_api_coverage,rq1,"Paper RQ1: Sampling Quality and Diversity (Fig. 4, Fig. 5, Finding 1)",Gleaner w/o AD,avg_api_coverage,API coverage,0.993330039526
+rq1|Gleaner w/o AD|avg_path_coverage_dedup,rq1,"Paper RQ1: Sampling Quality and Diversity (Fig. 4, Fig. 5, Finding 1)",Gleaner w/o AD,avg_path_coverage_dedup,Path coverage,0.894389087627
+rq1|Gleaner w/o AD|avg_unique_trace_coverage,rq1,"Paper RQ1: Sampling Quality and Diversity (Fig. 4, Fig. 5, Finding 1)",Gleaner w/o AD,avg_unique_trace_coverage,Unique trace coverage,0.219316174149
+rq1|Gleaner w/o AD|avg_shannon_entropy,rq1,"Paper RQ1: Sampling Quality and Diversity (Fig. 4, Fig. 5, Finding 1)",Gleaner w/o AD,avg_shannon_entropy,Shannon entropy,7.5132981155
+rq1|Gleaner w/o AD|avg_proportion_anomaly,rq1,"Paper RQ1: Sampling Quality and Diversity (Fig. 4, Fig. 5, Finding 1)",Gleaner w/o AD,avg_proportion_anomaly,Anomaly proportion,0.0713908725855
+rq1|Gleaner w/o DPP|avg_api_coverage,rq1,"Paper RQ1: Sampling Quality and Diversity (Fig. 4, Fig. 5, Finding 1)",Gleaner w/o DPP,avg_api_coverage,API coverage,0.996576792772
+rq1|Gleaner w/o DPP|avg_path_coverage_dedup,rq1,"Paper RQ1: Sampling Quality and Diversity (Fig. 4, Fig. 5, Finding 1)",Gleaner w/o DPP,avg_path_coverage_dedup,Path coverage,0.851324489445
+rq1|Gleaner w/o DPP|avg_unique_trace_coverage,rq1,"Paper RQ1: Sampling Quality and Diversity (Fig. 4, Fig. 5, Finding 1)",Gleaner w/o DPP,avg_unique_trace_coverage,Unique trace coverage,0.191684312994
+rq1|Gleaner w/o DPP|avg_shannon_entropy,rq1,"Paper RQ1: Sampling Quality and Diversity (Fig. 4, Fig. 5, Finding 1)",Gleaner w/o DPP,avg_shannon_entropy,Shannon entropy,7.25037466026
+rq1|Gleaner w/o DPP|avg_proportion_anomaly,rq1,"Paper RQ1: Sampling Quality and Diversity (Fig. 4, Fig. 5, Finding 1)",Gleaner w/o DPP,avg_proportion_anomaly,Anomaly proportion,0.106473167325
+rq1|Gleaner w/o Logs|avg_api_coverage,rq1,"Paper RQ1: Sampling Quality and Diversity (Fig. 4, Fig. 5, Finding 1)",Gleaner w/o Logs,avg_api_coverage,API coverage,0.994741671372
+rq1|Gleaner w/o Logs|avg_path_coverage_dedup,rq1,"Paper RQ1: Sampling Quality and Diversity (Fig. 4, Fig. 5, Finding 1)",Gleaner w/o Logs,avg_path_coverage_dedup,Path coverage,0.887532178608
+rq1|Gleaner w/o Logs|avg_unique_trace_coverage,rq1,"Paper RQ1: Sampling Quality and Diversity (Fig. 4, Fig. 5, Finding 1)",Gleaner w/o Logs,avg_unique_trace_coverage,Unique trace coverage,0.20997285284
+rq1|Gleaner w/o Logs|avg_shannon_entropy,rq1,"Paper RQ1: Sampling Quality and Diversity (Fig. 4, Fig. 5, Finding 1)",Gleaner w/o Logs,avg_shannon_entropy,Shannon entropy,7.40436444081
+rq1|Gleaner w/o Logs|avg_proportion_anomaly,rq1,"Paper RQ1: Sampling Quality and Diversity (Fig. 4, Fig. 5, Finding 1)",Gleaner w/o Logs,avg_proportion_anomaly,Anomaly proportion,0.107713666863
+rq1|Gleaner w/o Logs + AD|avg_api_coverage,rq1,"Paper RQ1: Sampling Quality and Diversity (Fig. 4, Fig. 5, Finding 1)",Gleaner w/o Logs + AD,avg_api_coverage,API coverage,0.994741671372
+rq1|Gleaner w/o Logs + AD|avg_path_coverage_dedup,rq1,"Paper RQ1: Sampling Quality and Diversity (Fig. 4, Fig. 5, Finding 1)",Gleaner w/o Logs + AD,avg_path_coverage_dedup,Path coverage,0.908159545143
+rq1|Gleaner w/o Logs + AD|avg_unique_trace_coverage,rq1,"Paper RQ1: Sampling Quality and Diversity (Fig. 4, Fig. 5, Finding 1)",Gleaner w/o Logs + AD,avg_unique_trace_coverage,Unique trace coverage,0.204412472216
+rq1|Gleaner w/o Logs + AD|avg_shannon_entropy,rq1,"Paper RQ1: Sampling Quality and Diversity (Fig. 4, Fig. 5, Finding 1)",Gleaner w/o Logs + AD,avg_shannon_entropy,Shannon entropy,7.39317852676
+rq1|Gleaner w/o Logs + AD|avg_proportion_anomaly,rq1,"Paper RQ1: Sampling Quality and Diversity (Fig. 4, Fig. 5, Finding 1)",Gleaner w/o Logs + AD,avg_proportion_anomaly,Anomaly proportion,0.073992722571
+rq1|Gleaner w/o Rebalance|avg_api_coverage,rq1,"Paper RQ1: Sampling Quality and Diversity (Fig. 4, Fig. 5, Finding 1)",Gleaner w/o Rebalance,avg_api_coverage,API coverage,0.996706192358
+rq1|Gleaner w/o Rebalance|avg_path_coverage_dedup,rq1,"Paper RQ1: Sampling Quality and Diversity (Fig. 4, Fig. 5, Finding 1)",Gleaner w/o Rebalance,avg_path_coverage_dedup,Path coverage,0.895638736802
+rq1|Gleaner w/o Rebalance|avg_unique_trace_coverage,rq1,"Paper RQ1: Sampling Quality and Diversity (Fig. 4, Fig. 5, Finding 1)",Gleaner w/o Rebalance,avg_unique_trace_coverage,Unique trace coverage,0.220996105194
+rq1|Gleaner w/o Rebalance|avg_shannon_entropy,rq1,"Paper RQ1: Sampling Quality and Diversity (Fig. 4, Fig. 5, Finding 1)",Gleaner w/o Rebalance,avg_shannon_entropy,Shannon entropy,7.49906608032
+rq1|Gleaner w/o Rebalance|avg_proportion_anomaly,rq1,"Paper RQ1: Sampling Quality and Diversity (Fig. 4, Fig. 5, Finding 1)",Gleaner w/o Rebalance,avg_proportion_anomaly,Anomaly proportion,0.100850752

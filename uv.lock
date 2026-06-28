@@ -551,6 +551,7 @@ name = "gleaner"
 version = "0.1.0"
 source = { editable = "." }
 dependencies = [
+    { name = "matplotlib" },
     { name = "polars" },
     { name = "rcabench-platform" },
 ]
@@ -574,6 +575,7 @@ dev = [
 
 [package.metadata]
 requires-dist = [
+    { name = "matplotlib", specifier = ">=3.10.5" },
     { name = "polars", specifier = ">=1.31.0" },
     { name = "rcabench-platform", specifier = "==0.4.1" },
 ]

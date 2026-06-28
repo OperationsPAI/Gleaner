@@ -25,6 +25,7 @@ This checklist tracks the Gleaner artifact preparation status for ISSTA 2026 AE.
 - [x] Regenerated `uv.lock`.
 - [x] Ran `bash scripts/smoke_test.sh` successfully on host.
 - [x] Added artifact-ready reduced RQ1/RQ2/RQ3/RQ4 scripts and wrappers.
+- [x] Added reduced illustrative plot and final report generation to the reduced pipeline.
 - [x] Reviewer-verified `bash scripts/run_reduced_all.sh` passes end to end in the current reduced state.
 - [x] Built Docker image locally with `docker build -t gleaner-issta2026-ae .`.
 - [x] Ran container smoke test with `docker run --rm gleaner-issta2026-ae bash scripts/smoke_test.sh`.
@@ -45,6 +46,7 @@ This checklist tracks the Gleaner artifact preparation status for ISSTA 2026 AE.
 - [x] Replaced hard-coded `/home/nn/workspace/gleaner-rc` paths in the reduced artifact scripts with repo-relative paths or CLI arguments.
 - [x] Routed reduced generated outputs into `output/artifact/reduced/rqX/`.
 - [x] Added expected-output comparison around every reduced RQ wrapper via `scripts/compare_expected.py`.
+- [x] Added `scripts/artifact/plot_reduced_rq_figures.py` and `scripts/run_reduced_plots.sh` for reduced illustrative PNGs, plot-data CSV/JSON, and `output/artifact/reduced/REPORT.md`.
 - [x] Guard full-path entry point so it clearly fails instead of silently succeeding as a placeholder.
 - [ ] Implement and reviewer-verify full-path behavior for every RQ.
 
@@ -120,6 +122,7 @@ This checklist tracks the Gleaner artifact preparation status for ISSTA 2026 AE.
 - [x] Ensured each reduced RQ script writes to `output/artifact/reduced/rqX/` by default.
 - [x] Each `scripts/run_rq*.sh` wrapper invokes `scripts/compare_expected.py` for expected-vs-actual validation.
 - [x] Reviewer-verified `scripts/run_reduced_all.sh` completes the reduced end-to-end path.
+- [x] `scripts/run_reduced_all.sh` generates reduced illustrative plots, plot-data files, and the final reduced report after RQ1-RQ4 summaries.
 - [x] Make `scripts/run_full_all.sh` explicitly non-placeholder-safe with a non-zero not-implemented/not-verified exit.
 - [ ] Add final full-suite execution behavior beyond the reduced reviewer path.
 - [x] Benchmark and document reduced runtimes.
@@ -128,12 +131,13 @@ This checklist tracks the Gleaner artifact preparation status for ISSTA 2026 AE.
 
 - [x] Added `scripts/compare_expected.py`.
 - [x] Generated expected reduced outputs under `artifact_expected/reduced/rq1/` through `artifact_expected/reduced/rq4/`.
+- [x] Generated expected reduced plot-data/report outputs under `artifact_expected/reduced/figures/`.
 - [x] Added expected-vs-actual comparison calls to each reduced RQ wrapper.
 - [x] Reviewer-verified the current reduced all-in-one command passes with expected-output validation.
 - [x] Define and document reduced sampler output schema.
 - [x] Define and document reduced RCA ranking output schema.
 - [x] Define and document reduced aggregate metric schema.
-- [x] Define and document reduced table/input schema; paper plotting scripts remain outside this snapshot.
+- [x] Define and document reduced plot-data/report schema; exact paper plotting scripts remain outside this snapshot.
 - [x] Document numerical tolerance policy for expected-vs-actual comparisons.
 - [x] Document what counts as a successful reduced reproduction.
 
@@ -147,7 +151,8 @@ This checklist tracks the Gleaner artifact preparation status for ISSTA 2026 AE.
 - [x] Map RQ4 to exact paper table/figure/section names recovered from `paper/main.pdf`.
 - [x] For each claim, document expected runtime.
 - [x] List unsupported full-dataset / full-plot claims and explain reduced-scope limits.
-- [ ] Integrate paper plotting scripts when available.
+- [x] Add reduced illustrative plots and final report generated from reduced summary CSVs.
+- [ ] Integrate exact full-paper plotting scripts when available.
 
 ## Documentation
 
@@ -175,6 +180,7 @@ This checklist tracks the Gleaner artifact preparation status for ISSTA 2026 AE.
 - [x] Basic environment and submodule pin smoke test exists.
 - [x] Reduced RQ1/RQ2/RQ3/RQ4 reproduction scripts are implemented.
 - [x] Reduced RQ1/RQ2/RQ3/RQ4 wrappers validate actual outputs against expected outputs.
+- [x] Reduced plot/report wrapper validates non-empty PNG files and compares plot-data/report expected outputs.
 - [x] Expected reduced outputs are provided under `artifact_expected/reduced/`.
 - [x] Current `scripts/run_reduced_all.sh` path is reviewer-verified as passing end to end.
 - [x] Reduced reproduction runtime is benchmarked and documented.

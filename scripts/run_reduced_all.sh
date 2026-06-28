@@ -7,4 +7,5 @@ bash scripts/run_rq1_sampling_quality.sh
 bash scripts/run_rq2_rca_effectiveness.sh
 bash scripts/run_rq3_ablation.sh
 bash scripts/run_rq4_efficiency.sh
-echo "[reduced] all reduced RQ scripts completed"
+bash scripts/run_reduced_plots.sh
+echo "[reduced] all reduced RQ scripts and plots completed"
