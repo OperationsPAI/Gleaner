@@ -19,5 +19,11 @@ temp/
 *.parquet
 
 test/
-
+*/sampled/*
 plots/
+# Artifact evidence exceptions
+!data/
+!data/artifact/
+!data/artifact/reduced/
+!data/artifact/reduced/**
+!data/artifact/reduced/**/*.parquet

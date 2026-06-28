@@ -1,61 +1,61 @@
 row_id,rq,paper_mapping,item,metric,metric_label,value
-rq3|Gleaner Latency-Dominant|avg_api_coverage,rq3,"Paper RQ2: Ablation Study (Table 5, Fig. 6, Fig. 7, Table 7, Finding 2)",Gleaner Latency-Dominant,avg_api_coverage,API coverage,0.993612365895
-rq3|Gleaner Latency-Dominant|avg_unique_trace_coverage,rq3,"Paper RQ2: Ablation Study (Table 5, Fig. 6, Fig. 7, Table 7, Finding 2)",Gleaner Latency-Dominant,avg_unique_trace_coverage,Unique trace coverage,0.214449993376
-rq3|Gleaner Latency-Dominant|avg_shannon_entropy,rq3,"Paper RQ2: Ablation Study (Table 5, Fig. 6, Fig. 7, Table 7, Finding 2)",Gleaner Latency-Dominant,avg_shannon_entropy,Shannon entropy,7.43283272318
-rq3|Gleaner Latency-Dominant|avg_proportion_anomaly,rq3,"Paper RQ2: Ablation Study (Table 5, Fig. 6, Fig. 7, Table 7, Finding 2)",Gleaner Latency-Dominant,avg_proportion_anomaly,Anomaly proportion,0.112108118666
-rq3|Gleaner Latency-Dominant|avg_path_coverage_dedup,rq3,"Paper RQ2: Ablation Study (Table 5, Fig. 6, Fig. 7, Table 7, Finding 2)",Gleaner Latency-Dominant,avg_path_coverage_dedup,Path coverage,0.892233625075
-rq3|Gleaner Latency-Dominant|avg_benefit_cost_ratio,rq3,"Paper RQ2: Ablation Study (Table 5, Fig. 6, Fig. 7, Table 7, Finding 2)",Gleaner Latency-Dominant,avg_benefit_cost_ratio,Benefit-cost ratio,0.816500963177
-rq3|Gleaner Log-Dominant|avg_api_coverage,rq3,"Paper RQ2: Ablation Study (Table 5, Fig. 6, Fig. 7, Table 7, Finding 2)",Gleaner Log-Dominant,avg_api_coverage,API coverage,0.993612365895
-rq3|Gleaner Log-Dominant|avg_unique_trace_coverage,rq3,"Paper RQ2: Ablation Study (Table 5, Fig. 6, Fig. 7, Table 7, Finding 2)",Gleaner Log-Dominant,avg_unique_trace_coverage,Unique trace coverage,0.215309199054
-rq3|Gleaner Log-Dominant|avg_shannon_entropy,rq3,"Paper RQ2: Ablation Study (Table 5, Fig. 6, Fig. 7, Table 7, Finding 2)",Gleaner Log-Dominant,avg_shannon_entropy,Shannon entropy,7.43741051554
-rq3|Gleaner Log-Dominant|avg_proportion_anomaly,rq3,"Paper RQ2: Ablation Study (Table 5, Fig. 6, Fig. 7, Table 7, Finding 2)",Gleaner Log-Dominant,avg_proportion_anomaly,Anomaly proportion,0.112068383804
-rq3|Gleaner Log-Dominant|avg_path_coverage_dedup,rq3,"Paper RQ2: Ablation Study (Table 5, Fig. 6, Fig. 7, Table 7, Finding 2)",Gleaner Log-Dominant,avg_path_coverage_dedup,Path coverage,0.887982583741
-rq3|Gleaner Log-Dominant|avg_benefit_cost_ratio,rq3,"Paper RQ2: Ablation Study (Table 5, Fig. 6, Fig. 7, Table 7, Finding 2)",Gleaner Log-Dominant,avg_benefit_cost_ratio,Benefit-cost ratio,0.818132303461
-rq3|Gleaner Pure Diversity|avg_api_coverage,rq3,"Paper RQ2: Ablation Study (Table 5, Fig. 6, Fig. 7, Table 7, Finding 2)",Gleaner Pure Diversity,avg_api_coverage,API coverage,0.807686335404
-rq3|Gleaner Pure Diversity|avg_unique_trace_coverage,rq3,"Paper RQ2: Ablation Study (Table 5, Fig. 6, Fig. 7, Table 7, Finding 2)",Gleaner Pure Diversity,avg_unique_trace_coverage,Unique trace coverage,0.182287993933
-rq3|Gleaner Pure Diversity|avg_shannon_entropy,rq3,"Paper RQ2: Ablation Study (Table 5, Fig. 6, Fig. 7, Table 7, Finding 2)",Gleaner Pure Diversity,avg_shannon_entropy,Shannon entropy,6.72269721354
-rq3|Gleaner Pure Diversity|avg_proportion_anomaly,rq3,"Paper RQ2: Ablation Study (Table 5, Fig. 6, Fig. 7, Table 7, Finding 2)",Gleaner Pure Diversity,avg_proportion_anomaly,Anomaly proportion,0.0176477242004
-rq3|Gleaner Pure Diversity|avg_path_coverage_dedup,rq3,"Paper RQ2: Ablation Study (Table 5, Fig. 6, Fig. 7, Table 7, Finding 2)",Gleaner Pure Diversity,avg_path_coverage_dedup,Path coverage,0.660108219465
-rq3|Gleaner Pure Diversity|avg_benefit_cost_ratio,rq3,"Paper RQ2: Ablation Study (Table 5, Fig. 6, Fig. 7, Table 7, Finding 2)",Gleaner Pure Diversity,avg_benefit_cost_ratio,Benefit-cost ratio,0.575129045152
-rq3|Gleaner Top Score|avg_api_coverage,rq3,"Paper RQ2: Ablation Study (Table 5, Fig. 6, Fig. 7, Table 7, Finding 2)",Gleaner Top Score,avg_api_coverage,API coverage,0.479477225673
-rq3|Gleaner Top Score|avg_unique_trace_coverage,rq3,"Paper RQ2: Ablation Study (Table 5, Fig. 6, Fig. 7, Table 7, Finding 2)",Gleaner Top Score,avg_unique_trace_coverage,Unique trace coverage,0.2274722631
-rq3|Gleaner Top Score|avg_shannon_entropy,rq3,"Paper RQ2: Ablation Study (Table 5, Fig. 6, Fig. 7, Table 7, Finding 2)",Gleaner Top Score,avg_shannon_entropy,Shannon entropy,7.59404538592
-rq3|Gleaner Top Score|avg_proportion_anomaly,rq3,"Paper RQ2: Ablation Study (Table 5, Fig. 6, Fig. 7, Table 7, Finding 2)",Gleaner Top Score,avg_proportion_anomaly,Anomaly proportion,0.144555014308
-rq3|Gleaner Top Score|avg_path_coverage_dedup,rq3,"Paper RQ2: Ablation Study (Table 5, Fig. 6, Fig. 7, Table 7, Finding 2)",Gleaner Top Score,avg_path_coverage_dedup,Path coverage,0.519908229057
-rq3|Gleaner Top Score|avg_benefit_cost_ratio,rq3,"Paper RQ2: Ablation Study (Table 5, Fig. 6, Fig. 7, Table 7, Finding 2)",Gleaner Top Score,avg_benefit_cost_ratio,Benefit-cost ratio,0.869003893479
-rq3|Gleaner WL Kernel|avg_api_coverage,rq3,"Paper RQ2: Ablation Study (Table 5, Fig. 6, Fig. 7, Table 7, Finding 2)",Gleaner WL Kernel,avg_api_coverage,API coverage,0.996717955957
-rq3|Gleaner WL Kernel|avg_unique_trace_coverage,rq3,"Paper RQ2: Ablation Study (Table 5, Fig. 6, Fig. 7, Table 7, Finding 2)",Gleaner WL Kernel,avg_unique_trace_coverage,Unique trace coverage,0.18737595946
-rq3|Gleaner WL Kernel|avg_shannon_entropy,rq3,"Paper RQ2: Ablation Study (Table 5, Fig. 6, Fig. 7, Table 7, Finding 2)",Gleaner WL Kernel,avg_shannon_entropy,Shannon entropy,7.16229414853
-rq3|Gleaner WL Kernel|avg_proportion_anomaly,rq3,"Paper RQ2: Ablation Study (Table 5, Fig. 6, Fig. 7, Table 7, Finding 2)",Gleaner WL Kernel,avg_proportion_anomaly,Anomaly proportion,0.0980662972409
-rq3|Gleaner WL Kernel|avg_path_coverage_dedup,rq3,"Paper RQ2: Ablation Study (Table 5, Fig. 6, Fig. 7, Table 7, Finding 2)",Gleaner WL Kernel,avg_path_coverage_dedup,Path coverage,0.895837045983
-rq3|Gleaner WL Kernel|avg_benefit_cost_ratio,rq3,"Paper RQ2: Ablation Study (Table 5, Fig. 6, Fig. 7, Table 7, Finding 2)",Gleaner WL Kernel,avg_benefit_cost_ratio,Benefit-cost ratio,0.764101943345
-rq3|Gleaner w/o AD|avg_api_coverage,rq3,"Paper RQ2: Ablation Study (Table 5, Fig. 6, Fig. 7, Table 7, Finding 2)",Gleaner w/o AD,avg_api_coverage,API coverage,0.993330039526
-rq3|Gleaner w/o AD|avg_unique_trace_coverage,rq3,"Paper RQ2: Ablation Study (Table 5, Fig. 6, Fig. 7, Table 7, Finding 2)",Gleaner w/o AD,avg_unique_trace_coverage,Unique trace coverage,0.219316174149
-rq3|Gleaner w/o AD|avg_shannon_entropy,rq3,"Paper RQ2: Ablation Study (Table 5, Fig. 6, Fig. 7, Table 7, Finding 2)",Gleaner w/o AD,avg_shannon_entropy,Shannon entropy,7.5132981155
-rq3|Gleaner w/o AD|avg_proportion_anomaly,rq3,"Paper RQ2: Ablation Study (Table 5, Fig. 6, Fig. 7, Table 7, Finding 2)",Gleaner w/o AD,avg_proportion_anomaly,Anomaly proportion,0.0713908725855
-rq3|Gleaner w/o AD|avg_path_coverage_dedup,rq3,"Paper RQ2: Ablation Study (Table 5, Fig. 6, Fig. 7, Table 7, Finding 2)",Gleaner w/o AD,avg_path_coverage_dedup,Path coverage,0.894389087627
-rq3|Gleaner w/o AD|avg_benefit_cost_ratio,rq3,"Paper RQ2: Ablation Study (Table 5, Fig. 6, Fig. 7, Table 7, Finding 2)",Gleaner w/o AD,avg_benefit_cost_ratio,Benefit-cost ratio,0.831225909705
-rq3|Gleaner w/o DPP|avg_api_coverage,rq3,"Paper RQ2: Ablation Study (Table 5, Fig. 6, Fig. 7, Table 7, Finding 2)",Gleaner w/o DPP,avg_api_coverage,API coverage,0.996576792772
-rq3|Gleaner w/o DPP|avg_unique_trace_coverage,rq3,"Paper RQ2: Ablation Study (Table 5, Fig. 6, Fig. 7, Table 7, Finding 2)",Gleaner w/o DPP,avg_unique_trace_coverage,Unique trace coverage,0.191684312994
-rq3|Gleaner w/o DPP|avg_shannon_entropy,rq3,"Paper RQ2: Ablation Study (Table 5, Fig. 6, Fig. 7, Table 7, Finding 2)",Gleaner w/o DPP,avg_shannon_entropy,Shannon entropy,7.25037466026
-rq3|Gleaner w/o DPP|avg_proportion_anomaly,rq3,"Paper RQ2: Ablation Study (Table 5, Fig. 6, Fig. 7, Table 7, Finding 2)",Gleaner w/o DPP,avg_proportion_anomaly,Anomaly proportion,0.106473167325
-rq3|Gleaner w/o DPP|avg_path_coverage_dedup,rq3,"Paper RQ2: Ablation Study (Table 5, Fig. 6, Fig. 7, Table 7, Finding 2)",Gleaner w/o DPP,avg_path_coverage_dedup,Path coverage,0.851324489445
-rq3|Gleaner w/o DPP|avg_benefit_cost_ratio,rq3,"Paper RQ2: Ablation Study (Table 5, Fig. 6, Fig. 7, Table 7, Finding 2)",Gleaner w/o DPP,avg_benefit_cost_ratio,Benefit-cost ratio,0.774749535463
-rq3|Gleaner w/o Logs|avg_api_coverage,rq3,"Paper RQ2: Ablation Study (Table 5, Fig. 6, Fig. 7, Table 7, Finding 2)",Gleaner w/o Logs,avg_api_coverage,API coverage,0.994741671372
-rq3|Gleaner w/o Logs|avg_unique_trace_coverage,rq3,"Paper RQ2: Ablation Study (Table 5, Fig. 6, Fig. 7, Table 7, Finding 2)",Gleaner w/o Logs,avg_unique_trace_coverage,Unique trace coverage,0.20997285284
-rq3|Gleaner w/o Logs|avg_shannon_entropy,rq3,"Paper RQ2: Ablation Study (Table 5, Fig. 6, Fig. 7, Table 7, Finding 2)",Gleaner w/o Logs,avg_shannon_entropy,Shannon entropy,7.40436444081
-rq3|Gleaner w/o Logs|avg_proportion_anomaly,rq3,"Paper RQ2: Ablation Study (Table 5, Fig. 6, Fig. 7, Table 7, Finding 2)",Gleaner w/o Logs,avg_proportion_anomaly,Anomaly proportion,0.107713666863
-rq3|Gleaner w/o Logs|avg_path_coverage_dedup,rq3,"Paper RQ2: Ablation Study (Table 5, Fig. 6, Fig. 7, Table 7, Finding 2)",Gleaner w/o Logs,avg_path_coverage_dedup,Path coverage,0.887532178608
-rq3|Gleaner w/o Logs|avg_benefit_cost_ratio,rq3,"Paper RQ2: Ablation Study (Table 5, Fig. 6, Fig. 7, Table 7, Finding 2)",Gleaner w/o Logs,avg_benefit_cost_ratio,Benefit-cost ratio,0.807019321696
-rq3|Gleaner w/o Logs + AD|avg_api_coverage,rq3,"Paper RQ2: Ablation Study (Table 5, Fig. 6, Fig. 7, Table 7, Finding 2)",Gleaner w/o Logs + AD,avg_api_coverage,API coverage,0.994741671372
-rq3|Gleaner w/o Logs + AD|avg_unique_trace_coverage,rq3,"Paper RQ2: Ablation Study (Table 5, Fig. 6, Fig. 7, Table 7, Finding 2)",Gleaner w/o Logs + AD,avg_unique_trace_coverage,Unique trace coverage,0.204412472216
-rq3|Gleaner w/o Logs + AD|avg_shannon_entropy,rq3,"Paper RQ2: Ablation Study (Table 5, Fig. 6, Fig. 7, Table 7, Finding 2)",Gleaner w/o Logs + AD,avg_shannon_entropy,Shannon entropy,7.39317852676
-rq3|Gleaner w/o Logs + AD|avg_proportion_anomaly,rq3,"Paper RQ2: Ablation Study (Table 5, Fig. 6, Fig. 7, Table 7, Finding 2)",Gleaner w/o Logs + AD,avg_proportion_anomaly,Anomaly proportion,0.073992722571
-rq3|Gleaner w/o Logs + AD|avg_path_coverage_dedup,rq3,"Paper RQ2: Ablation Study (Table 5, Fig. 6, Fig. 7, Table 7, Finding 2)",Gleaner w/o Logs + AD,avg_path_coverage_dedup,Path coverage,0.908159545143
-rq3|Gleaner w/o Logs + AD|avg_benefit_cost_ratio,rq3,"Paper RQ2: Ablation Study (Table 5, Fig. 6, Fig. 7, Table 7, Finding 2)",Gleaner w/o Logs + AD,avg_benefit_cost_ratio,Benefit-cost ratio,0.796066516626
-rq3|Gleaner w/o Rebalance|avg_api_coverage,rq3,"Paper RQ2: Ablation Study (Table 5, Fig. 6, Fig. 7, Table 7, Finding 2)",Gleaner w/o Rebalance,avg_api_coverage,API coverage,0.996706192358
-rq3|Gleaner w/o Rebalance|avg_unique_trace_coverage,rq3,"Paper RQ2: Ablation Study (Table 5, Fig. 6, Fig. 7, Table 7, Finding 2)",Gleaner w/o Rebalance,avg_unique_trace_coverage,Unique trace coverage,0.220996105194
-rq3|Gleaner w/o Rebalance|avg_shannon_entropy,rq3,"Paper RQ2: Ablation Study (Table 5, Fig. 6, Fig. 7, Table 7, Finding 2)",Gleaner w/o Rebalance,avg_shannon_entropy,Shannon entropy,7.49906608032
-rq3|Gleaner w/o Rebalance|avg_proportion_anomaly,rq3,"Paper RQ2: Ablation Study (Table 5, Fig. 6, Fig. 7, Table 7, Finding 2)",Gleaner w/o Rebalance,avg_proportion_anomaly,Anomaly proportion,0.100850752
-rq3|Gleaner w/o Rebalance|avg_path_coverage_dedup,rq3,"Paper RQ2: Ablation Study (Table 5, Fig. 6, Fig. 7, Table 7, Finding 2)",Gleaner w/o Rebalance,avg_path_coverage_dedup,Path coverage,0.895638736802
-rq3|Gleaner w/o Rebalance|avg_benefit_cost_ratio,rq3,"Paper RQ2: Ablation Study (Table 5, Fig. 6, Fig. 7, Table 7, Finding 2)",Gleaner w/o Rebalance,avg_benefit_cost_ratio,Benefit-cost ratio,0.836164281798
+rq3|Gleaner Latency-Dominant|avg_api_coverage,rq3,"Paper RQ2: Ablation Study (Table 5, Fig. 6, Fig. 7, Table 7, Finding 2)",Gleaner Latency-Dominant,avg_api_coverage,API coverage,0.954071969697
+rq3|Gleaner Latency-Dominant|avg_unique_trace_coverage,rq3,"Paper RQ2: Ablation Study (Table 5, Fig. 6, Fig. 7, Table 7, Finding 2)",Gleaner Latency-Dominant,avg_unique_trace_coverage,Unique trace coverage,0.208545120004
+rq3|Gleaner Latency-Dominant|avg_shannon_entropy,rq3,"Paper RQ2: Ablation Study (Table 5, Fig. 6, Fig. 7, Table 7, Finding 2)",Gleaner Latency-Dominant,avg_shannon_entropy,Shannon entropy,6.71674010826
+rq3|Gleaner Latency-Dominant|avg_proportion_anomaly,rq3,"Paper RQ2: Ablation Study (Table 5, Fig. 6, Fig. 7, Table 7, Finding 2)",Gleaner Latency-Dominant,avg_proportion_anomaly,Anomaly proportion,0.126050534662
+rq3|Gleaner Latency-Dominant|avg_path_coverage_dedup,rq3,"Paper RQ2: Ablation Study (Table 5, Fig. 6, Fig. 7, Table 7, Finding 2)",Gleaner Latency-Dominant,avg_path_coverage_dedup,Path coverage,0.843849854316
+rq3|Gleaner Latency-Dominant|avg_benefit_cost_ratio,rq3,"Paper RQ2: Ablation Study (Table 5, Fig. 6, Fig. 7, Table 7, Finding 2)",Gleaner Latency-Dominant,avg_benefit_cost_ratio,Benefit-cost ratio,0.84758209133
+rq3|Gleaner Log-Dominant|avg_api_coverage,rq3,"Paper RQ2: Ablation Study (Table 5, Fig. 6, Fig. 7, Table 7, Finding 2)",Gleaner Log-Dominant,avg_api_coverage,API coverage,0.954071969697
+rq3|Gleaner Log-Dominant|avg_unique_trace_coverage,rq3,"Paper RQ2: Ablation Study (Table 5, Fig. 6, Fig. 7, Table 7, Finding 2)",Gleaner Log-Dominant,avg_unique_trace_coverage,Unique trace coverage,0.209236571619
+rq3|Gleaner Log-Dominant|avg_shannon_entropy,rq3,"Paper RQ2: Ablation Study (Table 5, Fig. 6, Fig. 7, Table 7, Finding 2)",Gleaner Log-Dominant,avg_shannon_entropy,Shannon entropy,6.72063768334
+rq3|Gleaner Log-Dominant|avg_proportion_anomaly,rq3,"Paper RQ2: Ablation Study (Table 5, Fig. 6, Fig. 7, Table 7, Finding 2)",Gleaner Log-Dominant,avg_proportion_anomaly,Anomaly proportion,0.126050534662
+rq3|Gleaner Log-Dominant|avg_path_coverage_dedup,rq3,"Paper RQ2: Ablation Study (Table 5, Fig. 6, Fig. 7, Table 7, Finding 2)",Gleaner Log-Dominant,avg_path_coverage_dedup,Path coverage,0.839216652551
+rq3|Gleaner Log-Dominant|avg_benefit_cost_ratio,rq3,"Paper RQ2: Ablation Study (Table 5, Fig. 6, Fig. 7, Table 7, Finding 2)",Gleaner Log-Dominant,avg_benefit_cost_ratio,Benefit-cost ratio,0.84895054991
+rq3|Gleaner Pure Diversity|avg_api_coverage,rq3,"Paper RQ2: Ablation Study (Table 5, Fig. 6, Fig. 7, Table 7, Finding 2)",Gleaner Pure Diversity,avg_api_coverage,API coverage,0.787689393939
+rq3|Gleaner Pure Diversity|avg_unique_trace_coverage,rq3,"Paper RQ2: Ablation Study (Table 5, Fig. 6, Fig. 7, Table 7, Finding 2)",Gleaner Pure Diversity,avg_unique_trace_coverage,Unique trace coverage,0.184920544565
+rq3|Gleaner Pure Diversity|avg_shannon_entropy,rq3,"Paper RQ2: Ablation Study (Table 5, Fig. 6, Fig. 7, Table 7, Finding 2)",Gleaner Pure Diversity,avg_shannon_entropy,Shannon entropy,6.20836274063
+rq3|Gleaner Pure Diversity|avg_proportion_anomaly,rq3,"Paper RQ2: Ablation Study (Table 5, Fig. 6, Fig. 7, Table 7, Finding 2)",Gleaner Pure Diversity,avg_proportion_anomaly,Anomaly proportion,0.0210318868473
+rq3|Gleaner Pure Diversity|avg_path_coverage_dedup,rq3,"Paper RQ2: Ablation Study (Table 5, Fig. 6, Fig. 7, Table 7, Finding 2)",Gleaner Pure Diversity,avg_path_coverage_dedup,Path coverage,0.661671166009
+rq3|Gleaner Pure Diversity|avg_benefit_cost_ratio,rq3,"Paper RQ2: Ablation Study (Table 5, Fig. 6, Fig. 7, Table 7, Finding 2)",Gleaner Pure Diversity,avg_benefit_cost_ratio,Benefit-cost ratio,0.656709870702
+rq3|Gleaner Top Score|avg_api_coverage,rq3,"Paper RQ2: Ablation Study (Table 5, Fig. 6, Fig. 7, Table 7, Finding 2)",Gleaner Top Score,avg_api_coverage,API coverage,0.461647727273
+rq3|Gleaner Top Score|avg_unique_trace_coverage,rq3,"Paper RQ2: Ablation Study (Table 5, Fig. 6, Fig. 7, Table 7, Finding 2)",Gleaner Top Score,avg_unique_trace_coverage,Unique trace coverage,0.219497433592
+rq3|Gleaner Top Score|avg_shannon_entropy,rq3,"Paper RQ2: Ablation Study (Table 5, Fig. 6, Fig. 7, Table 7, Finding 2)",Gleaner Top Score,avg_shannon_entropy,Shannon entropy,6.84676569864
+rq3|Gleaner Top Score|avg_proportion_anomaly,rq3,"Paper RQ2: Ablation Study (Table 5, Fig. 6, Fig. 7, Table 7, Finding 2)",Gleaner Top Score,avg_proportion_anomaly,Anomaly proportion,0.217182278644
+rq3|Gleaner Top Score|avg_path_coverage_dedup,rq3,"Paper RQ2: Ablation Study (Table 5, Fig. 6, Fig. 7, Table 7, Finding 2)",Gleaner Top Score,avg_path_coverage_dedup,Path coverage,0.491283867373
+rq3|Gleaner Top Score|avg_benefit_cost_ratio,rq3,"Paper RQ2: Ablation Study (Table 5, Fig. 6, Fig. 7, Table 7, Finding 2)",Gleaner Top Score,avg_benefit_cost_ratio,Benefit-cost ratio,0.891230070477
+rq3|Gleaner WL Kernel|avg_api_coverage,rq3,"Paper RQ2: Ablation Study (Table 5, Fig. 6, Fig. 7, Table 7, Finding 2)",Gleaner WL Kernel,avg_api_coverage,API coverage,0.976799242424
+rq3|Gleaner WL Kernel|avg_unique_trace_coverage,rq3,"Paper RQ2: Ablation Study (Table 5, Fig. 6, Fig. 7, Table 7, Finding 2)",Gleaner WL Kernel,avg_unique_trace_coverage,Unique trace coverage,0.186992856527
+rq3|Gleaner WL Kernel|avg_shannon_entropy,rq3,"Paper RQ2: Ablation Study (Table 5, Fig. 6, Fig. 7, Table 7, Finding 2)",Gleaner WL Kernel,avg_shannon_entropy,Shannon entropy,6.54151328706
+rq3|Gleaner WL Kernel|avg_proportion_anomaly,rq3,"Paper RQ2: Ablation Study (Table 5, Fig. 6, Fig. 7, Table 7, Finding 2)",Gleaner WL Kernel,avg_proportion_anomaly,Anomaly proportion,0.107566026102
+rq3|Gleaner WL Kernel|avg_path_coverage_dedup,rq3,"Paper RQ2: Ablation Study (Table 5, Fig. 6, Fig. 7, Table 7, Finding 2)",Gleaner WL Kernel,avg_path_coverage_dedup,Path coverage,0.857152228501
+rq3|Gleaner WL Kernel|avg_benefit_cost_ratio,rq3,"Paper RQ2: Ablation Study (Table 5, Fig. 6, Fig. 7, Table 7, Finding 2)",Gleaner WL Kernel,avg_benefit_cost_ratio,Benefit-cost ratio,0.808087717568
+rq3|Gleaner w/o AD|avg_api_coverage,rq3,"Paper RQ2: Ablation Study (Table 5, Fig. 6, Fig. 7, Table 7, Finding 2)",Gleaner w/o AD,avg_api_coverage,API coverage,0.949715909091
+rq3|Gleaner w/o AD|avg_unique_trace_coverage,rq3,"Paper RQ2: Ablation Study (Table 5, Fig. 6, Fig. 7, Table 7, Finding 2)",Gleaner w/o AD,avg_unique_trace_coverage,Unique trace coverage,0.209874501307
+rq3|Gleaner w/o AD|avg_shannon_entropy,rq3,"Paper RQ2: Ablation Study (Table 5, Fig. 6, Fig. 7, Table 7, Finding 2)",Gleaner w/o AD,avg_shannon_entropy,Shannon entropy,6.74181502663
+rq3|Gleaner w/o AD|avg_proportion_anomaly,rq3,"Paper RQ2: Ablation Study (Table 5, Fig. 6, Fig. 7, Table 7, Finding 2)",Gleaner w/o AD,avg_proportion_anomaly,Anomaly proportion,0.0923651148157
+rq3|Gleaner w/o AD|avg_path_coverage_dedup,rq3,"Paper RQ2: Ablation Study (Table 5, Fig. 6, Fig. 7, Table 7, Finding 2)",Gleaner w/o AD,avg_path_coverage_dedup,Path coverage,0.824441203085
+rq3|Gleaner w/o AD|avg_benefit_cost_ratio,rq3,"Paper RQ2: Ablation Study (Table 5, Fig. 6, Fig. 7, Table 7, Finding 2)",Gleaner w/o AD,avg_benefit_cost_ratio,Benefit-cost ratio,0.850036328076
+rq3|Gleaner w/o DPP|avg_api_coverage,rq3,"Paper RQ2: Ablation Study (Table 5, Fig. 6, Fig. 7, Table 7, Finding 2)",Gleaner w/o DPP,avg_api_coverage,API coverage,0.975662878788
+rq3|Gleaner w/o DPP|avg_unique_trace_coverage,rq3,"Paper RQ2: Ablation Study (Table 5, Fig. 6, Fig. 7, Table 7, Finding 2)",Gleaner w/o DPP,avg_unique_trace_coverage,Unique trace coverage,0.192567903007
+rq3|Gleaner w/o DPP|avg_shannon_entropy,rq3,"Paper RQ2: Ablation Study (Table 5, Fig. 6, Fig. 7, Table 7, Finding 2)",Gleaner w/o DPP,avg_shannon_entropy,Shannon entropy,6.63397835749
+rq3|Gleaner w/o DPP|avg_proportion_anomaly,rq3,"Paper RQ2: Ablation Study (Table 5, Fig. 6, Fig. 7, Table 7, Finding 2)",Gleaner w/o DPP,avg_proportion_anomaly,Anomaly proportion,0.115319632365
+rq3|Gleaner w/o DPP|avg_path_coverage_dedup,rq3,"Paper RQ2: Ablation Study (Table 5, Fig. 6, Fig. 7, Table 7, Finding 2)",Gleaner w/o DPP,avg_path_coverage_dedup,Path coverage,0.803624911524
+rq3|Gleaner w/o DPP|avg_benefit_cost_ratio,rq3,"Paper RQ2: Ablation Study (Table 5, Fig. 6, Fig. 7, Table 7, Finding 2)",Gleaner w/o DPP,avg_benefit_cost_ratio,Benefit-cost ratio,0.825937696734
+rq3|Gleaner w/o Logs|avg_api_coverage,rq3,"Paper RQ2: Ablation Study (Table 5, Fig. 6, Fig. 7, Table 7, Finding 2)",Gleaner w/o Logs,avg_api_coverage,API coverage,0.959943181818
+rq3|Gleaner w/o Logs|avg_unique_trace_coverage,rq3,"Paper RQ2: Ablation Study (Table 5, Fig. 6, Fig. 7, Table 7, Finding 2)",Gleaner w/o Logs,avg_unique_trace_coverage,Unique trace coverage,0.205705161017
+rq3|Gleaner w/o Logs|avg_shannon_entropy,rq3,"Paper RQ2: Ablation Study (Table 5, Fig. 6, Fig. 7, Table 7, Finding 2)",Gleaner w/o Logs,avg_shannon_entropy,Shannon entropy,6.70943249092
+rq3|Gleaner w/o Logs|avg_proportion_anomaly,rq3,"Paper RQ2: Ablation Study (Table 5, Fig. 6, Fig. 7, Table 7, Finding 2)",Gleaner w/o Logs,avg_proportion_anomaly,Anomaly proportion,0.12784680855
+rq3|Gleaner w/o Logs|avg_path_coverage_dedup,rq3,"Paper RQ2: Ablation Study (Table 5, Fig. 6, Fig. 7, Table 7, Finding 2)",Gleaner w/o Logs,avg_path_coverage_dedup,Path coverage,0.839991232435
+rq3|Gleaner w/o Logs|avg_benefit_cost_ratio,rq3,"Paper RQ2: Ablation Study (Table 5, Fig. 6, Fig. 7, Table 7, Finding 2)",Gleaner w/o Logs,avg_benefit_cost_ratio,Benefit-cost ratio,0.839550924574
+rq3|Gleaner w/o Logs + AD|avg_api_coverage,rq3,"Paper RQ2: Ablation Study (Table 5, Fig. 6, Fig. 7, Table 7, Finding 2)",Gleaner w/o Logs + AD,avg_api_coverage,API coverage,0.962026515152
+rq3|Gleaner w/o Logs + AD|avg_unique_trace_coverage,rq3,"Paper RQ2: Ablation Study (Table 5, Fig. 6, Fig. 7, Table 7, Finding 2)",Gleaner w/o Logs + AD,avg_unique_trace_coverage,Unique trace coverage,0.197470252421
+rq3|Gleaner w/o Logs + AD|avg_shannon_entropy,rq3,"Paper RQ2: Ablation Study (Table 5, Fig. 6, Fig. 7, Table 7, Finding 2)",Gleaner w/o Logs + AD,avg_shannon_entropy,Shannon entropy,6.65712990396
+rq3|Gleaner w/o Logs + AD|avg_proportion_anomaly,rq3,"Paper RQ2: Ablation Study (Table 5, Fig. 6, Fig. 7, Table 7, Finding 2)",Gleaner w/o Logs + AD,avg_proportion_anomaly,Anomaly proportion,0.0981384445783
+rq3|Gleaner w/o Logs + AD|avg_path_coverage_dedup,rq3,"Paper RQ2: Ablation Study (Table 5, Fig. 6, Fig. 7, Table 7, Finding 2)",Gleaner w/o Logs + AD,avg_path_coverage_dedup,Path coverage,0.853718122837
+rq3|Gleaner w/o Logs + AD|avg_benefit_cost_ratio,rq3,"Paper RQ2: Ablation Study (Table 5, Fig. 6, Fig. 7, Table 7, Finding 2)",Gleaner w/o Logs + AD,avg_benefit_cost_ratio,Benefit-cost ratio,0.823013187501
+rq3|Gleaner w/o Rebalance|avg_api_coverage,rq3,"Paper RQ2: Ablation Study (Table 5, Fig. 6, Fig. 7, Table 7, Finding 2)",Gleaner w/o Rebalance,avg_api_coverage,API coverage,0.977840909091
+rq3|Gleaner w/o Rebalance|avg_unique_trace_coverage,rq3,"Paper RQ2: Ablation Study (Table 5, Fig. 6, Fig. 7, Table 7, Finding 2)",Gleaner w/o Rebalance,avg_unique_trace_coverage,Unique trace coverage,0.215061500562
+rq3|Gleaner w/o Rebalance|avg_shannon_entropy,rq3,"Paper RQ2: Ablation Study (Table 5, Fig. 6, Fig. 7, Table 7, Finding 2)",Gleaner w/o Rebalance,avg_shannon_entropy,Shannon entropy,6.78694731228
+rq3|Gleaner w/o Rebalance|avg_proportion_anomaly,rq3,"Paper RQ2: Ablation Study (Table 5, Fig. 6, Fig. 7, Table 7, Finding 2)",Gleaner w/o Rebalance,avg_proportion_anomaly,Anomaly proportion,0.108961304929
+rq3|Gleaner w/o Rebalance|avg_path_coverage_dedup,rq3,"Paper RQ2: Ablation Study (Table 5, Fig. 6, Fig. 7, Table 7, Finding 2)",Gleaner w/o Rebalance,avg_path_coverage_dedup,Path coverage,0.857712366805
+rq3|Gleaner w/o Rebalance|avg_benefit_cost_ratio,rq3,"Paper RQ2: Ablation Study (Table 5, Fig. 6, Fig. 7, Table 7, Finding 2)",Gleaner w/o Rebalance,avg_benefit_cost_ratio,Benefit-cost ratio,0.867926917272

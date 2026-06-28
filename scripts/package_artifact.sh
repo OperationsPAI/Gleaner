@@ -37,8 +37,8 @@ REQUIRED_PATHS=(
   "artifact_expected/reduced"
   "data/artifact/reduced/MANIFEST.json"
   "data/artifact/reduced/SHA256SUMS"
-  "output/rcabench-platform-v2/sampler_reports/gleaner/aggregated_perf.parquet"
-  "output/rcabench-platform-v2/sampler_reports/gleaner/detailed_perf.parquet"
+  "data/artifact/reduced/rq1/gleaner_source.aggregated_perf.parquet"
+  "data/artifact/reduced/rq1/gleaner_source.detailed_perf.parquet"
 )
 
 THIRD_PARTY_DIRS=(
@@ -147,8 +147,6 @@ done
 
 copy_path "artifact_expected/reduced"
 copy_path "data/artifact/reduced"
-copy_path "output/rcabench-platform-v2/sampler_reports/gleaner/aggregated_perf.parquet"
-copy_path "output/rcabench-platform-v2/sampler_reports/gleaner/detailed_perf.parquet"
 for rel in "${THIRD_PARTY_DIRS[@]}"; do
   copy_path "${rel}"
 done
@@ -213,8 +211,8 @@ require_in_archive "ARTIFACT_README.md"
 require_in_archive "ARCHIVE_MANIFEST.tsv"
 require_in_archive "third_party/Nezha/"
 require_in_archive "data/artifact/reduced/MANIFEST.json"
-require_in_archive "output/rcabench-platform-v2/sampler_reports/gleaner/aggregated_perf.parquet"
-require_in_archive "output/rcabench-platform-v2/sampler_reports/gleaner/detailed_perf.parquet"
+require_in_archive "data/artifact/reduced/rq1/gleaner_source.aggregated_perf.parquet"
+require_in_archive "data/artifact/reduced/rq1/gleaner_source.detailed_perf.parquet"
 require_absent_regex '(^|/)\.git(/|$)' '.git/'
 require_absent_regex '(^|/)\.venv(/|$)' '.venv/'
 require_absent_regex '^dist(/|$)' 'dist/'

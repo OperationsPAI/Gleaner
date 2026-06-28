@@ -13,10 +13,10 @@ from typing import Any, Iterable
 import polars as pl
 
 DEFAULT_INPUT_AGGREGATED = Path(
-    "output/rcabench-platform-v2/sampler_reports/gleaner/aggregated_perf.parquet"
+    "output/rcabench-platform-v2/sampler_reports/gleaner_reduced20/aggregated_perf.parquet"
 )
 DEFAULT_INPUT_DETAILED = Path(
-    "output/rcabench-platform-v2/sampler_reports/gleaner/detailed_perf.parquet"
+    "output/rcabench-platform-v2/sampler_reports/gleaner_reduced20/detailed_perf.parquet"
 )
 DEFAULT_OUTPUT_DIR = Path("output/artifact/reduced/rq1")
 DEFAULT_MODE = "offline"

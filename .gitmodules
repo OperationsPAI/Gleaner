@@ -10,3 +10,6 @@
 [submodule "third_party/TraStrainer"]
 	path = third_party/TraStrainer
 	url = https://github.com/LGU-SE-Internal/TraStrainer.git
+[submodule "third_party/rcabench-platform"]
+	path = third_party/rcabench-platform
+	url = https://github.com/OperationsPAI/rcabench-platform.git

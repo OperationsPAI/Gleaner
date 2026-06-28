@@ -88,13 +88,15 @@ if [[ "$has_nezha_arg" -eq 0 ]]; then
   run_args+=("--nezha-parquet" "$nezha_path")
 fi
 
-uv run python scripts/artifact/rq2_rca_effectiveness.py "${run_args[@]}"
+uv run --package Gleaner python scripts/artifact/rq2_rca_effectiveness.py "${run_args[@]}"
 
 if [[ -d artifact_expected/reduced/rq2 ]]; then
-  uv run python scripts/compare_expected.py \
+  uv run --package Gleaner python scripts/compare_expected.py \
     --expected artifact_expected/reduced/rq2 \
     --actual output/artifact/reduced/rq2 \
     --file rq2_rca_effectiveness_results.md \
     --file rq2_rca_effectiveness_summary.csv \
     --file rq2_rca_effectiveness_summary.json
 fi
+
+uv run --package Gleaner python scripts/artifact/print_reduced_tables.py rq2

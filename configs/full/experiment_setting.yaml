@@ -1,0 +1,86 @@
+# Full paper reproduction setting. This is intentionally much larger than the AE reduced path.
+# Expected wall time: potentially several days depending on CPU count, memory, and third-party baseline environments.
+
+datasets:
+  dataset_a_gleaner:
+    name: gleaner
+    split: full
+    path: data/rcabench-platform-v2/data/gleaner
+    purpose:
+      - RQ1 sampling quality on Dataset A
+      - RQ2/RQ3 ablations and RCA impact
+      - RQ4 efficiency
+  dataset_b_tracepicker:
+    name: tracepicker
+    split: full
+    path: data/rcabench-platform-v2/data/tracepicker
+    systems:
+      - trainticket
+      - media
+      - onlineBoutique
+      - sockshop
+      - socialNetwork
+    purpose:
+      - RQ1 cross-system evaluation
+
+sampling:
+  modes: [offline]
+  rates: [0.005, 0.01, 0.1]
+  dataset_a_samplers:
+    - gleaner
+    - gleaner_latency_dominate
+    - gleaner_log_dominate
+    - gleaner_no_ad
+    - gleaner_no_dpp
+    - gleaner_no_logs
+    - gleaner_no_logs_no_ad
+    - gleaner_no_rebalance
+    - gleaner_pure_diversity
+    - gleaner_top_score
+    - gleaner_wl_kernel
+    - random
+    - tracepicker
+    - trastrainer
+    - trastrainer_no_metrics
+    - sifter
+    - sieve
+  dataset_b_samplers:
+    - gleaner_no_logs_no_ad
+    - tracepicker
+    - trastrainer_no_metrics
+    - sifter
+    - sieve
+    - random
+
+rca:
+  algorithms:
+    - microrca
+    - shapleyiq
+    - nezha
+  include_sampled: true
+  metrics:
+    - AC@1
+    - AC@3
+    - MRR
+
+figures_and_tables:
+  rq1:
+    - paper Fig. 4 Dataset A sampling quality
+    - paper Fig. 5 Dataset B cross-system quality
+    - RQ1 markdown data tables
+  rq2_ablation:
+    - paper Table 5
+    - paper Fig. 6
+    - paper Fig. 7
+  rq3_rca:
+    - paper Table 6
+    - paper Table 7
+  rq4_efficiency:
+    - paper Table 8
+
+outputs:
+  root: output/full
+  sampler_reports: output/rcabench-platform-v2/sampler_reports
+  rca_reports: output/rcabench-platform-v2/meta
+  figures: output/full/figures
+  tables: output/full/tables

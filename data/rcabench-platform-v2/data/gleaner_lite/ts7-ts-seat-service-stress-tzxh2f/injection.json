@@ -1,0 +1,40 @@
+{
+    "benchmark": "clickhouse",
+    "created_at": "2025-07-20T18:50:55.019739Z",
+    "description": "Fault for task 0da14452-f0cf-4708-9a1c-699feaea7db8",
+    "display_config": "{\"duration\":4,\"injection_point\":{\"app_name\":\"ts-seat-service\",\"class_name\":\"seat.service.SeatServiceImpl\",\"method_name\":\"getDirectProportion\"},\"mem_type\":2,\"namespace\":\"ts\"}",
+    "end_time": "2025-07-20T18:54:54Z",
+    "engine_config": "{\"name\":\"InjectionConf\",\"range\":[0,30],\"children\":{\"28\":{\"name\":\"28\",\"range\":[0,3],\"children\":{\"0\":{\"name\":\"0\",\"range\":[1,60],\"children\":null,\"description\":\"Time Unit Minute\",\"value\":4},\"1\":{\"name\":\"1\",\"range\":[0,0],\"children\":null,\"description\":\"{ts: 0}\",\"value\":0},\"2\":{\"name\":\"2\",\"range\":[0,887],\"children\":null,\"description\":\"Flattened app+method index\",\"value\":623},\"3\":{\"name\":\"3\",\"range\":[1,2],\"children\":null,\"description\":\"Memory Type (1=Heap, 2=Stack)\",\"value\":2}},\"description\":\"\",\"value\":0}},\"description\":\"\",\"value\":28}",
+    "fault_type": 28,
+    "ground_truth": {
+        "container": [
+            "ts-seat-service"
+        ],
+        "function": [
+            "seat.service.SeatServiceImpl.getDirectProportion"
+        ],
+        "metric": [
+            "memory"
+        ],
+        "pod": [
+            "ts-seat-service-5c9b5c74d7-zxm2j"
+        ],
+        "service": [
+            "ts-seat-service"
+        ],
+        "span": null,
+        "additional_properties": {}
+    },
+    "id": 883,
+    "injection_name": "ts7-ts-seat-service-stress-tzxh2f",
+    "labels": {
+        "batch": "bootstrap",
+        "env": "prod"
+    },
+    "pre_duration": 4,
+    "start_time": "2025-07-20T18:50:56Z",
+    "status": 2,
+    "task_id": "0da14452-f0cf-4708-9a1c-699feaea7db8",
+    "updated_at": "2025-07-20T18:54:57.003327Z",
+    "additional_properties": {}
+}

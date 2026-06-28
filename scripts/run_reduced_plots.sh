@@ -3,7 +3,7 @@ set -euo pipefail
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$ROOT"
 
-uv run python scripts/artifact/plot_reduced_rq_figures.py "$@"
+uv run --package Gleaner python scripts/artifact/plot_reduced_rq_figures.py "$@"
 
 required_pngs=(
   output/artifact/reduced/figures/rq1_sampling_quality_metrics.png
@@ -33,7 +33,7 @@ if [[ -d artifact_expected/reduced/figures ]]; then
     cp "artifact_expected/reduced/figures/$file" "$compare_dir/expected_plots/$file"
     cp "output/artifact/reduced/figures/$file" "$compare_dir/actual_plots/$file"
   done
-  uv run python scripts/compare_expected.py \
+  uv run --package Gleaner python scripts/compare_expected.py \
     --expected "$compare_dir/expected_plots" \
     --actual "$compare_dir/actual_plots" \
     --file rq1_sampling_quality_plot_data.csv \
@@ -45,7 +45,7 @@ if [[ -d artifact_expected/reduced/figures ]]; then
 
   cp artifact_expected/reduced/figures/REPORT.md "$compare_dir/expected_report/REPORT.md"
   cp output/artifact/reduced/REPORT.md "$compare_dir/actual_report/REPORT.md"
-  uv run python scripts/compare_expected.py \
+  uv run --package Gleaner python scripts/compare_expected.py \
     --expected "$compare_dir/expected_report" \
     --actual "$compare_dir/actual_report" \
     --file REPORT.md

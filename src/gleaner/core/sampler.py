@@ -70,15 +70,18 @@ class GleanerSampler(TraceSampler):
         except Exception:
             pass
 
-        # Apply global log level from config
+        # Keep artifact runs quiet by default; enable verbose logs with GLEANER_LOG_LEVEL.
         try:
+            import os
             import sys
 
             import loguru
 
-            level_name = str(getattr(self.config, "log_level", "INFO")).upper()
-            loguru.logger.remove()  # Remove existing handlers
-            loguru.logger.add(sys.stderr, level=level_name)
+            disable_logs = os.getenv("GLEANER_DISABLE_LOGS", "").lower() in {"1", "true", "yes"}
+            level_name = os.getenv("GLEANER_LOG_LEVEL", "ERROR").upper()
+            loguru.logger.remove()
+            if not disable_logs:
+                loguru.logger.add(sys.stderr, level=level_name)
         except Exception:
             pass
 

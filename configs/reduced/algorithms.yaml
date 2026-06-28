@@ -1,10 +1,19 @@
+# Reduced AE path: no expensive baseline sampler reruns.
 samplers:
-  - gleaner
-  - tracepicker
-  - trastrainer
-  - sieve
-  - sifter
+  dataset_a_gleaner_variants:
+    - gleaner_latency_dominate
+    - gleaner_log_dominate
+    - gleaner_no_ad
+    - gleaner_no_dpp
+    - gleaner_no_logs
+    - gleaner_no_logs_no_ad
+    - gleaner_no_rebalance
+    - gleaner_pure_diversity
+    - gleaner_top_score
+    - gleaner_wl_kernel
+  dataset_b_cross_system: raw_tracepicker_system_statistics_only
 rca_algorithms:
+  # Filtered from prior per-datapack detailed RCA outputs to the reduced20 subset.
   - microrca
   - shapleyiq
   - nezha

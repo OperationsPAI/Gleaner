@@ -29,6 +29,17 @@ exclude = [ #
     "temp/",
 ]
 
+[tool.uv.sources]
+rcabench-platform = { path = "third_party/rcabench-platform", editable = true }
+
+[tool.uv.workspace]
+members = [
+    "third_party/Nezha",
+    "third_party/ShapleyIQ",
+    "third_party/TraStrainer",
+]
+exclude = ["third_party/TracePicker"]
+
 [dependency-groups]
 dev = [ #
     "ipykernel>=6.29.5",

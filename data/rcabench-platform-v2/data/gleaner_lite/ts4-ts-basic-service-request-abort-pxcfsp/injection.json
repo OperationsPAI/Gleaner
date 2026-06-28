@@ -1,0 +1,37 @@
+{
+    "benchmark": "clickhouse",
+    "created_at": "2025-09-04T03:59:08.116Z",
+    "description": "Fault for task 390b4c61-ad1c-4c23-ac11-4e4fbf46d7eb",
+    "display_config": "{\"duration\":4,\"injection_point\":{\"app_name\":\"ts-basic-service\",\"method\":\"GET\",\"route\":\"/api/v1/stationservice/stations/id/*\",\"server_address\":\"ts-station-service\",\"server_port\":\"8080\"},\"namespace\":\"ts\"}",
+    "end_time": "2025-09-04T04:03:08Z",
+    "engine_config": "{\"name\":\"InjectionConf\",\"range\":[0,30],\"children\":{\"5\":{\"name\":\"5\",\"range\":[0,2],\"children\":{\"0\":{\"name\":\"0\",\"range\":[1,60],\"children\":null,\"description\":\"Time Unit Minute\",\"value\":4},\"1\":{\"name\":\"1\",\"range\":[0,0],\"children\":null,\"description\":\"{ts: 0}\",\"value\":0},\"2\":{\"name\":\"2\",\"range\":[0,67],\"children\":null,\"description\":\"Flattened HTTP Endpoint Index\",\"value\":10}},\"description\":\"\",\"value\":0}},\"description\":\"\",\"value\":5}",
+    "fault_type": 5,
+    "ground_truth": {
+        "container": [
+            "ts-basic-service",
+            "ts-station-service"
+        ],
+        "function": null,
+        "metric": null,
+        "pod": [
+            "ts-basic-service-68f7cbd746-blscn",
+            "ts-station-service-7ff47b8db8-fpm9d"
+        ],
+        "service": [
+            "ts-basic-service",
+            "ts-station-service"
+        ],
+        "span": [
+            "ts-basic-service",
+            "ts-station-service"
+        ]
+    },
+    "id": 8420,
+    "injection_name": "ts4-ts-basic-service-request-abort-pxcfsp",
+    "pre_duration": 4,
+    "start_time": "2025-09-04T03:59:08Z",
+    "status": 2,
+    "task": null,
+    "task_id": "390b4c61-ad1c-4c23-ac11-4e4fbf46d7eb",
+    "updated_at": "2025-09-04T04:03:08.539Z"
+}

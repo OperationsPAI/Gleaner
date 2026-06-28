@@ -33,8 +33,8 @@ check_present() {
 if git -C . rev-parse --git-dir >/dev/null 2>&1; then
   check_sha third_party/ShapleyIQ f45c02e55f5614f8c9e5d54ba1882780c694ce90
   check_sha third_party/Nezha f0de4db8123a566e13c5fcfe6ac0d9137009f99a
-  check_sha third_party/TracePicker 31e5fc8130c9b2c315220bb91397f2756dda8378
-  check_sha third_party/TraStrainer 82b133d9a0209997e3337506988776ab07ac4ada
+  check_sha third_party/TracePicker ca049d2a69e740df8fc1e034ebee3a87c1664245
+  check_sha third_party/TraStrainer 225e9e956432ed5254bce0d59718720d6b829451
 else
   echo "[smoke] Git metadata unavailable; skipping strict third_party SHA verification."
   echo "[smoke] Verifying third_party directories exist and are non-empty instead."
@@ -45,7 +45,7 @@ else
 fi
 
 echo "[smoke] verifying Python imports"
-uv run python - <<'PY'
+uv run --package Gleaner python - <<'PY'
 import importlib.metadata as md
 import gleaner
 print("gleaner import OK")

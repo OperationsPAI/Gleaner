@@ -2,7 +2,7 @@
 
 ## Configuration
 
-- Input parquet: `output/rcabench-platform-v2/sampler_reports/gleaner/aggregated_perf.parquet`
+- Input parquet: `output/rcabench-platform-v2/sampler_reports/gleaner_reduced20/aggregated_perf.parquet`
 - Output directory: `output/artifact/reduced/rq4`
 - Mode: `offline`
 - Sampling rate: `0.1`
@@ -19,32 +19,32 @@
 
 | Algorithm | Runtime Per Trace Ms | Std Runtime Per Trace Ms | Min Runtime Per Trace Ms | Max Runtime Per Trace Ms | Benefit Cost Ratio | Std Benefit Cost Ratio | Min Benefit Cost Ratio | Max Benefit Cost Ratio | Actual Sampling Rate | Std Actual Sampling Rate | Min Actual Sampling Rate | Max Actual Sampling Rate | Controllability | Std Controllability | Min Controllability | Max Controllability |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| gleaner_latency_dominate | 1.141 | 0.248 | 0.709 | 1.851 | 0.7323 | 0.0968 | 0.3798 | 0.8832 | 10.00% | 0.00% | 9.99% | 10.02% | 0.0010 | 0.0008 | 0.0000 | 0.0038 |
-| gleaner_log_dominate | 1.159 | 0.243 | 0.710 | 1.923 | 0.7365 | 0.0980 | 0.3779 | 0.8845 | 10.00% | 0.00% | 9.99% | 10.02% | 0.0010 | 0.0008 | 0.0000 | 0.0038 |
-| gleaner_no_ad | 12.498 | 23.568 | 0.730 | 97.961 | 0.7522 | 0.0797 | 0.4479 | 0.9101 | 9.99% | 0.07% | 9.15% | 10.02% | 0.0021 | 0.0067 | 0.0000 | 0.0848 |
-| gleaner_no_dpp | 0.589 | 0.061 | 0.452 | 0.813 | 0.6514 | 0.1062 | 0.1709 | 0.8447 | 10.00% | 0.00% | 9.99% | 10.02% | 0.0010 | 0.0008 | 0.0000 | 0.0038 |
-| gleaner_no_logs | 0.932 | 0.233 | 0.537 | 1.828 | 0.7171 | 0.1002 | 0.3573 | 0.8723 | 9.99% | 0.07% | 9.15% | 10.02% | 0.0021 | 0.0067 | 0.0000 | 0.0848 |
-| gleaner_no_logs_no_ad | 0.825 | 0.154 | 0.560 | 1.219 | 0.6916 | 0.0671 | 0.4385 | 0.8549 | 10.00% | 0.00% | 9.99% | 10.02% | 0.0010 | 0.0008 | 0.0000 | 0.0038 |
-| gleaner_no_rebalance | 1.202 | 0.247 | 0.713 | 1.899 | 0.7586 | 0.1051 | 0.3779 | 0.9101 | 10.00% | 0.00% | 9.99% | 10.02% | 0.0010 | 0.0008 | 0.0000 | 0.0038 |
-| gleaner_pure_diversity | 1.685 | 0.284 | 0.915 | 2.433 | 0.6525 | 0.0663 | 0.3205 | 0.8211 | 9.99% | 0.07% | 9.15% | 10.02% | 0.0021 | 0.0067 | 0.0000 | 0.0848 |
-| gleaner_top_score | 0.517 | 0.050 | 0.339 | 0.787 | 0.7813 | 0.0970 | 0.0120 | 0.9267 | 10.00% | 0.00% | 9.99% | 10.02% | 0.0010 | 0.0008 | 0.0000 | 0.0038 |
-| gleaner_wl_kernel | 8.398 | 5.201 | 2.101 | 24.547 | 0.6352 | 0.1071 | 0.1573 | 0.8234 | 10.00% | 0.00% | 9.99% | 10.02% | 0.0010 | 0.0008 | 0.0000 | 0.0038 |
+| gleaner_latency_dominate | 0.914 | 0.144 | 0.709 | 1.208 | 0.7769 | 0.0966 | 0.5857 | 0.8832 | 10.01% | 0.01% | 10.00% | 10.02% | 0.0020 | 0.0011 | 0.0000 | 0.0038 |
+| gleaner_log_dominate | 0.946 | 0.156 | 0.710 | 1.275 | 0.7796 | 0.0920 | 0.5869 | 0.8832 | 10.01% | 0.01% | 10.00% | 10.02% | 0.0020 | 0.0011 | 0.0000 | 0.0038 |
+| gleaner_no_ad | 44.719 | 35.887 | 0.730 | 95.611 | 0.7824 | 0.0835 | 0.5899 | 0.9101 | 10.00% | 0.03% | 9.90% | 10.02% | 0.0024 | 0.0023 | 0.0000 | 0.0091 |
+| gleaner_no_dpp | 0.607 | 0.073 | 0.516 | 0.813 | 0.7103 | 0.1043 | 0.4599 | 0.8447 | 10.01% | 0.01% | 10.00% | 10.02% | 0.0020 | 0.0011 | 0.0000 | 0.0038 |
+| gleaner_no_logs | 0.821 | 0.301 | 0.537 | 1.828 | 0.7652 | 0.0907 | 0.5802 | 0.8713 | 10.00% | 0.03% | 9.90% | 10.02% | 0.0024 | 0.0023 | 0.0000 | 0.0091 |
+| gleaner_no_logs_no_ad | 0.679 | 0.092 | 0.566 | 0.887 | 0.7287 | 0.0837 | 0.5466 | 0.8549 | 10.01% | 0.01% | 10.00% | 10.02% | 0.0020 | 0.0011 | 0.0000 | 0.0038 |
+| gleaner_no_rebalance | 0.995 | 0.189 | 0.713 | 1.334 | 0.8011 | 0.0875 | 0.5880 | 0.9101 | 10.01% | 0.01% | 10.00% | 10.02% | 0.0020 | 0.0011 | 0.0000 | 0.0038 |
+| gleaner_pure_diversity | 1.695 | 0.284 | 1.230 | 2.162 | 0.7164 | 0.0752 | 0.5379 | 0.8211 | 10.00% | 0.03% | 9.90% | 10.02% | 0.0024 | 0.0023 | 0.0000 | 0.0091 |
+| gleaner_top_score | 0.511 | 0.053 | 0.405 | 0.603 | 0.8183 | 0.0923 | 0.5967 | 0.9267 | 10.01% | 0.01% | 10.00% | 10.02% | 0.0020 | 0.0011 | 0.0000 | 0.0038 |
+| gleaner_wl_kernel | 6.660 | 6.373 | 2.101 | 23.688 | 0.6887 | 0.0971 | 0.4744 | 0.8234 | 10.01% | 0.01% | 10.00% | 10.02% | 0.0020 | 0.0011 | 0.0000 | 0.0038 |
 
 ## Metric Leaders
 
-- Runtime Per Trace Ms (lowest is best): gleaner_top_score (0.517)
-- Std Runtime Per Trace Ms (lowest is best): gleaner_top_score (0.050)
-- Min Runtime Per Trace Ms (lowest is best): gleaner_top_score (0.339)
-- Max Runtime Per Trace Ms (lowest is best): gleaner_top_score (0.787)
-- Benefit Cost Ratio (highest is best): gleaner_top_score (0.7813)
-- Std Benefit Cost Ratio (lowest is best): gleaner_pure_diversity (0.0663)
-- Min Benefit Cost Ratio (highest is best): gleaner_no_ad (0.4479)
+- Runtime Per Trace Ms (lowest is best): gleaner_top_score (0.511)
+- Std Runtime Per Trace Ms (lowest is best): gleaner_top_score (0.053)
+- Min Runtime Per Trace Ms (lowest is best): gleaner_top_score (0.405)
+- Max Runtime Per Trace Ms (lowest is best): gleaner_top_score (0.603)
+- Benefit Cost Ratio (highest is best): gleaner_top_score (0.8183)
+- Std Benefit Cost Ratio (lowest is best): gleaner_pure_diversity (0.0752)
+- Min Benefit Cost Ratio (highest is best): gleaner_top_score (0.5967)
 - Max Benefit Cost Ratio (highest is best): gleaner_top_score (0.9267)
-- Actual Sampling Rate (highest is best): gleaner_latency_dominate (10.00%)
-- Std Actual Sampling Rate (lowest is best): gleaner_latency_dominate (0.00%)
-- Min Actual Sampling Rate (highest is best): gleaner_latency_dominate (9.99%)
+- Actual Sampling Rate (highest is best): gleaner_latency_dominate (10.01%)
+- Std Actual Sampling Rate (lowest is best): gleaner_latency_dominate (0.01%)
+- Min Actual Sampling Rate (highest is best): gleaner_latency_dominate (10.00%)
 - Max Actual Sampling Rate (highest is best): gleaner_latency_dominate (10.02%)
-- Controllability (highest is best): gleaner_no_ad (0.0021)
-- Std Controllability (lowest is best): gleaner_latency_dominate (0.0008)
+- Controllability (highest is best): gleaner_no_ad (0.0024)
+- Std Controllability (lowest is best): gleaner_latency_dominate (0.0011)
 - Min Controllability (highest is best): gleaner_latency_dominate (0.0000)
-- Max Controllability (highest is best): gleaner_no_ad (0.0848)
+- Max Controllability (highest is best): gleaner_no_ad (0.0091)

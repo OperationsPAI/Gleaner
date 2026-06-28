@@ -1,0 +1,42 @@
+{
+    "benchmark": "clickhouse",
+    "created_at": "2025-07-19T13:50:47.727171Z",
+    "description": "Fault for task a24a71b4-e50f-4e31-9ff3-cdca742bfc2e",
+    "display_config": "{\"duration\":4,\"injection_point\":{\"app_name\":\"ts-basic-service\",\"method\":\"GET\",\"route\":\"/api/v1/stationservice/stations/id/*\",\"server_address\":\"ts-station-service\",\"server_port\":\"8080\"},\"namespace\":\"ts\",\"status_code\":9}",
+    "end_time": "2025-07-19T13:54:47Z",
+    "engine_config": "{\"name\":\"InjectionConf\",\"range\":[0,30],\"children\":{\"13\":{\"name\":\"13\",\"range\":[0,3],\"children\":{\"0\":{\"name\":\"0\",\"range\":[1,60],\"children\":null,\"description\":\"Time Unit Minute\",\"value\":4},\"1\":{\"name\":\"1\",\"range\":[0,0],\"children\":null,\"description\":\"{ts: 0}\",\"value\":0},\"2\":{\"name\":\"2\",\"range\":[0,67],\"children\":null,\"description\":\"Flattened HTTP Endpoint Index\",\"value\":10},\"3\":{\"name\":\"3\",\"range\":[0,9],\"children\":null,\"description\":\"HTTP Status Code to replace with\",\"value\":9}},\"description\":\"\",\"value\":0}},\"description\":\"\",\"value\":13}",
+    "fault_type": 13,
+    "ground_truth": {
+        "container": [
+            "ts-basic-service",
+            "ts-station-service"
+        ],
+        "function": null,
+        "metric": null,
+        "pod": [
+            "ts-basic-service-59885fb497-wgt2d",
+            "ts-station-service-6d584c8ff5-5kr2n"
+        ],
+        "service": [
+            "ts-basic-service",
+            "ts-station-service"
+        ],
+        "span": [
+            "ts-basic-service",
+            "ts-station-service"
+        ],
+        "additional_properties": {}
+    },
+    "id": 358,
+    "injection_name": "ts8-ts-basic-service-response-replace-code-w8c2xr",
+    "labels": {
+        "batch": "bootstrap",
+        "env": "prod"
+    },
+    "pre_duration": 4,
+    "start_time": "2025-07-19T13:50:48Z",
+    "status": 2,
+    "task_id": "a24a71b4-e50f-4e31-9ff3-cdca742bfc2e",
+    "updated_at": "2025-07-19T13:54:48.584855Z",
+    "additional_properties": {}
+}

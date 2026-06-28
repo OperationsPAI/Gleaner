@@ -16,11 +16,11 @@
 - Reduced RQ2 evidence: staged parquet inputs are under `data/artifact/reduced/rq2/`.
 - GPU: not required unless a baseline's original implementation is explicitly configured to use GPU.
 - Network: not required after the container/artifact and datasets have been obtained.
-- Expected runtime: the full reduced command, including reduced plot/report generation, completed on the local host in 4.31 seconds wall-clock time (`time -p bash scripts/run_reduced_all.sh`, 2026-06-28). Reviewers should budget under 5 minutes for this path on a typical x86_64 Linux machine, including environment startup variability.
+- Expected runtime: the full reduced command, including reduced plot/report generation, completed on the local host in 7.42 seconds wall-clock time (`time -p bash scripts/run_reduced_all.sh`, 2026-06-28). Reviewers should budget under 5 minutes for this path on a typical x86_64 Linux machine, including environment startup variability.
 - Reduced evidence manifest: `data/artifact/reduced/MANIFEST.json`.
 - Reduced evidence checksum list: `data/artifact/reduced/SHA256SUMS`.
 - Reduced evidence verification: `bash scripts/prepare_reduced_data.sh`.
-- Reduced manifest totals: 23 files, 513364 bytes. Scope is existing reduced evidence, expected outputs, and expected plot-data/report files, not raw full/reduced datapack directories.
+- Reduced manifest totals: 31 files, 587337 bytes. Scope is expected outputs, reduced20 RQ2 detailed/grouped RCA evidence, TracePicker Dataset B cross-system reduced evidence, a deterministic fault-balanced 20-datapack selection manifest, and source sampler reports used to regenerate reduced20 summaries.
 
 ## Validation And Tolerances
 
@@ -41,10 +41,10 @@
 ## Full Evaluation
 
 - Command: `bash scripts/run_full_all.sh`.
-- Current behavior: intentionally exits non-zero with a not-implemented/not-reviewer-verified message.
-- Current verification: not a runnable verified reproduction path in this artifact snapshot.
+- Current behavior: guarded long-running one-command orchestration with real sampling, RCA, figure/table, and postcondition phases; default execution exits non-zero unless `GLEANER_RUN_FULL=1` is set.
+- Current verification: command structure, environment preflight, guards, and postcondition checks are verified; full multi-day execution is not run as part of the reduced AE path.
 - Intended future scope: full TracePicker dataset plus full Gleaner dataset.
-- Expected runtime and storage: substantially larger than the reduced evaluation; exact numbers will be added only after implementation and benchmarking.
+- Expected runtime and storage: substantially larger than the reduced evaluation; full paper reproduction includes the main uv workspace for Gleaner, Nezha, ShapleyIQ/MicroRCA, and TraStrainer/Sifter/Sieve, an isolated Python 3.12 TracePicker environment, full Dataset A, Dataset B cross-system sampler reports, RCA runs, and figure/table regeneration. It may take multiple days depending on CPU count and machine configuration.
 - Reviewer guidance: use `bash scripts/run_reduced_all.sh` as the verified RQ1-RQ4 AE reproduction path.
 
 ## Packaging And Archive

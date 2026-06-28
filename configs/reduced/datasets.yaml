@@ -1,10 +1,30 @@
 # Reduced AE dataset plan.
-# The TracePicker dataset is used in full. The Gleaner dataset is reduced to a fixed list of 10 datapacks.
+# Gleaner dataset A uses a deterministic fault-balanced 20-datapack subset.
 tracepicker:
   split: full
   path: data/rcabench-platform-v2/data/tracepicker
 gleaner:
-  split: reduced_10_datapacks
+  split: reduced_20_fault_balanced_datapacks
   path: data/rcabench-platform-v2/data/gleaner
+  selection_manifest: configs/reduced/reduced20_datapacks.json
   datapacks:
-    # TODO: fill with 10 representative datapack directory names.
+    - ts0-ts-basic-service-response-delay-5krk58  # response-delay
+    - ts0-ts-seat-service-request-delay-tcwh2k  # request-delay
+    - ts0-ts-security-service-request-replace-method-j6gpxx  # replace-method
+    - ts1-ts-order-service-return-ntc7dv  # return
+    - ts1-ts-preserve-service-delay-w7zb74  # delay
+    - ts2-ts-basic-service-latency-ndg28l  # latency
+    - ts2-ts-basic-service-response-delay-8s6m54  # response-delay
+    - ts2-ts-inside-payment-service-exception-b4n728  # exception
+    - ts3-ts-food-service-response-replace-body-mn5pkz  # replace-body
+    - ts3-ts-travel-plan-service-request-delay-2xpd97  # request-delay
+    - ts4-ts-basic-service-request-abort-pxcfsp  # other
+    - ts4-ts-security-service-corrupt-9lndmd  # corrupt
+    - ts5-ts-order-service-partition-x8xglz  # partition
+    - ts5-ts-preserve-service-stress-845w52  # stress
+    - ts5-ts-station-service-container-kill-c99ccx  # container-kill
+    - ts6-ts-basic-service-delay-6v4trr  # delay
+    - ts7-ts-seat-service-stress-tzxh2f  # stress
+    - ts8-ts-basic-service-response-replace-code-w8c2xr  # replace-code
+    - ts9-ts-order-service-container-kill-bsh6lx  # container-kill
+    - ts9-ts-travel-plan-service-loss-nr7g2b  # loss

@@ -1,0 +1,10 @@
+{
+    "normal_start_time": "2024-07-21 07:47:28.586841+00:00",
+    "normal_end_time": "2024-07-21 08:48:34.415591+00:00",
+    "abnormal_start_time": "2024-07-21 08:48:34.415591+00:00",
+    "abnormal_end_time": "2024-07-21 08:48:34.415591+00:00",
+    "injection_name": "none",
+    "fault_type": "none",
+    "data_type": "normal_only",
+    "source": "tracepicker"
+}

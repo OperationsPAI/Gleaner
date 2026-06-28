@@ -1,0 +1,33 @@
+{
+    "benchmark": "clickhouse",
+    "created_at": "2025-09-02T17:16:47.198Z",
+    "description": "Fault for task 077fd40e-a7f1-4bd2-9ee7-5683ea05a158",
+    "display_config": "{\"duration\":4,\"injection_point\":{\"app_name\":\"ts-order-service\",\"class_name\":\"order.entity.Order\",\"method_name\":\"hashCode\"},\"namespace\":\"ts\",\"return_type\":1,\"return_value_opt\":1}",
+    "end_time": "2025-09-02T17:20:47Z",
+    "engine_config": "{\"name\":\"InjectionConf\",\"range\":[0,30],\"children\":{\"24\":{\"name\":\"24\",\"range\":[0,4],\"children\":{\"0\":{\"name\":\"0\",\"range\":[1,60],\"children\":null,\"description\":\"Time Unit Minute\",\"value\":4},\"1\":{\"name\":\"1\",\"range\":[0,0],\"children\":null,\"description\":\"{ts: 0}\",\"value\":0},\"2\":{\"name\":\"2\",\"range\":[0,887],\"children\":null,\"description\":\"Flattened app+method index\",\"value\":454},\"3\":{\"name\":\"3\",\"range\":[1,2],\"children\":null,\"description\":\"Return Type (1=String, 2=Int)\",\"value\":1},\"4\":{\"name\":\"4\",\"range\":[0,1],\"children\":null,\"description\":\"Return value option (0=Default, 1=Random)\",\"value\":1}},\"description\":\"\",\"value\":0}},\"description\":\"\",\"value\":24}",
+    "fault_type": 24,
+    "ground_truth": {
+        "container": [
+            "ts-order-service"
+        ],
+        "function": [
+            "order.entity.Order.hashCode"
+        ],
+        "metric": null,
+        "pod": [
+            "ts-order-service-56b9db98d8-gswlq"
+        ],
+        "service": [
+            "ts-order-service"
+        ],
+        "span": null
+    },
+    "id": 7983,
+    "injection_name": "ts1-ts-order-service-return-ntc7dv",
+    "pre_duration": 4,
+    "start_time": "2025-09-02T17:16:52Z",
+    "status": 2,
+    "task": null,
+    "task_id": "077fd40e-a7f1-4bd2-9ee7-5683ea05a158",
+    "updated_at": "2025-09-02T17:20:53.114Z"
+}

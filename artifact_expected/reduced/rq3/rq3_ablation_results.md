@@ -2,7 +2,7 @@
 
 ## Configuration
 
-- Input parquet: `output/rcabench-platform-v2/sampler_reports/gleaner/aggregated_perf.parquet`
+- Input parquet: `output/rcabench-platform-v2/sampler_reports/gleaner_reduced20/aggregated_perf.parquet`
 - Output directory: `output/artifact/reduced/rq3`
 - Mode: `offline`
 - Excluded sampling rates: `0.005`
@@ -13,25 +13,25 @@
 
 | Sampler | Display Name | Sample Rate Count | API Coverage | Unique Trace Coverage | Shannon Entropy | Proportion Anomaly | Path Coverage Dedup | Benefit-Cost Ratio |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| gleaner_latency_dominate | Gleaner Latency-Dominant | 2 | 0.9936 | 0.2144 | 7.4328 | 0.1121 | 0.8922 | 0.8165 |
-| gleaner_log_dominate | Gleaner Log-Dominant | 2 | 0.9936 | 0.2153 | 7.4374 | 0.1121 | 0.8880 | 0.8181 |
-| gleaner_no_ad | Gleaner w/o AD | 2 | 0.9933 | 0.2193 | 7.5133 | 0.0714 | 0.8944 | 0.8312 |
-| gleaner_no_dpp | Gleaner w/o DPP | 2 | 0.9966 | 0.1917 | 7.2504 | 0.1065 | 0.8513 | 0.7747 |
-| gleaner_no_logs | Gleaner w/o Logs | 2 | 0.9947 | 0.2100 | 7.4044 | 0.1077 | 0.8875 | 0.8070 |
-| gleaner_no_logs_no_ad | Gleaner w/o Logs + AD | 2 | 0.9947 | 0.2044 | 7.3932 | 0.0740 | 0.9082 | 0.7961 |
-| gleaner_no_rebalance | Gleaner w/o Rebalance | 2 | 0.9967 | 0.2210 | 7.4991 | 0.1009 | 0.8956 | 0.8362 |
-| gleaner_pure_diversity | Gleaner Pure Diversity | 2 | 0.8077 | 0.1823 | 6.7227 | 0.0176 | 0.6601 | 0.5751 |
-| gleaner_top_score | Gleaner Top Score | 2 | 0.4795 | 0.2275 | 7.5940 | 0.1446 | 0.5199 | 0.8690 |
-| gleaner_wl_kernel | Gleaner WL Kernel | 2 | 0.9967 | 0.1874 | 7.1623 | 0.0981 | 0.8958 | 0.7641 |
+| gleaner_latency_dominate | Gleaner Latency-Dominant | 2 | 0.9541 | 0.2085 | 6.7167 | 0.1261 | 0.8438 | 0.8476 |
+| gleaner_log_dominate | Gleaner Log-Dominant | 2 | 0.9541 | 0.2092 | 6.7206 | 0.1261 | 0.8392 | 0.8490 |
+| gleaner_no_ad | Gleaner w/o AD | 2 | 0.9497 | 0.2099 | 6.7418 | 0.0924 | 0.8244 | 0.8500 |
+| gleaner_no_dpp | Gleaner w/o DPP | 2 | 0.9757 | 0.1926 | 6.6340 | 0.1153 | 0.8036 | 0.8259 |
+| gleaner_no_logs | Gleaner w/o Logs | 2 | 0.9599 | 0.2057 | 6.7094 | 0.1278 | 0.8400 | 0.8396 |
+| gleaner_no_logs_no_ad | Gleaner w/o Logs + AD | 2 | 0.9620 | 0.1975 | 6.6571 | 0.0981 | 0.8537 | 0.8230 |
+| gleaner_no_rebalance | Gleaner w/o Rebalance | 2 | 0.9778 | 0.2151 | 6.7869 | 0.1090 | 0.8577 | 0.8679 |
+| gleaner_pure_diversity | Gleaner Pure Diversity | 2 | 0.7877 | 0.1849 | 6.2084 | 0.0210 | 0.6617 | 0.6567 |
+| gleaner_top_score | Gleaner Top Score | 2 | 0.4616 | 0.2195 | 6.8468 | 0.2172 | 0.4913 | 0.8912 |
+| gleaner_wl_kernel | Gleaner WL Kernel | 2 | 0.9768 | 0.1870 | 6.5415 | 0.1076 | 0.8572 | 0.8081 |
 
 ## Best Per Metric
 
-- API Coverage (higher is better): Gleaner WL Kernel (0.9967)
-- Unique Trace Coverage (higher is better): Gleaner Top Score (0.2275)
-- Shannon Entropy (higher is better): Gleaner Top Score (7.5940)
-- Proportion Anomaly (higher is better): Gleaner Top Score (0.1446)
-- Path Coverage Dedup (higher is better): Gleaner w/o Logs + AD (0.9082)
-- Benefit-Cost Ratio (higher is better): Gleaner Top Score (0.8690)
+- API Coverage (higher is better): Gleaner w/o Rebalance (0.9778)
+- Unique Trace Coverage (higher is better): Gleaner Top Score (0.2195)
+- Shannon Entropy (higher is better): Gleaner Top Score (6.8468)
+- Proportion Anomaly (higher is better): Gleaner Top Score (0.2172)
+- Path Coverage Dedup (higher is better): Gleaner w/o Rebalance (0.8577)
+- Benefit-Cost Ratio (higher is better): Gleaner Top Score (0.8912)
 
 ## Notes
 

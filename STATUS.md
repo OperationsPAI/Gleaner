@@ -12,26 +12,28 @@ Current functional evidence:
 - Each reduced RQ wrapper invokes `scripts/compare_expected.py` to validate expected vs actual outputs.
 - The reduced plot wrapper validates non-empty PNGs and compares plot-data/report files with `scripts/compare_expected.py`; image bytes are not compared.
 - `scripts/run_reduced_all.sh` is reviewer-verified as passing end to end in the current reduced state.
-- Reduced RQ2 RCA evidence is committed under `data/artifact/reduced/rq2/`.
+- Reduced20 RQ2 RCA evidence is committed under `data/artifact/reduced/rq2/`; it is filtered from prior per-datapack Nezha/ShapleyIQ/MicroRCA detailed outputs to the same 20-datapack subset.
+- Gleaner Dataset A reduced mode now regenerates sampler summaries from a deterministic fault-balanced 20-datapack subset recorded in `configs/reduced/reduced20_datapacks.json`.
+- Reduced RQ1-B Dataset B cross-system evidence is generated from committed portable TracePicker five-system summary evidence by default, with raw CSV regeneration supported when available; full cross-baseline Dataset B sampler comparison is reserved for the full pipeline.
 - Reduced manifest/checksum verification is provided by `data/artifact/reduced/MANIFEST.json`, `data/artifact/reduced/SHA256SUMS`, and `scripts/prepare_reduced_data.sh`.
 - Host smoke testing has passed.
 - Docker image build has passed with `docker build -t gleaner-issta2026-ae .`.
 - Container smoke testing has passed with `docker run --rm gleaner-issta2026-ae bash scripts/smoke_test.sh`.
 - Container reduced reproduction has passed with `docker run --rm gleaner-issta2026-ae bash scripts/run_reduced_all.sh`.
 - Local release/archive packaging is implemented by `scripts/package_artifact.sh`; it generates a HEAD-derived tarball, internal manifest, and external SHA-256 checksum for local verification.
-- The reduced path is CPU-only compatible: it runs with `CUDA_VISIBLE_DEVICES='' bash scripts/run_reduced_all.sh`.
+- The reduced path is CPU-only compatible: it runs with `CUDA_VISIBLE_DEVICES='' bash scripts/run_reduced_all.sh`. The one-command path prints phase banners and compact RQ result tables.
 - Third-party submodule pins, license-file evidence, public URL reachability, smoke-test coverage, and reduced-scope dependency risks are documented in `docs/THIRD_PARTY.md`.
 
 Still open before claiming a final functional artifact:
 
-- Full path is intentionally not final or reviewer-verified; `scripts/run_full_all.sh` is guarded to fail non-zero instead of succeeding as a placeholder.
+- Full path is documented and implemented as a guarded long-running paper-reproduction orchestration via `configs/full/experiment_setting.yaml` and `scripts/run_full_all.sh`; it requires `GLEANER_RUN_FULL=1`, rejects placeholder success, validates postconditions, and may take multiple days depending on CPU count, raw datasets, and the isolated TracePicker environment.
 - Public archive upload, DOI minting, and HotCRP artifact link submission are not prepared or performed.
 
 ## Artifacts Evaluated - Reusable
 
 The reduced command entry points, expected-output validation, schema notes, claim mapping, reduced illustrative plots, final report, and new-datapack reuse guidance are documented in `ARTIFACT_README.md`. The reusable scope is the reduced/offline artifact path: users can regenerate RQ summaries from compatible sampler-report and RCA parquet inputs, inspect expected-output comparisons, generate reduced illustrative plots/reports from summary CSVs, and extend baseline/RCA adapters by producing the documented report schemas. Full-dataset orchestration, exact full-paper figure reproduction, and full baseline environment integration remain outside the reviewer-verified scope.
 
-Third-party reuse status is evidence-based in `docs/THIRD_PARTY.md`: ShapleyIQ and Nezha include license files in the vendored tree; TracePicker and TraStrainer do not include license files in the vendored snapshot and therefore remain unknown pending upstream/project-owner confirmation. Configured submodule URLs are reachable via public `git ls-remote` checks, but full third-party component execution remains outside the reduced reviewer-verified scope because TracePicker and TraStrainer have conflicting or heavy environment requirements.
+Third-party reuse status is evidence-based in `docs/THIRD_PARTY.md`: ShapleyIQ and Nezha include license files in the vendored tree; TracePicker and TraStrainer do not include license files in the vendored snapshot and therefore remain unknown pending upstream/project-owner confirmation. Configured submodule URLs are reachable via public `git ls-remote` checks. Nezha, ShapleyIQ/MicroRCA, and TraStrainer/Sifter/Sieve now match the main uv workspace dependency stack; TracePicker remains isolated because it requires Python 3.12 and CUDA-oriented wheels.
 
 ## Artifacts Available
 

@@ -1,0 +1,42 @@
+{
+    "benchmark": "clickhouse",
+    "created_at": "2025-07-24T09:33:35.039588Z",
+    "description": "Fault for task c69596f2-7965-4dd5-b7b7-4fd6b37631ea",
+    "display_config": "{\"body_type\":1,\"duration\":4,\"injection_point\":{\"app_name\":\"ts-food-service\",\"method\":\"GET\",\"route\":\"/api/v1/travelservice/routes/*\",\"server_address\":\"ts-travel-service\",\"server_port\":\"8080\"},\"namespace\":\"ts\"}",
+    "end_time": "2025-07-24T09:37:35Z",
+    "engine_config": "{\"name\":\"InjectionConf\",\"range\":[0,30],\"children\":{\"9\":{\"name\":\"9\",\"range\":[0,3],\"children\":{\"0\":{\"name\":\"0\",\"range\":[1,60],\"children\":null,\"description\":\"Time Unit Minute\",\"value\":4},\"1\":{\"name\":\"1\",\"range\":[0,0],\"children\":null,\"description\":\"{ts: 0}\",\"value\":0},\"2\":{\"name\":\"2\",\"range\":[0,67],\"children\":null,\"description\":\"Flattened HTTP Endpoint Index\",\"value\":16},\"3\":{\"name\":\"3\",\"range\":[0,1],\"children\":null,\"description\":\"Body Type (0=Empty, 1=Random)\",\"value\":1}},\"description\":\"\",\"value\":0}},\"description\":\"\",\"value\":9}",
+    "fault_type": 9,
+    "ground_truth": {
+        "container": [
+            "ts-food-service",
+            "ts-travel-service"
+        ],
+        "function": null,
+        "metric": null,
+        "pod": [
+            "ts-food-service-5c89cbd9b6-gdnkv",
+            "ts-travel-service-669d7cb98b-mmb45"
+        ],
+        "service": [
+            "ts-food-service",
+            "ts-travel-service"
+        ],
+        "span": [
+            "ts-food-service",
+            "ts-travel-service"
+        ],
+        "additional_properties": {}
+    },
+    "id": 2247,
+    "injection_name": "ts3-ts-food-service-response-replace-body-mn5pkz",
+    "labels": {
+        "batch": "guided",
+        "env": "prod"
+    },
+    "pre_duration": 4,
+    "start_time": "2025-07-24T09:33:35Z",
+    "status": 2,
+    "task_id": "c69596f2-7965-4dd5-b7b7-4fd6b37631ea",
+    "updated_at": "2025-07-24T09:37:35.535556Z",
+    "additional_properties": {}
+}
