@@ -23,6 +23,8 @@ test/
 plots/
 # Artifact evidence exceptions
 !data/
+!data/rcabench_dataset/**/*.parquet
+!data/rcabench-platform-v2/**/*.parquet
 !data/artifact/
 !data/artifact/reduced/
 !data/artifact/reduced/**
