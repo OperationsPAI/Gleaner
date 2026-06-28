@@ -250,7 +250,7 @@ class TracePickerDatasetLoader(DatasetLoader):
 @app.command()
 def local_test():
     """Test the conversion functions with sockshop sample data."""
-    sockshop_traces = Path("tracepicker/sockshop/traces_spans.csv")
+    sockshop_traces = Path("data/tracepicker/sockshop/traces_spans.csv")
 
     if not sockshop_traces.exists():
         logger.error(f"Test file not found: {sockshop_traces}")
@@ -273,7 +273,7 @@ def local_test():
 
 @app.command()
 @timeit()
-def run(src_folder: str = "tracepicker", dataset_name: str = "tracepicker"):
+def run(src_folder: str = "data/tracepicker", dataset_name: str = "tracepicker"):
     """Convert TracePicker dataset to RCABench format.
 
     Args:

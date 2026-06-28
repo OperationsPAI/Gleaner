@@ -12,6 +12,7 @@ Baseline samplers are not all installed into the same Python environment:
 - ShapleyIQ/MicroRCA lives in `third_party/ShapleyIQ` and is included as a uv workspace member.
 - TraStrainer, Sifter, and Sieve live in `third_party/TraStrainer` and are included as a uv workspace member because the updated submodule uses Python `>=3.13` and `rcabench-platform==0.4.1`.
 - TracePicker lives in `third_party/TracePicker` and remains excluded from the workspace because it requires Python `==3.12.*` plus CUDA-oriented `torch`, `dgl`, and `geatpy` wheels.
+- The shared platform runtime lives in `platform/rcabench-platform` and is used by the main uv workspace as an editable `rcabench-platform==0.4.1` source.
 
 Check the baseline environment split with:
 

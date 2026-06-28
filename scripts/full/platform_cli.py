@@ -28,6 +28,7 @@ for path in [
         sys.path.insert(0, str(path))
 
 from rcabench_platform.v2.algorithms.spec import global_algorithm_registry
+from rcabench_platform.v2.algorithms.random_ import Random
 from rcabench_platform.v2.cli import eval as eval_cli
 from rcabench_platform.v2.cli import sample as sample_cli
 from rcabench_platform.v2.logging import logger
@@ -88,7 +89,10 @@ def register_samplers() -> None:
     )
 
     # Registers trastrainer, trastrainer_no_metrics, sifter, sieve, and wt.
-    import trastrainer.register_samplers  # noqa: F401
+    try:
+        import trastrainer.register_samplers  # noqa: F401
+    except ImportError as exc:
+        logger.warning(f"Skipping optional TraStrainer samplers: {exc}")
 
 
 def register_algorithms() -> None:
@@ -98,6 +102,7 @@ def register_algorithms() -> None:
     registry = global_algorithm_registry()
     registry.update(
         {
+            "random": Random,
             "microrca": MicroRCA,
             "shapleyiq": ShapleyRCA,
             "nezha": NezhaAlgorithm,

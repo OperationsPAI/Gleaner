@@ -1,0 +1,4 @@
+interface:
+  display_name: "Gleaner New Inputs"
+  short_description: "Convert TracePicker or raw OTel inputs into Gleaner datasets."
+  default_prompt: "Adapt a new input dataset for Gleaner."

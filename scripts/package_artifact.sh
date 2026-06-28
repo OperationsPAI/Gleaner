@@ -33,6 +33,9 @@ REQUIRED_PATHS=(
   "src"
   "scripts"
   "configs"
+  "agent_skills/gleaner-new-inputs/SKILL.md"
+  "agent_skills/gleaner-sampler/SKILL.md"
+  "agent_skills/gleaner-rca/SKILL.md"
   "docs"
   "artifact_expected/reduced"
   "data/artifact/reduced/MANIFEST.json"
@@ -46,6 +49,9 @@ THIRD_PARTY_DIRS=(
   "third_party/ShapleyIQ"
   "third_party/TracePicker"
   "third_party/TraStrainer"
+)
+PLATFORM_DIRS=(
+  "platform/rcabench-platform"
 )
 
 copy_path() {
@@ -106,6 +112,16 @@ for rel in "${THIRD_PARTY_DIRS[@]}"; do
     exit 1
   fi
 done
+for rel in "${PLATFORM_DIRS[@]}"; do
+  if [[ ! -d "${ROOT}/${rel}" ]]; then
+    printf 'ERROR: required platform directory is missing: %s\n' "${rel}" >&2
+    exit 1
+  fi
+  if ! find "${ROOT}/${rel}" -mindepth 1 ! -name '.git' -print -quit | grep -q .; then
+    printf 'ERROR: required platform directory is empty: %s\n' "${rel}" >&2
+    exit 1
+  fi
+done
 
 if ! command -v sha256sum >/dev/null 2>&1; then
   printf 'ERROR: sha256sum is required to generate checksums.\n' >&2
@@ -136,7 +152,7 @@ TOP_LEVEL_FILES=(
   ".gitmodules"
   "main.py"
 )
-TOP_LEVEL_DIRS=("src" "scripts" "configs" "docs")
+TOP_LEVEL_DIRS=("src" "scripts" "configs" "docs" "agent_skills")
 
 for rel in "${TOP_LEVEL_FILES[@]}"; do
   [[ -e "${ROOT}/${rel}" ]] && copy_path "${rel}"
@@ -148,6 +164,9 @@ done
 copy_path "artifact_expected/reduced"
 copy_path "data/artifact/reduced"
 for rel in "${THIRD_PARTY_DIRS[@]}"; do
+  copy_path "${rel}"
+done
+for rel in "${PLATFORM_DIRS[@]}"; do
   copy_path "${rel}"
 done
 
@@ -209,7 +228,11 @@ require_absent_regex() {
 
 require_in_archive "ARTIFACT_README.md"
 require_in_archive "ARCHIVE_MANIFEST.tsv"
+require_in_archive "agent_skills/gleaner-new-inputs/SKILL.md"
+require_in_archive "agent_skills/gleaner-sampler/SKILL.md"
+require_in_archive "agent_skills/gleaner-rca/SKILL.md"
 require_in_archive "third_party/Nezha/"
+require_in_archive "platform/rcabench-platform/"
 require_in_archive "data/artifact/reduced/MANIFEST.json"
 require_in_archive "data/artifact/reduced/rq1/gleaner_source.aggregated_perf.parquet"
 require_in_archive "data/artifact/reduced/rq1/gleaner_source.detailed_perf.parquet"

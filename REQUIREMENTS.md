@@ -5,7 +5,7 @@
 - Architecture: x86_64 Linux.
 - Container runtime: Docker 24+ recommended for the verified container path; Podman 4+ may work but has not been separately verified.
 - Python: the Gleaner artifact runner uses Python 3.13.
-- Core platform dependency: `rcabench-platform==0.4.1`.
+- Core platform dependency: `rcabench-platform==0.4.1`, resolved from the editable submodule at `platform/rcabench-platform`.
 
 ## Reduced Evaluation
 
@@ -36,7 +36,7 @@
 
 - If `scripts/prepare_reduced_data.sh` reports a checksum or size mismatch, restore the reduced files listed in `data/artifact/reduced/MANIFEST.json` before rerunning experiments.
 - If an expected-output comparison fails, inspect the reported JSON path, CSV row/column, or Markdown unified diff; generated outputs remain under `output/artifact/reduced/`.
-- If the smoke test reports skipped SHA verification, the run is likely from an archive or container without `.git`; this is expected only when `third_party/` directories are present and non-empty.
+- If the smoke test reports skipped SHA verification, the run is likely from an archive or container without `.git`; this is expected only when `third_party/` directories and `platform/rcabench-platform` are present and non-empty.
 
 ## Full Evaluation
 

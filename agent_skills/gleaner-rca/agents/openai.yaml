@@ -1,0 +1,4 @@
+interface:
+  display_name: "Gleaner RCA"
+  short_description: "Add, run, and validate RCA algorithms for Gleaner."
+  default_prompt: "Add or validate a Gleaner RCA algorithm."

@@ -35,13 +35,15 @@ if git -C . rev-parse --git-dir >/dev/null 2>&1; then
   check_sha third_party/Nezha f0de4db8123a566e13c5fcfe6ac0d9137009f99a
   check_sha third_party/TracePicker ca049d2a69e740df8fc1e034ebee3a87c1664245
   check_sha third_party/TraStrainer 225e9e956432ed5254bce0d59718720d6b829451
+  check_sha platform/rcabench-platform efd9e06688b70ff0b5e7a2d1821fd63c068ff6c4
 else
-  echo "[smoke] Git metadata unavailable; skipping strict third_party SHA verification."
-  echo "[smoke] Verifying third_party directories exist and are non-empty instead."
+  echo "[smoke] Git metadata unavailable; skipping strict submodule SHA verification."
+  echo "[smoke] Verifying vendored component directories exist and are non-empty instead."
   check_present third_party/ShapleyIQ
   check_present third_party/Nezha
   check_present third_party/TracePicker
   check_present third_party/TraStrainer
+  check_present platform/rcabench-platform
 fi
 
 echo "[smoke] verifying Python imports"

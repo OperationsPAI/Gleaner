@@ -37,7 +37,7 @@ The archive is built from a temporary staging directory, so `dist/` is never cop
 - Reduced expected outputs: `artifact_expected/reduced/`.
 - Reduced data evidence: `data/artifact/reduced/`.
 - Reduced Gleaner sampler parquet reports used by the artifact: `output/rcabench-platform-v2/sampler_reports/gleaner/aggregated_perf.parquet` and `output/rcabench-platform-v2/sampler_reports/gleaner/detailed_perf.parquet`.
-- Actual file contents for the four third-party component directories under `third_party/`, excluding their `.git` metadata.
+- Actual file contents for the four third-party component directories under `third_party/`, plus `platform/rcabench-platform`, excluding their `.git` metadata.
 
 The package intentionally excludes `.git`, `.venv`, Python/tool caches, temporary/build/dist directories, generated `output/artifact/` results, raw/full data, and local untracked parquet leftovers outside the explicit reduced sampler report paths.
 
@@ -67,6 +67,7 @@ test -s dist/*.tar.gz
 test -s dist/*.sha256
 tar -tzf dist/*.tar.gz | grep -Fx ARTIFACT_README.md
 tar -tzf dist/*.tar.gz | grep -Fx third_party/Nezha/
+tar -tzf dist/*.tar.gz | grep -Fx platform/rcabench-platform/
 tar -tzf dist/*.tar.gz | grep -Fx data/artifact/reduced/MANIFEST.json
 tar -tzf dist/*.tar.gz | grep -Fx output/rcabench-platform-v2/sampler_reports/gleaner/aggregated_perf.parquet
 ! tar -tzf dist/*.tar.gz | grep -E '(^|/)\.git(/|$)'

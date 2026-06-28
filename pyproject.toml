@@ -30,7 +30,7 @@ exclude = [ #
 ]
 
 [tool.uv.sources]
-rcabench-platform = { path = "third_party/rcabench-platform", editable = true }
+rcabench-platform = { path = "platform/rcabench-platform", editable = true }
 
 [tool.uv.workspace]
 members = [

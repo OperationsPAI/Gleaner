@@ -782,7 +782,7 @@ dev = [
 requires-dist = [
     { name = "matplotlib", specifier = ">=3.10.5" },
     { name = "polars", specifier = ">=1.31.0" },
-    { name = "rcabench-platform", editable = "third_party/rcabench-platform" },
+    { name = "rcabench-platform", editable = "platform/rcabench-platform" },
 ]
 
 [package.metadata.requires-dev]
@@ -1971,7 +1971,7 @@ dev = [
 requires-dist = [
     { name = "polars", specifier = ">=0.20.0" },
     { name = "pyarrow", specifier = ">=20.0.0" },
-    { name = "rcabench-platform", editable = "third_party/rcabench-platform" },
+    { name = "rcabench-platform", editable = "platform/rcabench-platform" },
 ]
 
 [package.metadata.requires-dev]
@@ -3041,7 +3041,7 @@ wheels = [
 [[package]]
 name = "rcabench-platform"
 version = "0.4.1"
-source = { editable = "third_party/rcabench-platform" }
+source = { editable = "platform/rcabench-platform" }
 dependencies = [
     { name = "altair" },
     { name = "clickhouse-connect" },
@@ -3522,7 +3522,7 @@ requires-dist = [
     { name = "matplotlib" },
     { name = "numpy" },
     { name = "pandas" },
-    { name = "rcabench-platform", editable = "third_party/rcabench-platform" },
+    { name = "rcabench-platform", editable = "platform/rcabench-platform" },
     { name = "rich", specifier = ">=13.0.0" },
     { name = "scikit-learn" },
     { name = "scipy" },
@@ -3882,7 +3882,7 @@ requires-dist = [
     { name = "numpy" },
     { name = "pandas" },
     { name = "polars", specifier = ">=1.31.0" },
-    { name = "rcabench-platform", editable = "third_party/rcabench-platform" },
+    { name = "rcabench-platform", editable = "platform/rcabench-platform" },
     { name = "rich", specifier = ">=13.0.0" },
     { name = "scikit-learn" },
     { name = "torch" },

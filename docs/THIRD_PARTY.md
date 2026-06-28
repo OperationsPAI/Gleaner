@@ -1,6 +1,6 @@
 # Third-party Components
 
-The artifact vendors baseline samplers and RCA algorithms as git submodules pinned to the exact commits used by the AE workspace. These repositories are included in the local archive as file contents, not as bare gitlinks, so reviewers can inspect the referenced code from the package.
+The artifact vendors baseline samplers and RCA algorithms as git submodules pinned to the exact commits used by the AE workspace. It also includes the shared `rcabench-platform` runtime as a first-class platform submodule under `platform/`. These repositories are included in the local archive as file contents, not as bare gitlinks, so reviewers can inspect the referenced code from the package.
 
 ## Pinned Sources And Access Checks
 
@@ -12,8 +12,9 @@ The public URL checks below were performed with non-mutating `git ls-remote <url
 | Nezha | RCA: Nezha | https://github.com/LGU-SE-Internal/Nezha.git | `f0de4db8123a566e13c5fcfe6ac0d9137009f99a` | OK, 8 refs visible | `7b048e7a7fdb2c1237ad7d442f9ada9f929a8ae8` | Pinned to the reviewed submodule commit, not the remote default HEAD. |
 | TracePicker | Baseline sampler | https://github.com/LGU-SE-Internal/TracePicker.git | `ca049d2a69e740df8fc1e034ebee3a87c1664245` | OK, 3 refs visible | `ca049d2a69e740df8fc1e034ebee3a87c1664245` | Pinned commit matches remote HEAD observed during the check. |
 | TraStrainer | Baseline samplers: TraStrainer, Sieve, Sifter | https://github.com/LGU-SE-Internal/TraStrainer.git | `225e9e956432ed5254bce0d59718720d6b829451` | OK, 5 refs visible | `225e9e956432ed5254bce0d59718720d6b829451` | Pinned commit matches remote HEAD observed during the check. |
+| rcabench-platform | Shared RCA/sampling runtime platform | https://github.com/OperationsPAI/rcabench-platform.git | `efd9e06688b70ff0b5e7a2d1821fd63c068ff6c4` | OK, 216 refs visible | `a14339077215690d895305e8898201ca6683cad8` | Pinned to the `v0.4.1` tag and placed under `platform/rcabench-platform`. |
 
-The local submodule pin smoke test in `scripts/smoke_test.sh` checks these exact commits when Git metadata is available. In archive/container contexts without `.git`, it checks that each `third_party/` directory exists and is non-empty, then clearly reports that strict SHA verification was skipped.
+The local submodule pin smoke test in `scripts/smoke_test.sh` checks these exact commits when Git metadata is available. In archive/container contexts without `.git`, it checks that each `third_party/` directory and `platform/rcabench-platform` exist and are non-empty, then clearly reports that strict SHA verification was skipped.
 
 ## License File Evidence
 
@@ -31,7 +32,7 @@ License status is based only on files present in the vendored submodule director
 `scripts/smoke_test.sh` is intentionally a fast artifact smoke test, not a full third-party component test suite. It verifies:
 
 - exact submodule SHAs in a Git checkout;
-- non-empty `third_party/` directories in archive/container contexts where `.git` is unavailable;
+- non-empty `third_party/` directories and `platform/rcabench-platform` in archive/container contexts where `.git` is unavailable;
 - importability of the local `gleaner` package;
 - installed `rcabench-platform` package metadata.
 

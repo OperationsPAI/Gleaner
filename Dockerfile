@@ -16,12 +16,14 @@ COPY src ./src
 COPY main.py ./main.py
 COPY scripts ./scripts
 COPY configs ./configs
+COPY agent_skills ./agent_skills
 COPY artifact_expected ./artifact_expected
 COPY data/artifact ./data/artifact
 COPY output/rcabench-platform-v2/sampler_reports/gleaner ./output/rcabench-platform-v2/sampler_reports/gleaner
 COPY docs ./docs
 COPY ARTIFACT_README.md REQUIREMENTS.md STATUS.md ./
 COPY third_party ./third_party
+COPY platform ./platform
 
 RUN uv sync --locked
 

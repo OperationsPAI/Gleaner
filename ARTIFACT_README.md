@@ -30,7 +30,7 @@ uv sync --locked
 bash scripts/smoke_test.sh
 ```
 
-The smoke test verifies pinned submodule versions when Git metadata is available. In Docker/archive contexts without `.git`, it verifies the `third_party/` directories exist and are non-empty and clearly reports that SHA verification is skipped. The Python environment and artifact runner imports are also checked.
+The smoke test verifies pinned submodule versions when Git metadata is available. In Docker/archive contexts without `.git`, it verifies the `third_party/` component directories and `platform/rcabench-platform` exist and are non-empty, then clearly reports that SHA verification is skipped. The Python environment and artifact runner imports are also checked.
 
 
 ## Docker Path
@@ -164,6 +164,8 @@ The combined reduced path regenerates the 20-datapack sampler summaries, then ru
 
 ## Reuse Guide For New Datapacks
 
+Detailed reusable workflows are documented in `docs/new-inputs.md`, `docs/extending.md`, and `docs/troubleshooting.md`. Agent-oriented workflows are split by purpose in `agent_skills/gleaner-new-inputs/SKILL.md`, `agent_skills/gleaner-sampler/SKILL.md`, and `agent_skills/gleaner-rca/SKILL.md`.
+
 1. Prepare compatible sampler reports for the new datapacks. For RQ1/RQ3/RQ4, write `aggregated_perf.parquet` and, for RQ1, `detailed_perf.parquet` with the schema described above. The default committed examples live under `output/rcabench-platform-v2/sampler_reports/gleaner/`.
 2. Prepare compatible RCA reports if evaluating downstream localization. `scripts/run_rq2_rca_effectiveness.sh` looks for ShapleyIQ/MicroRCA and Nezha `sampler.grouped.perf.parquet` files in its default locations, or you can pass `--shapleyiq-microrca-parquet PATH` and `--nezha-parquet PATH`.
 3. Run the reduced scripts with explicit input and output paths when testing new data, for example `uv run python scripts/artifact/rq1_sampling_quality.py --input-aggregated PATH/aggregated_perf.parquet --input-detailed PATH/detailed_perf.parquet --output-dir output/artifact/reduced/rq1-new`.
@@ -180,7 +182,7 @@ The committed reduced data is a compact evidence bundle derived from local RCAbe
 - If `bash scripts/prepare_reduced_data.sh` fails, compare the reported path against `data/artifact/reduced/MANIFEST.json`; the reduced files must match the recorded byte sizes and SHA256 values.
 - If `scripts/compare_expected.py` fails, use its reported JSON path, CSV row/column, or Markdown diff to inspect the generated files under `output/artifact/reduced/`.
 - If Markdown differs only by output directory, ensure the wrappers are using the default comparison mode; output-directory lines are normalized by default.
-- If `scripts/smoke_test.sh` reports skipped submodule SHA checks, confirm the run is from a packaged archive/container without `.git` and that each `third_party/` directory is present and non-empty.
+- If `scripts/smoke_test.sh` reports skipped submodule SHA checks, confirm the run is from a packaged archive/container without `.git` and that each `third_party/` directory plus `platform/rcabench-platform` is present and non-empty.
 - If a third-party license question arises, use `docs/THIRD_PARTY.md` as the evidence record. ShapleyIQ and Nezha include license files in the vendored tree; TracePicker and TraStrainer do not, so their license status is intentionally recorded as unknown rather than inferred.
 
 ## Local Release Packaging
@@ -191,7 +193,7 @@ Build a local archive and checksum with:
 bash scripts/package_artifact.sh
 ```
 
-The script writes `dist/gleaner-issta2026-ae-<git-short-sha-or-worktree>.tar.gz`, an external `.sha256` file, and an internal `ARCHIVE_MANIFEST.tsv` inside the archive. It packages the reduced artifact contents, selected reduced sampler reports, and actual `third_party/` file contents while excluding `.git`, `.venv`, caches, generated `output/artifact/`, raw/full data, and `dist/` itself. See `docs/RELEASE_PACKAGING.md` for details.
+The script writes `dist/gleaner-issta2026-ae-<git-short-sha-or-worktree>.tar.gz`, an external `.sha256` file, and an internal `ARCHIVE_MANIFEST.tsv` inside the archive. It packages the reduced artifact contents, selected reduced sampler reports, actual `third_party/` file contents, and the core `platform/rcabench-platform` contents while excluding `.git`, `.venv`, caches, generated `output/artifact/`, raw/full data, and `dist/` itself. See `docs/RELEASE_PACKAGING.md` for details.
 
 No public archive URL, DOI, or HotCRP artifact link has been minted or submitted yet. Do not add placeholder links or identifiers. See `docs/EXTERNAL_SUBMISSION_GUIDE.md` for human upload and verification steps.
 
