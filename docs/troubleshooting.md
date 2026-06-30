@@ -166,6 +166,36 @@ output/artifact/
 dist/
 ```
 
+## A Reduced Run Is Interrupted
+
+The reduced scripts are designed to be rerunnable. Sampler stages use the platform's default `skip_finished=True` behavior, so rerunning the same command skips completed sampled outputs when they are still present.
+
+For the normal Docker reduced path, rerun the same command with the same output mount:
+
+```bash
+docker run --rm \
+  -v "$PWD/output:/artifact/output" \
+  gleaner-issta2026-ae:reduced-<version> \
+  bash scripts/run_reduced_all.sh
+```
+
+Notes:
+
+- If the container is still running, let it continue or inspect logs with `docker logs <container-id>`.
+- If a `docker run --rm` container was killed, generated report files under the mounted `output/` directory remain, but sampled intermediate directories inside the container are discarded; rerunning is still safe, but those missing intermediates must be regenerated.
+- If you run inside a persistent container or mount a persistent data directory, completed sampled outputs are skipped automatically on rerun.
+- Do not set clear flags for resume. `GLEANER_REDUCED_CLEAR=1` and `GLEANER_RQ1B_CLEAR=1` intentionally delete/recompute prior sampled outputs.
+- If an interrupted run left a corrupt partial sampled directory, delete only that specific `sampled/<sampler>_<rate>_<mode>` directory or rerun that stage with the relevant clear flag.
+
+The parallel reduced stage writes live logs to:
+
+```text
+output/artifact/reduced/logs/prepare_reduced_reports.log
+output/artifact/reduced/logs/rq1b_cross_system.log
+```
+
+Use these logs to identify the last completed stage before rerunning.
+
 ## Expected-Output Comparison Fails
 
 If generated summaries differ from a prior local run, common causes are:
