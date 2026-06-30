@@ -86,9 +86,11 @@ make_context() {
 
   copy_dataset_dir "data/rcabench-platform-v2/meta/gleaner_lite"
   copy_dataset_dir "data/rcabench-platform-v2/data/gleaner_lite"
-  copy_dataset_dir "data/rcabench-platform-v2/meta/tracepicker"
-  copy_dataset_dir "data/rcabench-platform-v2/data/tracepicker"
+  copy_dataset_dir "data/rcabench-platform-v2/meta/tracepicker_lite"
+  copy_dataset_dir "data/rcabench-platform-v2/data/tracepicker_lite"
   if [[ "${flavor}" == "full" ]]; then
+    copy_dataset_dir "data/rcabench-platform-v2/meta/tracepicker"
+    copy_dataset_dir "data/rcabench-platform-v2/data/tracepicker"
     copy_dataset_dir "data/rcabench-platform-v2/meta/gleaner"
     copy_dataset_dir "data/rcabench-platform-v2/data/gleaner"
   fi

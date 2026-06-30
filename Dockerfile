@@ -14,7 +14,6 @@ COPY src ./src
 COPY main.py ./main.py
 COPY scripts ./scripts
 COPY configs ./configs
-COPY artifact_expected ./artifact_expected
 COPY docs ./docs
 COPY REQUIREMENTS.md STATUS.md ./
 COPY data/rcabench_dataset ./data/rcabench_dataset
