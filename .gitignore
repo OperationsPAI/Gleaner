@@ -19,7 +19,7 @@ temp/
 *.parquet
 
 test/
-*/sampled/*
+
 plots/
 # Artifact evidence exceptions
 !data/
@@ -28,3 +28,5 @@ plots/
 
 data/rcabench-platform-v2/data/gleaner
 data/rcabench-platform-v2/meta/gleaner
+
+**/*/sampled
