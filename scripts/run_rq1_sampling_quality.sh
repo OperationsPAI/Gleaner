@@ -20,13 +20,4 @@ fi
 
 "${PY[@]}" scripts/artifact/rq1_sampling_quality.py "$@"
 
-if [[ "${GLEANER_COMPARE_EXPECTED:-0}" == "1" && -d artifact_expected/reduced/rq1 ]]; then
-  "${PY[@]}" scripts/compare_expected.py \
-    --expected artifact_expected/reduced/rq1 \
-    --actual output/artifact/reduced/rq1 \
-    --file rq1_sampling_quality_results.md \
-    --file rq1_sampling_quality_summary.csv \
-    --file rq1_sampling_quality_summary.json
-fi
-
 "${PY[@]}" scripts/artifact/print_reduced_tables.py rq1

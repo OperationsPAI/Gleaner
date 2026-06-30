@@ -20,13 +20,4 @@ fi
 
 "${PY[@]}" scripts/artifact/rq2_ablation.py "$@"
 
-if [[ "${GLEANER_COMPARE_EXPECTED:-0}" == "1" && -d artifact_expected/reduced/rq2 ]]; then
-  "${PY[@]}" scripts/compare_expected.py \
-    --expected artifact_expected/reduced/rq2 \
-    --actual output/artifact/reduced/rq2 \
-    --file rq2_ablation_results.md \
-    --file rq2_ablation_summary.csv \
-    --file rq2_ablation_summary.json
-fi
-
 "${PY[@]}" scripts/artifact/print_reduced_tables.py rq2

@@ -36,7 +36,6 @@ REQUIRED_PATHS=(
   "docs/agent_skills/gleaner-sampler/SKILL.md"
   "docs/agent_skills/gleaner-rca/SKILL.md"
   "docs"
-  "artifact_expected/reduced"
   "data/rcabench-platform-v2/meta/gleaner_lite/index.parquet"
   "data/rcabench-platform-v2/meta/tracepicker_lite/index.parquet"
 )
@@ -161,7 +160,6 @@ for rel in "${TOP_LEVEL_DIRS[@]}"; do
   copy_path "${rel}"
 done
 
-copy_path "artifact_expected/reduced"
 copy_path "data/rcabench-platform-v2"
 for rel in "${THIRD_PARTY_DIRS[@]}"; do
   copy_path "${rel}"

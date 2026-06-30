@@ -15,6 +15,7 @@ temp
 *.pyc
 *.pyo
 *.pyd
+docs/reference/dev2_rq_scripts
 third_party/TraStrainer/data
 third_party/TraStrainer/data/**
 third_party/TraStrainer/checkpoints

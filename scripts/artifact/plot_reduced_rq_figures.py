@@ -326,7 +326,7 @@ def write_report(path: Path, entries: list[dict[str, object]], summary_paths: li
             "## Validation Summary",
             "",
             "- RQ summary generation: performed by `bash scripts/run_reduced_all.sh` before this plotting step.",
-            "- Plot-data comparison: `scripts/run_reduced_plots.sh` compares CSV/JSON/Markdown outputs against `artifact_expected/reduced/figures/` when expected files are present.",
+            "- Plot-data validation: `scripts/run_reduced_plots.sh` checks that generated CSV/JSON/Markdown plot artifacts are present and non-empty.",
             "- Image validation: `scripts/run_reduced_plots.sh` checks each generated PNG exists and is non-empty; image bytes are not compared.",
             "- Scope: reduced artifact evidence only; full-dataset plotting and exact full-paper figure reproduction remain outside this snapshot.",
             "",

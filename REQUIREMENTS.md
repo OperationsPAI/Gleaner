@@ -52,7 +52,7 @@ gunzip -c gleaner-issta2026-ae-reduced-*.docker.tar.gz | docker load
 - Reduced Dataset B selection: two TracePicker systems (`trainticket`, `media`) so RQ1-B live rerun remains within the reduced runtime budget.
 - Expected runtime: designed to complete in one day or less on a typical multi-core x86_64 Linux machine.
 - Output location: generated files are written under `output/`.
-- Validation: reduced scripts fail on missing required inputs or empty required outputs. Optional strict comparison can be enabled with `GLEANER_COMPARE_EXPECTED=1`.
+- Validation: reduced scripts fail on missing required inputs or empty required outputs.
 
 ## Parallelism And CPU Controls
 

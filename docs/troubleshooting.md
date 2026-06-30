@@ -168,7 +168,7 @@ dist/
 
 ## Expected-Output Comparison Fails
 
-Use the diff path printed by `scripts/compare_expected.py`. Common causes are:
+If generated summaries differ from a prior local run, common causes are:
 
 - output was written to a non-default directory and the Markdown path line changed;
 - a random or sampled run updated reports before expected baselines were refreshed;

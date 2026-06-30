@@ -16,7 +16,7 @@ The artifact is documented, consistent, complete for its stated scopes, exercisa
 - The full image is provided for long-running complete-setting validation. It adds complete Gleaner Dataset A (`gleaner`), complete converted TracePicker Dataset B (`tracepicker`), full-path scripts, and isolated full-only baseline environments.
 - The Getting Started path uses `scripts/smoke_test.sh`; successful output includes `gleaner import OK`, `rcabench-platform 0.4.1`, and `[smoke] smoke test complete`.
 - The reduced reproduction entry point is `scripts/run_reduced_all.sh`. It runs reduced RQ1/RQ2/RQ3/RQ4 scripts, reduced plots, and `output/artifact/reduced/REPORT.md` generation.
-- Reduced wrappers fail on missing inputs or empty required outputs. Strict frozen-output comparison is available with `GLEANER_COMPARE_EXPECTED=1` against `artifact_expected/reduced/`.
+- Reduced wrappers fail on missing inputs or empty required outputs.
 - `scripts/prepare_reduced_data.sh` checks that `gleaner_lite` and `tracepicker_lite` live converted inputs are present under `data/rcabench-platform-v2/`.
 - Full reproduction is guarded by `GLEANER_RUN_FULL=1 bash scripts/run_full_all.sh`; without the guard it exits non-zero so placeholder full results cannot be mistaken for verified evidence.
 

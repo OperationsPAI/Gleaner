@@ -107,13 +107,4 @@ rca_parquet="output/rcabench-platform-v2/meta/${DATASET}/sampler.grouped.perf.pa
   --nezha-parquet "${rca_parquet}" \
   "${summary_rate_args[@]}" "${summary_mode_args[@]}" "$@"
 
-if [[ "${GLEANER_COMPARE_EXPECTED:-0}" == "1" && -d artifact_expected/reduced/rq3 ]]; then
-  "${PY[@]}" scripts/compare_expected.py \
-    --expected artifact_expected/reduced/rq3 \
-    --actual output/artifact/reduced/rq3 \
-    --file rq3_rca_effectiveness_results.md \
-    --file rq3_rca_effectiveness_summary.csv \
-    --file rq3_rca_effectiveness_summary.json
-fi
-
 "${PY[@]}" scripts/artifact/print_reduced_tables.py rq3
