@@ -28,9 +28,9 @@ mkdir -p output/artifact/reduced/logs
 PREP_LOG="output/artifact/reduced/logs/prepare_reduced_reports.log"
 RQ1B_LOG="output/artifact/reduced/logs/rq1b_cross_system.log"
 
-bash scripts/prepare_reduced_reports.sh >"${PREP_LOG}" 2>&1 &
+bash scripts/prepare_reduced_reports.sh 2>&1 | sed -u 's/^/[prepare] /' | tee "${PREP_LOG}" &
 prep_pid=$!
-bash scripts/run_rq1b_cross_system.sh >"${RQ1B_LOG}" 2>&1 &
+bash scripts/run_rq1b_cross_system.sh 2>&1 | sed -u 's/^/[rq1b] /' | tee "${RQ1B_LOG}" &
 rq1b_pid=$!
 
 failed=0

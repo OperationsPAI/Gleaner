@@ -35,14 +35,14 @@ If the archive also includes a checksum file, verify it before loading:
 sha256sum -c gleaner-issta2026-ae-reduced-*.docker.tar.gz.sha256
 ```
 
-The image tag is printed by `docker load`. In the examples below, replace `gleaner-issta2026-ae:reduced-worktree` with the loaded tag if it differs.
+The image tag is printed by `docker load`. In the examples below, replace `gleaner-issta2026-ae:reduced-<version>` with the loaded tag printed by `docker load`.
 
 ### Smoke Test
 
 Run the smoke test inside the reduced image:
 
 ```bash
-docker run --rm gleaner-issta2026-ae:reduced-worktree bash scripts/smoke_test.sh
+docker run --rm gleaner-issta2026-ae:reduced-<version> bash scripts/smoke_test.sh
 ```
 
 Expected output includes:
@@ -65,7 +65,7 @@ Run all reduced experiments in the reduced image:
 mkdir -p output
 docker run --rm \
   -v "$PWD/output:/artifact/output" \
-  gleaner-issta2026-ae:reduced-worktree \
+  gleaner-issta2026-ae:reduced-<version> \
   bash scripts/run_reduced_all.sh
 ```
 
@@ -82,7 +82,7 @@ Example with an explicit CPU limit:
 ```bash
 docker run --rm -e GLEANER_REDUCED_CPUS=8 \
   -v "$PWD/output:/artifact/output" \
-  gleaner-issta2026-ae:reduced-worktree \
+  gleaner-issta2026-ae:reduced-<version> \
   bash scripts/run_reduced_all.sh
 ```
 
@@ -92,7 +92,7 @@ Run these commands when inspecting a specific paper claim:
 
 ```bash
 docker run --rm -it -v "$PWD/output:/artifact/output" \
-  gleaner-issta2026-ae:reduced-worktree bash
+  gleaner-issta2026-ae:reduced-<version> bash
 ```
 
 Then run the desired command inside the container:
@@ -169,7 +169,7 @@ Run the guarded full path:
 ```bash
 docker run --rm -e GLEANER_RUN_FULL=1 \
   -v "$PWD/output:/artifact/output" \
-  gleaner-issta2026-ae:full-worktree \
+  gleaner-issta2026-ae:full-<version> \
   bash scripts/run_full_all.sh
 ```
 
