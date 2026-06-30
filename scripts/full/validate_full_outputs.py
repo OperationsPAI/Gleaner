@@ -13,8 +13,9 @@ def parse_args():
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument("--dataset-a", default="gleaner")
     p.add_argument("--dataset-b", default="tracepicker")
-    p.add_argument("--rates", default="0.005,0.01,0.1")
-    p.add_argument("--modes", default="offline")
+    p.add_argument("--rates", default="0.001,0.01,0.025,0.05,0.075,0.1")
+    p.add_argument("--rca-rates", default="0.01,0.1")
+    p.add_argument("--modes", default="offline,online")
     return p.parse_args()
 
 
@@ -37,6 +38,7 @@ def require_cols(path: Path, cols: set[str]) -> pl.DataFrame:
 def main() -> None:
     args = parse_args()
     expected_rates = {float(x) for x in args.rates.split(",") if x}
+    expected_rca_rates = {float(x) for x in args.rca_rates.split(",") if x}
     expected_modes = {x for x in args.modes.split(",") if x}
 
     a_sampler = require_cols(Path(f"output/rcabench-platform-v2/sampler_reports/{args.dataset_a}/aggregated_perf.parquet"), {"sampler", "dataset", "sampling_rate", "mode", "datapack_count"})
@@ -50,7 +52,7 @@ def main() -> None:
     if missing_modes:
         raise SystemExit(f"ERROR: Dataset A sampler report missing modes: {sorted(missing_modes)}")
 
-    required_a_samplers = {"gleaner", "random", "tracepicker", "trastrainer", "trastrainer_no_metrics", "sifter", "sieve"}
+    required_a_samplers = {"gleaner", "gleaner_no_logs", "gleaner_no_ad", "gleaner_no_logs_no_ad", "gleaner_wl_kernel", "gleaner_pure_diversity", "gleaner_top_score", "gleaner_no_dpp", "gleaner_anomaly_pure_diversity", "random", "tracepicker", "trastrainer", "trastrainer_no_metrics", "sifter", "sieve"}
     missing_samplers = required_a_samplers - set(str(x) for x in a_sampler["sampler"].unique().to_list())
     if missing_samplers:
         raise SystemExit(f"ERROR: Dataset A report missing required samplers: {sorted(missing_samplers)}")
@@ -58,6 +60,18 @@ def main() -> None:
     missing_b_samplers = required_b_samplers - set(str(x) for x in b_sampler["sampler"].unique().to_list())
     if missing_b_samplers:
         raise SystemExit(f"ERROR: Dataset B report missing required samplers: {sorted(missing_b_samplers)}")
+
+
+    if "sampler.rate" in rca.columns:
+        sampled_rca = rca.filter(pl.col("sampler.name").is_not_null()) if "sampler.name" in rca.columns else rca
+        if sampled_rca.height:
+            actual_rca_rates = set(float(x) for x in sampled_rca["sampler.rate"].drop_nulls().unique().to_list())
+            missing_rca_rates = expected_rca_rates - actual_rca_rates
+            if missing_rca_rates:
+                raise SystemExit(f"ERROR: RCA report missing sampled rates: {sorted(missing_rca_rates)}")
+            extra_rca_rates = actual_rca_rates - expected_rca_rates
+            if extra_rca_rates:
+                raise SystemExit(f"ERROR: RCA report has non-paper sampled rates: {sorted(extra_rca_rates)}")
 
     required_algs = {"microrca", "shapleyiq", "nezha"}
     missing_algs = required_algs - set(str(x) for x in rca["algorithm"].unique().to_list())

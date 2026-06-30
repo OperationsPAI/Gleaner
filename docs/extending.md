@@ -219,6 +219,6 @@ uv run python scripts/full/platform_cli.py eval perf-report $DATASET
 If a new sampler or RCA algorithm is not integrated into the platform runner, it can still participate in reduced artifact scripts by producing compatible reports:
 
 - sampler reports: `aggregated_perf.parquet` and, for per-datapack RQ1 checks, `detailed_perf.parquet` with `sampler`, `mode`, `sampling_rate`, and `datapack` where applicable;
-- RCA reports: `sampler.grouped.perf.parquet` with `algorithm`, `sampler.name`, `sampler.rate`, `AC@1`, and `AC@3`.
+- RCA reports: `sampler.grouped.perf.parquet` with `algorithm`, `sampler.name`, `sampler.rate`, `Accuracy@1`, and `Accuracy@3`.
 
 The reduced scripts in `scripts/artifact/` accept explicit paths for these reports and write Markdown/CSV/JSON summaries under `output/artifact/reduced/`.

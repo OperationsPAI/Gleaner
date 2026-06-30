@@ -1,58 +1,96 @@
 # Requirements
 
-## Platform
+This file describes the architecture, hardware, software, storage, and runtime requirements for the Gleaner ISSTA 2026 artifact.
 
-- Architecture: x86_64 Linux.
-- Container runtime: Docker 24+ recommended for the verified container path; Podman 4+ may work but has not been separately verified.
-- Python: the Gleaner artifact runner uses Python 3.13.
-- Core platform dependency: `rcabench-platform==0.4.1`, resolved from the editable submodule at `platform/rcabench-platform`.
+## Packaged Architecture
 
-## Reduced Evaluation
+- CPU architecture: x86_64 Linux.
+- Container format: Docker image archives generated with `docker save | gzip`.
+- Python runtime inside images: Python 3.13 for the main Gleaner artifact environment.
+- Package manager inside images: `uv`, copied from the official `ghcr.io/astral-sh/uv:0.8.13` image.
+- Main platform dependency: `rcabench-platform==0.4.1` from the vendored editable submodule at `platform/rcabench-platform`.
 
-- Command: `bash scripts/run_reduced_all.sh`.
-- Current verification: reviewer-verified as passing end to end on host and verified inside Docker with `docker run --rm gleaner-issta2026-ae bash scripts/run_reduced_all.sh`.
-- RQ coverage: reduced RQ1, RQ2, RQ3, and RQ4 scripts are implemented and connected to wrappers; `scripts/run_reduced_plots.sh` generates reduced illustrative plots and `output/artifact/reduced/REPORT.md` after the summaries exist.
-- Validation: each `scripts/run_rq*.sh` wrapper invokes `scripts/compare_expected.py` against expected outputs under `artifact_expected/reduced/rqX/`; the plot/report wrapper validates non-empty PNGs and compares plot-data/report files against `artifact_expected/reduced/figures/`.
-- Reduced RQ2 evidence: staged parquet inputs are under `data/artifact/reduced/rq2/`.
-- GPU: not required unless a baseline's original implementation is explicitly configured to use GPU.
-- Network: not required after the container/artifact and datasets have been obtained.
-- Expected runtime: the full reduced command, including reduced plot/report generation, completed on the local host in 7.42 seconds wall-clock time (`time -p bash scripts/run_reduced_all.sh`, 2026-06-28). Reviewers should budget under 5 minutes for this path on a typical x86_64 Linux machine, including environment startup variability.
-- Reduced evidence manifest: `data/artifact/reduced/MANIFEST.json`.
-- Reduced evidence checksum list: `data/artifact/reduced/SHA256SUMS`.
-- Reduced evidence verification: `bash scripts/prepare_reduced_data.sh`.
-- Reduced manifest totals: 31 files, 587337 bytes. Scope is expected outputs, reduced20 RQ2 detailed/grouped RCA evidence, TracePicker Dataset B cross-system reduced evidence, a deterministic fault-balanced 20-datapack selection manifest, and source sampler reports used to regenerate reduced20 summaries.
+## Required Host Software
 
-## Validation And Tolerances
+- Docker 24+ recommended.
+- `gunzip` or compatible gzip decompressor for loading image archives.
+- `sha256sum` or compatible checksum tool for verifying archives.
+- No host Python installation is required for the reviewer path.
+- Network access is not required to run either the reduced or full artifact path after the Docker archives and checksum files have been obtained.
 
-- Successful reduced reproduction means `bash scripts/prepare_reduced_data.sh`, `bash scripts/smoke_test.sh`, and `bash scripts/run_reduced_all.sh` all exit with status 0.
-- `scripts/compare_expected.py` compares JSON, CSV, and Markdown outputs against `artifact_expected/reduced/rqX/` and `artifact_expected/reduced/figures/`.
-- Numeric JSON/CSV values use strict default tolerances of `abs_tol=1e-12` and `rel_tol=1e-12`.
-- JSON comparison ignores `config.output_dir` by default so reviewers can choose a different output directory.
-- Markdown comparison normalizes lines named `output directory` or `output_dir` by default; all other Markdown content must match.
-- Boolean JSON values are type-checked separately from numbers, so `true`/`false` cannot silently match `1`/`0`.
-- Plot images are validated by existence and non-empty file size; image bytes are not compared because rendering metadata can vary across environments.
+## Hardware Requirements
 
-## Troubleshooting
+- GPU: not required for the reduced AE path.
+- CPU: commodity multi-core x86_64 CPU recommended. The reduced path is CPU-only and benefits from multiple cores.
+- Memory: at least 16 GB RAM recommended for reduced runs; 32 GB or more recommended for full/diagnostic runs.
+- Storage: reserve space for both compressed archives, loaded Docker images, and generated outputs. The full image is substantially larger because it includes full datasets and heavyweight baseline environments.
+- Special hardware: no specific CPU model, GPU, accelerator, or non-commodity peripheral is required for the reduced path.
 
-- If `scripts/prepare_reduced_data.sh` reports a checksum or size mismatch, restore the reduced files listed in `data/artifact/reduced/MANIFEST.json` before rerunning experiments.
-- If an expected-output comparison fails, inspect the reported JSON path, CSV row/column, or Markdown unified diff; generated outputs remain under `output/artifact/reduced/`.
-- If the smoke test reports skipped SHA verification, the run is likely from an archive or container without `.git`; this is expected only when `third_party/` directories and `platform/rcabench-platform` are present and non-empty.
+## Docker Images
 
-## Full Evaluation
+The final artifact deposit should provide two image archives:
 
-- Command: `bash scripts/run_full_all.sh`.
-- Current behavior: guarded long-running one-command orchestration with real sampling, RCA, figure/table, and postcondition phases; default execution exits non-zero unless `GLEANER_RUN_FULL=1` is set.
-- Current verification: command structure, environment preflight, guards, and postcondition checks are verified; full multi-day execution is not run as part of the reduced AE path.
-- Intended future scope: full TracePicker dataset plus full Gleaner dataset.
-- Expected runtime and storage: substantially larger than the reduced evaluation; full paper reproduction includes the main uv workspace for Gleaner, Nezha, ShapleyIQ/MicroRCA, and TraStrainer/Sifter/Sieve, an isolated Python 3.12 TracePicker environment, full Dataset A, Dataset B cross-system sampler reports, RCA runs, and figure/table regeneration. It may take multiple days depending on CPU count and machine configuration.
-- Reviewer guidance: use `bash scripts/run_reduced_all.sh` as the verified RQ1-RQ4 AE reproduction path.
+| Image archive | Purpose | Contents |
+|---|---|---|
+| `gleaner-issta2026-ae-reduced-*.docker.tar.gz` | Primary <=1-day AE path | Source, docs, `gleaner_lite`, `tracepicker_lite`, reduced scripts, main CPU Python environment |
+| `gleaner-issta2026-ae-full-*.docker.tar.gz` | Long-running full validation | Everything in reduced plus complete `gleaner`, complete converted `tracepicker`, full-path scripts, and isolated full-only baseline environments |
 
-## Packaging And Archive
+Load and verify an image with:
 
-- Verified Docker build: `docker build -t gleaner-issta2026-ae .`.
-- Verified container smoke: `docker run --rm gleaner-issta2026-ae bash scripts/smoke_test.sh`.
-- Verified container reduced run: `docker run --rm gleaner-issta2026-ae bash scripts/run_reduced_all.sh`.
-- Local archive/package script: `bash scripts/package_artifact.sh`.
-- Local archive manifest/checksum: generated and verified by the package script as `ARCHIVE_MANIFEST.tsv` inside the tarball and a sibling `.sha256` file under `dist/`.
-- Public archive/release upload: not yet prepared or performed.
-- DOI and HotCRP artifact link: not yet minted or submitted.
+```bash
+sha256sum -c gleaner-issta2026-ae-reduced-*.docker.tar.gz.sha256
+gunzip -c gleaner-issta2026-ae-reduced-*.docker.tar.gz | docker load
+```
+
+## Reduced Evaluation Requirements
+
+- Main command: `bash scripts/run_reduced_all.sh`.
+- Smoke test command: `bash scripts/smoke_test.sh`.
+- Dataset A reduced input: `data/rcabench-platform-v2/data/gleaner_lite` and `meta/gleaner_lite`.
+- Dataset B reduced input: `data/rcabench-platform-v2/data/tracepicker_lite` and `meta/tracepicker_lite`.
+- Reduced Dataset A selection: 20 datapacks selected for fault-category coverage and reduced RCA trend matching against historical full Dataset A RCA results under `rca/`.
+- Reduced Dataset B selection: two TracePicker systems (`trainticket`, `media`) so RQ1-B live rerun remains within the reduced runtime budget.
+- Expected runtime: designed to complete in one day or less on a typical multi-core x86_64 Linux machine.
+- Output location: generated files are written under `output/`.
+- Validation: reduced scripts fail on missing required inputs or empty required outputs. Optional strict comparison can be enabled with `GLEANER_COMPARE_EXPECTED=1`.
+
+## Parallelism And CPU Controls
+
+Reduced sampler/RCA preparation uses parallel worker processes where the platform supports it.
+
+- Default reduced CPU count: half of the CPUs available to the current process/cgroup, computed as `max(1, available_cpus // 2)`.
+- Override for all reduced scripts: `GLEANER_REDUCED_CPUS=N bash scripts/run_reduced_all.sh`.
+- Override for sampler preparation only: `GLEANER_REDUCED_CPUS=N bash scripts/prepare_reduced_reports.sh`.
+- The one-command reduced runner overlaps independent work: `prepare_reduced_reports.sh` for `gleaner_lite` and RQ1-B sampling/reporting for `tracepicker_lite` run concurrently, with logs under `output/artifact/reduced/logs/`.
+- RQ1-B uses `sample batch` over `tracepicker_lite` and passes the auto-detected CPU count through `--use-cpus`.
+
+## Full Evaluation Requirements
+
+- Main command: `GLEANER_RUN_FULL=1 bash scripts/run_full_all.sh`.
+- Guard behavior: without `GLEANER_RUN_FULL=1`, the full command exits non-zero by design.
+- Scope: complete Gleaner Dataset A, complete converted TracePicker Dataset B, full sampler/RCA orchestration, Gleaner variants, baseline samplers, MicroRCA, ShapleyIQ, Nezha, full paper-facing rates, and online 5% RQ4 efficiency for Gleaner and Gleaner WL Kernel.
+- Runtime: long-running; may take multiple days depending on CPU count, disk speed, and selected baseline environments.
+- Full-only baseline environments: TraStrainer/Sifter/Sieve and TracePicker are installed in isolated environments in the full image so heavyweight dependencies stay out of the reduced image.
+
+## Data And Reuse Fixtures
+
+Both images include small raw-input examples used by the reuse documentation:
+
+- `data/rcabench_dataset/`: raw RCABench/ClickHouse-style example datapack plus Drain template state.
+- `data/tracepicker/`: TracePicker trace-only CSV example.
+
+The converted platform datasets used by reduced/full experiments are under `data/rcabench-platform-v2/`.
+
+## Packaging Requirements For Submitters
+
+- Build/export command: `bash scripts/package_docker_images.sh`.
+- Reduced-only build: `GLEANER_BUILD_FULL_IMAGE=0 bash scripts/package_docker_images.sh`.
+- Full-only build: `GLEANER_BUILD_REDUCED_IMAGE=0 GLEANER_BUILD_FULL_IMAGE=1 bash scripts/package_docker_images.sh`.
+- Compression level: `GLEANER_DOCKER_GZIP_LEVEL=N` controls gzip level, default 6.
+- TracePicker full env: included by default in the full image; set `GLEANER_FULL_INSTALL_TRACEPICKER_ENV=0` only for local debugging.
+
+## External Services And Network
+
+- Neither the reduced nor the full artifact path requires commercial services, private credentials, external APIs, or internet downloads after the Docker archives are available.
+- The artifact does not require closed-source software.
+- The final public artifact deposit provides the actual archive files, checksums, and DOI metadata through Zenodo. This repository intentionally does not hard-code duplicate archive URLs or DOI strings.

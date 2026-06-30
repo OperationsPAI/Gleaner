@@ -1,0 +1,42 @@
+{
+    "benchmark": "clickhouse",
+    "created_at": "2025-07-23T23:42:02.042241Z",
+    "description": "Fault for task f4c195f6-cb27-4d00-8da8-79e992c50ed7",
+    "display_config": "{\"correlation\":21,\"direction\":\"both\",\"duration\":4,\"injection_point\":{\"source_service\":\"ts-order-service\",\"target_service\":\"ts-preserve-service\"},\"loss\":70,\"namespace\":\"ts\"}",
+    "end_time": "2025-07-23T23:46:02Z",
+    "engine_config": "{\"name\":\"InjectionConf\",\"range\":[0,30],\"children\":{\"18\":{\"name\":\"18\",\"range\":[0,5],\"children\":{\"0\":{\"name\":\"0\",\"range\":[1,60],\"children\":null,\"description\":\"Time Unit Minute\",\"value\":4},\"1\":{\"name\":\"1\",\"range\":[0,0],\"children\":null,\"description\":\"{ts: 0}\",\"value\":0},\"2\":{\"name\":\"2\",\"range\":[0,123],\"children\":null,\"description\":\"Flattened network pair index\",\"value\":43},\"3\":{\"name\":\"3\",\"range\":[1,100],\"children\":null,\"description\":\"Packet loss percentage\",\"value\":70},\"4\":{\"name\":\"4\",\"range\":[0,100],\"children\":null,\"description\":\"Correlation percentage\",\"value\":21},\"5\":{\"name\":\"5\",\"range\":[1,3],\"children\":null,\"description\":\"Direction (1=to, 2=from, 3=both)\",\"value\":3}},\"description\":\"\",\"value\":0}},\"description\":\"\",\"value\":18}",
+    "fault_type": 18,
+    "ground_truth": {
+        "container": [
+            "ts-order-service",
+            "ts-preserve-service"
+        ],
+        "function": null,
+        "metric": null,
+        "pod": [
+            "ts-order-service-66c6db4f9d-m6pvx",
+            "ts-preserve-service-84ccbbd47d-pdw2h"
+        ],
+        "service": [
+            "ts-order-service",
+            "ts-preserve-service"
+        ],
+        "span": [
+            "ts-order-service",
+            "ts-preserve-service"
+        ],
+        "additional_properties": {}
+    },
+    "id": 2016,
+    "injection_name": "ts5-ts-order-service-loss-5r5z8b",
+    "labels": {
+        "batch": "guided",
+        "env": "prod"
+    },
+    "pre_duration": 4,
+    "start_time": "2025-07-23T23:42:02Z",
+    "status": 2,
+    "task_id": "f4c195f6-cb27-4d00-8da8-79e992c50ed7",
+    "updated_at": "2025-07-23T23:46:02.685943Z",
+    "additional_properties": {}
+}

@@ -6,6 +6,7 @@ from __future__ import annotations
 import argparse
 import json
 import math
+import os
 import sys
 from pathlib import Path
 from typing import Iterable
@@ -13,11 +14,14 @@ from typing import Iterable
 import polars as pl
 
 DEFAULT_INPUT = Path(
-    "output/rcabench-platform-v2/sampler_reports/gleaner_reduced20/aggregated_perf.parquet"
+    os.getenv(
+        "GLEANER_REDUCED_AGGREGATED",
+        "output/rcabench-platform-v2/sampler_reports/gleaner_lite/aggregated_perf.parquet",
+    )
 )
 DEFAULT_OUTPUT_DIR = Path("output/artifact/reduced/rq4")
-DEFAULT_MODE = "offline"
-DEFAULT_SAMPLING_RATE = 0.1
+DEFAULT_MODE = "online"
+DEFAULT_SAMPLING_RATE = 0.05
 
 DISPLAY_NAMES = {
     "gleaner": "Gleaner",
@@ -27,13 +31,13 @@ DISPLAY_NAMES = {
     "sifter": "Sifter",
     "sieve": "Sieve",
     "random": "Random",
+    "gleaner_wl_kernel": "Gleaner WL Kernel",
 }
 
 METRIC_CATEGORIES = {
     "runtime": "runtime_per_trace_ms",
-    "benefit_cost": "benefit_cost_ratio",
     "actual_rate": "actual_sampling_rate",
-    "controllability": "controllability",
+    "benefit_cost": "benefit_cost_ratio",
 }
 
 PREFERRED_METRICS = [
@@ -41,18 +45,14 @@ PREFERRED_METRICS = [
     "std_runtime_per_trace_ms",
     "min_runtime_per_trace_ms",
     "max_runtime_per_trace_ms",
-    "avg_benefit_cost_ratio",
-    "std_benefit_cost_ratio",
-    "min_benefit_cost_ratio",
-    "max_benefit_cost_ratio",
     "avg_actual_sampling_rate",
     "std_actual_sampling_rate",
     "min_actual_sampling_rate",
     "max_actual_sampling_rate",
-    "avg_controllability",
-    "std_controllability",
-    "min_controllability",
-    "max_controllability",
+    "avg_benefit_cost_ratio",
+    "std_benefit_cost_ratio",
+    "min_benefit_cost_ratio",
+    "max_benefit_cost_ratio",
 ]
 
 REQUIRED_COLUMNS = {"sampler", "mode", "sampling_rate"}
@@ -84,6 +84,12 @@ def parse_args() -> argparse.Namespace:
         type=float,
         default=DEFAULT_SAMPLING_RATE,
         help=f"Sampling rate to filter (default: {DEFAULT_SAMPLING_RATE})",
+    )
+    parser.add_argument(
+        "--sampler",
+        action="append",
+        default=None,
+        help="Sampler to include; repeatable. Defaults to paper RQ4 focus: Gleaner and Gleaner WL Kernel.",
     )
     return parser.parse_args()
 
@@ -127,8 +133,6 @@ def format_value(metric: str, value: object) -> str:
         return f"{numeric:.3f}"
     if "benefit_cost_ratio" in metric:
         return f"{numeric:.4f}"
-    if "controllability" in metric:
-        return f"{numeric:.4f}"
     return f"{numeric:.4f}"
 
 
@@ -146,7 +150,7 @@ def available_efficiency_metrics(columns: Iterable[str]) -> list[str]:
 
 
 def load_filtered(
-    input_parquet: Path, mode: str, sampling_rate: float
+    input_parquet: Path, mode: str, sampling_rate: float, samplers: list[str]
 ) -> tuple[pl.DataFrame, list[str]]:
     if not input_parquet.exists():
         fail(f"input parquet not found: {input_parquet}")
@@ -168,6 +172,7 @@ def load_filtered(
     filtered = df.filter(
         (pl.col("mode") == mode)
         & ((pl.col("sampling_rate") - sampling_rate).abs() < 1e-12)
+        & pl.col("sampler").is_in(samplers)
     )
     if filtered.height == 0:
         available = (
@@ -181,7 +186,7 @@ def load_filtered(
             for row in available
         )
         fail(
-            f"no rows after filtering mode={mode!r}, sampling_rate={sampling_rate}; "
+            f"no rows after filtering mode={mode!r}, sampling_rate={sampling_rate}, samplers={samplers}; "
             f"available configurations: {choices or 'none'}"
         )
 
@@ -219,19 +224,19 @@ def make_markdown(
     sampling_rate: float,
     output_dir: Path,
 ) -> str:
-    algorithms = summary.get_column("sampler").to_list()
-    display_algorithms = [DISPLAY_NAMES.get(name, name) for name in algorithms]
+    samplers = summary.get_column("sampler").to_list()
+    display_algorithms = [DISPLAY_NAMES.get(name, name) for name in samplers]
 
     lines: list[str] = []
-    lines.append("# RQ4: Efficiency Evaluation")
+    lines.append("# RQ4: Efficiency Analysis")
     lines.append("")
     lines.append("## Configuration")
     lines.append("")
     lines.append(f"- Input parquet: `{input_parquet}`")
     lines.append(f"- Output directory: `{output_dir}`")
     lines.append(f"- Mode: `{mode}`")
-    lines.append(f"- Sampling rate: `{sampling_rate:g}`")
-    lines.append(f"- Algorithms: {', '.join(display_algorithms)}")
+    lines.append(f"- Sampling rate: `{sampling_rate:g}` (paper Table 8 uses 5% target rate)")
+    lines.append(f"- Samplers: {', '.join(display_algorithms)}")
     lines.append("")
     lines.append("## Available Metrics")
     lines.append("")
@@ -247,7 +252,7 @@ def make_markdown(
     lines.append("")
     lines.append("## Efficiency Summary")
     lines.append("")
-    header = ["Algorithm"] + [metric_label(metric) for metric in metrics]
+    header = ["Sampler"] + [metric_label(metric) for metric in metrics]
     lines.append("| " + " | ".join(header) + " |")
     lines.append("| " + " | ".join(["---"] * len(header)) + " |")
 
@@ -289,7 +294,8 @@ def json_safe(value: object) -> object:
 
 
 def write_outputs(args: argparse.Namespace) -> None:
-    filtered, metrics = load_filtered(args.input_parquet, args.mode, args.sampling_rate)
+    samplers = args.sampler or ["gleaner", "gleaner_wl_kernel"]
+    filtered, metrics = load_filtered(args.input_parquet, args.mode, args.sampling_rate, samplers)
     summary = summarize_by_sampler(filtered, metrics)
 
     args.output_dir.mkdir(parents=True, exist_ok=True)
@@ -314,8 +320,9 @@ def write_outputs(args: argparse.Namespace) -> None:
             "output_dir": str(args.output_dir),
             "mode": args.mode,
             "sampling_rate": args.sampling_rate,
+            "samplers": samplers,
         },
-        "algorithms": summary.get_column("sampler").to_list(),
+        "samplers": summary.get_column("sampler").to_list(),
         "available_metrics": metrics,
         "rows": [
             {key: json_safe(value) for key, value in row.items()}

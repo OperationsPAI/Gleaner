@@ -1,0 +1,37 @@
+{
+    "benchmark": "clickhouse",
+    "created_at": "2025-08-05T12:04:25.721Z",
+    "description": "Fault for task 4985b3d2-c39e-4cf4-87db-4e23103800f2",
+    "display_config": "{\"body_type\":1,\"duration\":4,\"injection_point\":{\"app_name\":\"ts-preserve-service\",\"method\":\"POST\",\"route\":\"/api/v1/orderservice/order\",\"server_address\":\"ts-order-service\",\"server_port\":\"8080\"},\"namespace\":\"ts\"}",
+    "end_time": "2025-08-05T12:08:25Z",
+    "engine_config": "{\"name\":\"InjectionConf\",\"range\":[0,30],\"children\":{\"9\":{\"name\":\"9\",\"range\":[0,3],\"children\":{\"0\":{\"name\":\"0\",\"range\":[1,60],\"children\":null,\"description\":\"Time Unit Minute\",\"value\":4},\"1\":{\"name\":\"1\",\"range\":[0,0],\"children\":null,\"description\":\"{ts: 0}\",\"value\":0},\"2\":{\"name\":\"2\",\"range\":[0,67],\"children\":null,\"description\":\"Flattened HTTP Endpoint Index\",\"value\":19},\"3\":{\"name\":\"3\",\"range\":[0,1],\"children\":null,\"description\":\"Body Type (0=Empty, 1=Random)\",\"value\":1}},\"description\":\"\",\"value\":0}},\"description\":\"\",\"value\":9}",
+    "fault_type": 9,
+    "ground_truth": {
+        "container": [
+            "ts-order-service",
+            "ts-preserve-service"
+        ],
+        "function": null,
+        "metric": null,
+        "pod": [
+            "ts-order-service-5bfb788b74-52nd2",
+            "ts-preserve-service-694669d8dd-lch7k"
+        ],
+        "service": [
+            "ts-preserve-service",
+            "ts-order-service"
+        ],
+        "span": [
+            "ts-preserve-service",
+            "ts-order-service"
+        ]
+    },
+    "id": 3515,
+    "injection_name": "ts5-ts-preserve-service-response-replace-body-wqn6rr",
+    "pre_duration": 4,
+    "start_time": "2025-08-05T12:04:26Z",
+    "status": 2,
+    "task": null,
+    "task_id": "4985b3d2-c39e-4cf4-87db-4e23103800f2",
+    "updated_at": "2025-08-05T12:08:26.41Z"
+}

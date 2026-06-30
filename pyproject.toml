@@ -36,7 +36,6 @@ rcabench-platform = { path = "platform/rcabench-platform", editable = true }
 members = [
     "third_party/Nezha",
     "third_party/ShapleyIQ",
-    "third_party/TraStrainer",
 ]
 exclude = ["third_party/TracePicker"]
 

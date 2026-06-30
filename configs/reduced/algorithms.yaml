@@ -1,19 +1,19 @@
-# Reduced AE path: no expensive baseline sampler reruns.
+# Reduced AE path uses paper-facing sampler names and live reruns.
 samplers:
-  dataset_a_gleaner_variants:
-    - gleaner_latency_dominate
-    - gleaner_log_dominate
-    - gleaner_no_ad
-    - gleaner_no_dpp
-    - gleaner_no_logs
-    - gleaner_no_logs_no_ad
-    - gleaner_no_rebalance
-    - gleaner_pure_diversity
-    - gleaner_top_score
-    - gleaner_wl_kernel
-  dataset_b_cross_system: raw_tracepicker_system_statistics_only
+  dataset_a_paper_variants:
+    - gleaner
+    - gleaner_no_logs              # Gleaner w/o Logs
+    - gleaner_no_ad                # Gleaner w/o Alarms
+    - gleaner_no_logs_no_ad        # Gleaner w/o Logs & Alarms
+    - gleaner_wl_kernel            # Gleaner WL Kernel
+    - gleaner_pure_diversity       # Gleaner Pure Diversity
+    - gleaner_top_score            # Gleaner Pure Anomaly
+    - gleaner_no_dpp               # Gleaner w/o Diversity
+    - gleaner_anomaly_pure_diversity # Gleaner w/o Anomaly
+    - random                       # Paper figure/table reference baseline
+  dataset_b_cross_system:
+    - gleaner_no_logs_no_ad        # Paper Dataset B uses no logs / no alarms
 rca_algorithms:
-  # Filtered from prior per-datapack detailed RCA outputs to the reduced20 subset.
   - microrca
   - shapleyiq
   - nezha

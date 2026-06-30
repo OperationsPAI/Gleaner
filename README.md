@@ -1,111 +1,51 @@
-# Gleaner
+# Gleaner ISSTA 2026 Artifact
 
-Gleaner is a semantically rich online sampler for microservice diagnostics. This repository is the ISSTA 2026 Artifact Evaluation workspace for reproducing the reduced evidence behind the paper claims and for reusing the sampler/RCA pipeline on new inputs.
+Gleaner is a semantically rich online sampler for microservice diagnostics. This artifact supports the ISSTA 2026 Artifact Evaluation by packaging the Gleaner implementation, Platform integration, reduced live inputs, full-dataset inputs, third-party baseline/RCA code, and scripts that regenerate the artifact evidence for the paper's main experimental claims.
 
-This README is the main artifact entry point. Its structure follows the ISSTA AE requirement of a 30-minute Getting Started path plus step-by-step reproduction instructions, and borrows the correspondence/assumption style from the proof-artifact guidelines. The more detailed reference remains in `ARTIFACT_README.md`.
+## Which Archive Should I Use?
 
-## Artifact Abstract
+The Zenodo artifact contains two Docker image archives plus the plain-text artifact files (`README.md`, `REQUIREMENTS.md`, `STATUS.md`, `LICENSE`, and supporting `docs/`). Use the reduced image first.
 
-The artifact packages:
+| Archive | Reviewer use | Contents | Expected scope |
+|---|---|---|---|
+| `gleaner-issta2026-ae-reduced-*.docker.tar.gz` | Primary AE artifact | Code, reduced Dataset A (`gleaner_lite`), TracePicker Dataset B reduced input (`tracepicker_lite`), reduced scripts | Getting Started plus reduced reproduction within one day |
+| `gleaner-issta2026-ae-full-*.docker.tar.gz` | Optional/full validation | Everything in reduced plus complete Gleaner Dataset A (`gleaner`), full-path scripts, full baseline dependency support, a prebuilt isolated TraStrainer/Sifter/Sieve environment, and a prebuilt isolated TracePicker environment | Long-running full paper setting; may take multiple days |
 
-- Gleaner sampler implementations and reduced experiment scripts for RQ1-RQ4.
-- `rcabench-platform==0.4.1` as a first-class platform dependency under `platform/rcabench-platform`.
-- Third-party baseline/RCA repositories under `third_party/` as pinned submodules.
-- Reduced input evidence under `data/artifact/reduced/` and expected outputs under `artifact_expected/reduced/`.
-- Human-readable reuse docs plus purpose-specific agent skills for new inputs, samplers, and RCA algorithms.
+The reduced image is the artifact path intended for reviewers. The full image is packaged separately so reviewers can inspect or launch the complete-paper setting without making the reduced path too large or slow. Compared with the reduced image, it adds the complete Dataset A and heavyweight baseline dependencies needed by the full pipeline. TraStrainer/Sifter/Sieve and TracePicker are installed in isolated full-image environments so their heavy baseline-specific dependencies do not pollute the reduced reviewer image.
 
-The verified path is the reduced/offline AE path. It regenerates reduced summaries, reduced illustrative plots, and a final reduced report, then compares generated Markdown/CSV/JSON outputs against committed expected outputs. The full multi-day paper reproduction path is documented and guarded, but it is not claimed as reviewer-verified in this snapshot.
+## Part 1: Getting Started Guide
 
-## Badge Status
+### Artifact Description
 
-| Badge | Current support | Notes |
-|---|---|---|
-| Functional | Supported for the reduced artifact path | `scripts/smoke_test.sh`, `scripts/run_reduced_all.sh`, expected-output comparisons, Docker smoke/reduced runs, and archive packaging are documented in `STATUS.md`. |
-| Reusable | Partially supported for reduced/offline reuse | New-input conversion, sampler extension, RCA extension, schemas, troubleshooting, and agent skills are included. Full-dataset reuse is not fully verified. |
-| Available | Not yet supported | A local archive can be built with `scripts/package_artifact.sh`, but public upload, DOI, and HotCRP artifact link are still external/manual steps. |
+- Dataset A in the paper corresponds to the Gleaner dataset. The reduced Dataset A input is `gleaner_lite`, a deterministic 20-datapack subset selected by fault-category coverage and RCA trend matching.
+- Dataset B in the paper corresponds to the TracePicker baseline paper dataset. The reduced Dataset B/cross-system reduced input is `tracepicker_lite`, taken from the TracePicker dataset and limited to two paper microservice systems (`trainticket`, `media`) so RQ1-B remains within the reduced runtime budget.
+- Reduced RQ scripts regenerate sampler reports, downstream RCA summaries, efficiency summaries, reduced plots, and a final reduced report under `output/artifact/reduced/`.
 
-## Artifact Roadmap
+### Installation
 
-| Path | Purpose |
-|---|---|
-| `ARTIFACT_README.md` | Detailed AE reference: reduced/full paths, claim mapping, schemas, packaging, and troubleshooting. |
-| `REQUIREMENTS.md` | Hardware, software, runtime, validation, and packaging requirements. |
-| `STATUS.md` | Badge readiness, verified evidence, and open blockers. |
-| `LICENSE` | Distribution terms for the Gleaner artifact; third-party license notes are in `docs/THIRD_PARTY.md`. |
-| `scripts/run_reduced_all.sh` | One-command reduced RQ1-RQ4 reproduction and plot/report generation. |
-| `scripts/smoke_test.sh` | Installation and submodule/package smoke test. |
-| `scripts/package_artifact.sh` | Local archive and checksum builder. |
-| `data/artifact/reduced/` | Reduced evidence manifest, checksums, sampler/RCA inputs, and TracePicker cross-system summary evidence. |
-| `artifact_expected/reduced/` | Expected reduced outputs used by strict comparison checks. |
-| `output/artifact/reduced/` | Generated reduced outputs; ignored/recreated by runs. |
-| `docs/new-inputs.md` | Reuse guide for TracePicker trace-only and raw RCABench/ClickHouse OpenTelemetry inputs. |
-| `docs/extending.md` | Reuse guide for sampler/RCA smoke commands and extension contracts. |
-| `docs/troubleshooting.md` | Common setup, conversion, detector, submodule, and report issues. |
-| `agent_skills/gleaner-new-inputs/SKILL.md` | Agent workflow for adapting new inputs. |
-| `agent_skills/gleaner-sampler/SKILL.md` | Agent workflow for adding/validating samplers. |
-| `agent_skills/gleaner-rca/SKILL.md` | Agent workflow for adding/validating RCA algorithms. |
-| `platform/rcabench-platform` | Shared RCAbench Platform v2 runtime, pinned to `rcabench-platform==0.4.1`. |
-| `third_party/` | Pinned third-party baseline samplers and RCA implementations. |
-
-## Security, Privacy, And Ethics
-
-- The verified commands run locally and write generated files under `output/` or `dist/`; they do not delete user data.
-- No private credentials, commercial services, reviewer identity services, or network APIs are required after dependencies and artifact files are obtained.
-- The reduced evidence is a compact derived bundle; raw full datasets are not shipped in the reduced package.
-- Third-party code is vendored for inspection and execution where supported. License-file evidence and unknown-license notes are recorded in `docs/THIRD_PARTY.md`.
-- GPU is not required for the verified reduced path. Some full/upstream baseline environments may have heavier or CUDA-oriented dependencies and are outside the fast reduced validation path.
-
-## Access And Archive Status
-
-For a source checkout, use the `issta-26-artifact` branch and initialize submodules:
+The recommended reviewer path uses Docker and does not require installing Python packages on the host. Load the reduced image:
 
 ```bash
-git submodule update --init --recursive
+gunzip -c gleaner-issta2026-ae-reduced-*.docker.tar.gz | docker load
 ```
 
-For an archive/container artifact, the submodule contents should already be vendored. In that case, skip the `git submodule` command and run the smoke test below.
-
-No public archival URL or DOI is recorded yet. To build the local archive that should later be uploaded by a human submitter:
+If the archive also includes a checksum file, verify it before loading:
 
 ```bash
-bash scripts/package_artifact.sh
+sha256sum -c gleaner-issta2026-ae-reduced-*.docker.tar.gz.sha256
 ```
 
-The script writes a `dist/gleaner-issta2026-ae-*.tar.gz` archive, a sibling `.sha256` file, and an internal `ARCHIVE_MANIFEST.tsv`. See `docs/RELEASE_PACKAGING.md` and `docs/EXTERNAL_SUBMISSION_GUIDE.md` before creating final public links.
+The image tag is printed by `docker load`. In the examples below, replace `gleaner-issta2026-ae:reduced-worktree` with the loaded tag if it differs.
 
-## Requirements
+### Smoke Test
 
-- OS/architecture: x86_64 Linux is the verified platform.
-- Python: 3.13 for the Gleaner artifact runner.
-- Package manager: `uv` for dependency installation and locked execution.
-- Core dependency: `rcabench-platform==0.4.1` from `platform/rcabench-platform`.
-- Runtime: CPU-only for the verified reduced path; Docker 24+ is recommended for a containerized path.
-- Storage: budget several GB for Python packages, caches, Docker layers, and generated outputs; the committed reduced evidence itself is small and checksum-tracked.
-- Network: required only to fetch dependencies or upload a final archive; not required by the verified reduced experiment commands after setup.
-
-Install `uv` if needed:
+Run the smoke test inside the reduced image:
 
 ```bash
-curl -LsSf https://astral.sh/uv/install.sh | sh
+docker run --rm gleaner-issta2026-ae:reduced-worktree bash scripts/smoke_test.sh
 ```
 
-Then install the locked environment:
-
-```bash
-uv sync --locked
-```
-
-## Getting Started: 30-Minute Path
-
-Run these commands from the repository root:
-
-```bash
-git submodule update --init --recursive
-uv sync --locked
-bash scripts/smoke_test.sh
-```
-
-Expected smoke-test signals include:
+Expected output includes:
 
 ```text
 gleaner import OK
@@ -113,54 +53,20 @@ rcabench-platform 0.4.1
 [smoke] smoke test complete
 ```
 
-In archive/container contexts without `.git`, strict submodule SHA checks are skipped and replaced with non-empty directory checks for `third_party/` and `platform/rcabench-platform`.
+Reviewers should be able to finish the Docker load and smoke test within 30 minutes on a typical x86_64 Linux machine with Docker installed. First-time Docker image loading time depends on local disk speed.
 
-## Docker Path
+## Part 2: Step-By-Step Reproduction Instructions
 
-Build the image:
+### One-Command Reduced Reproduction
 
-```bash
-docker build -t gleaner-issta2026-ae .
-```
-
-Run the smoke test:
+Run all reduced experiments in the reduced image:
 
 ```bash
-docker run --rm gleaner-issta2026-ae bash scripts/smoke_test.sh
-```
-
-Run the verified reduced reproduction:
-
-```bash
-docker run --rm gleaner-issta2026-ae bash scripts/run_reduced_all.sh
-```
-
-## Evaluation Workflow
-
-### Major Claims
-
-| Claim | Paper result area | Artifact evidence | Reduced command | Scope note |
-|---|---|---|---|---|
-| C1 | Sampling quality and diversity, including Dataset A and Dataset B evidence | RQ1 summaries, RQ1-B TracePicker cross-system summaries, reduced plot data | `bash scripts/run_rq1_sampling_quality.sh`; `bash scripts/run_rq1b_cross_system.sh` | Reduced Dataset A uses a deterministic 20-datapack subset; Dataset B uses portable TracePicker summary evidence. |
-| C2 | Ablation study of Gleaner variants | RQ3 summaries and reduced ablation plot data | `bash scripts/run_rq3_ablation.sh` | Artifact script name is RQ3, while the paper labels ablation as RQ2. |
-| C3 | Downstream RCA accuracy under sampling | RQ2 RCA summaries from Nezha and ShapleyIQ/MicroRCA evidence | `bash scripts/run_rq2_rca_effectiveness.sh` | Artifact script name is RQ2, while the paper labels downstream RCA as RQ3. |
-| C4 | Efficiency and sampling overhead | RQ4 runtime, benefit-cost, actual-rate, and controllability summaries | `bash scripts/run_rq4_efficiency.sh` | Reduced summaries are deterministic evidence, not full-dataset timing reproduction. |
-
-The exact paper location mapping is maintained in `ARTIFACT_README.md`. Unsupported or not-yet-verified claims are also stated there and in `STATUS.md`.
-
-### E0: Installation And Smoke Test
-
-- Preparation: install `uv`; initialize submodules if running from a Git checkout.
-- Execution: run `uv sync --locked` and `bash scripts/smoke_test.sh`.
-- Results: confirm the smoke-test output reports `gleaner import OK`, `rcabench-platform 0.4.1`, and `[smoke] smoke test complete`.
-- Expected time: under 30 person-minutes after the artifact is available; first dependency download can dominate wall-clock time.
-
-### E1: One-Command Reduced Reproduction
-
-Run all reduced experiments and expected-output checks:
-
-```bash
-bash scripts/run_reduced_all.sh
+mkdir -p output
+docker run --rm \
+  -v "$PWD/output:/artifact/output" \
+  gleaner-issta2026-ae:reduced-worktree \
+  bash scripts/run_reduced_all.sh
 ```
 
 Expected final signal:
@@ -169,17 +75,33 @@ Expected final signal:
 [reduced] all reduced RQ scripts and plots completed
 ```
 
-This command runs the smoke test, prepares reduced sampler reports, runs RQ1/RQ1-B/RQ2/RQ3/RQ4, generates reduced plots, writes `output/artifact/reduced/REPORT.md`, and compares generated outputs against `artifact_expected/reduced/`. The locally recorded runtime on 2026-06-28 was under 10 seconds after setup; reviewers should budget under 5 minutes on a typical x86_64 Linux machine.
+This command runs the smoke test, checks reduced inputs, prepares `gleaner_lite` sampler reports, runs the reduced RQ scripts, and generates reduced plots plus `output/artifact/reduced/REPORT.md`. Sampler-report preparation uses half of the CPUs available to the process by default; override with `GLEANER_REDUCED_CPUS=N` if needed.
 
-### E2: Individual Reduced Experiments
+Example with an explicit CPU limit:
 
-Run individual experiments when inspecting a specific claim:
+```bash
+docker run --rm -e GLEANER_REDUCED_CPUS=8 \
+  -v "$PWD/output:/artifact/output" \
+  gleaner-issta2026-ae:reduced-worktree \
+  bash scripts/run_reduced_all.sh
+```
+
+### Individual Reduced Experiments
+
+Run these commands when inspecting a specific paper claim:
+
+```bash
+docker run --rm -it -v "$PWD/output:/artifact/output" \
+  gleaner-issta2026-ae:reduced-worktree bash
+```
+
+Then run the desired command inside the container:
 
 ```bash
 bash scripts/run_rq1_sampling_quality.sh
 bash scripts/run_rq1b_cross_system.sh
-bash scripts/run_rq2_rca_effectiveness.sh
-bash scripts/run_rq3_ablation.sh
+bash scripts/run_rq2_ablation.sh
+bash scripts/run_rq3_rca_effectiveness.sh
 bash scripts/run_rq4_efficiency.sh
 bash scripts/run_reduced_plots.sh
 ```
@@ -196,129 +118,101 @@ output/artifact/reduced/figures/
 output/artifact/reduced/REPORT.md
 ```
 
-Expected outputs are committed under `artifact_expected/reduced/`. Each wrapper compares Markdown/CSV/JSON outputs with strict numeric tolerances. Plot PNGs are checked for existence and non-empty size; plot-data CSV/JSON and the report are compared against expected files.
+### Paper Claims Supported By The Reduced Artifact
 
-### E3: Reduced Input Evidence Check
+| Claim | Paper result area | Reduced evidence | Command(s) | Scope |
+|---|---|---|---|---|
+| C1 | RQ1 sampling quality and diversity; Dataset A and Dataset B evidence | Dataset A RQ1 tables/CSV/JSON; Dataset B Trace Pattern Coverage summary; reduced plot data | `run_rq1_sampling_quality.sh`, `run_rq1b_cross_system.sh` | Dataset A uses `gleaner_lite`; Dataset B uses the `tracepicker_lite` TracePicker input. RQ1-A reports Gleaner and available baselines |
+| C2 | Paper RQ2 ablation study | Gleaner variant ablation summaries and reduced illustrative plot | `run_rq2_ablation.sh` | Variants follow the paper Table 5 naming. |
+| C3 | Paper RQ3 downstream RCA accuracy | MicroRCA, ShapleyIQ, and Nezha Accuracy@1/Accuracy@3 summaries on full and sampled `gleaner_lite` inputs | `run_rq3_rca_effectiveness.sh` | RCA sampled inputs are selected by sampler/rate/mode; random is included as the reduced baseline. |
+| C4 | RQ4 efficiency | Gleaner and Gleaner WL Kernel online runtime per trace, actual sampling rate, and benefit-cost ratio at 5% target rate | `run_rq4_efficiency.sh` | Reduced RQ4 reports Gleaner and Gleaner WL Kernel, matching the paper runtime comparison scope without running every ablation variant. |
 
-Before or after reproduction, verify the reduced input manifest and checksums:
+The reduced outputs are intended to validate the artifact workflow and paper-style metrics on a one-day-or-less reduced scope. They are not claimed to exactly reproduce every full-paper figure pixel-for-pixel.
 
-```bash
-bash scripts/prepare_reduced_data.sh
-```
+### Paper Claims Not Fully Supported By The Reduced Artifact
 
-The manifest is `data/artifact/reduced/MANIFEST.json`; optional checksums are in `data/artifact/reduced/SHA256SUMS`.
+- Full-dataset numeric reproduction is not part of the primary reduced reviewer path; use the full image and `GLEANER_RUN_FULL=1 bash scripts/run_full_all.sh` for the long-running setting.
+- Full cross-baseline Dataset B comparisons are reserved for the full path; the reduced path reports Dataset B Trace Pattern Coverage from `tracepicker_lite`.
+- Exact camera-ready figure layout reproduction is not claimed; reduced plot scripts generate reviewer-readable illustrative PNGs and CSV plot data.
+- Public archival metadata is not embedded in this repository; reviewers should use the files provided with the final artifact deposit.
 
-### E4: Full Reproduction Guard
+### Reduced Dataset Selection Criteria
 
-The full path is intentionally separated from the reviewer-verified reduced path:
+`gleaner_lite` is a deterministic 20-datapack subset of the full Gleaner Dataset A. The manifest is `configs/reduced/reduced20_datapacks.json`, generated/applied by `scripts/data/make_gleaner_lite.py`.
 
-```bash
-GLEANER_RUN_FULL=1 bash scripts/run_full_all.sh
-```
+The selection criterion is fault-category coverage plus reduced RCA trend matching: cover the represented fault categories while choosing a one-day subset whose reduced RCA Accuracy@1/Accuracy@3 trends are close to the historical full Dataset A RCA results stored under `rca/`. The current manifest covers 15 fault categories. Five categories have two datapacks each (`corrupt`, `delay`, `partition`, `replace-body`, `stress`), and ten categories have one datapack each (`container-kill`, `exception`, `latency`, `loss`, `other`, `replace-code`, `replace-method`, `request-delay`, `response-delay`, `return`).
 
-This path is for future/full orchestration only. It may require full datasets, isolated third-party environments, and multiple days. Running `bash scripts/run_full_all.sh` without `GLEANER_RUN_FULL=1` exits non-zero by design so placeholder full results cannot be mistaken for verified evidence.
+Dataset B is not fault-category sampled. The reduced Dataset B input is `tracepicker_lite`, a two-system subset (`trainticket`, `media`) taken directly from the TracePicker baseline paper dataset for cross-system Trace Pattern Coverage. The full `tracepicker` converted dataset remains available for full/diagnostic runs.
 
-## Reusing Gleaner
+### RCA Sampled-Input Selection
 
-Reusable support is split into human-readable docs and agent-oriented workflows.
+Reduced RCA runs full-input RCA first, then runs sampled-input RCA with `eval batch --include-sampled`. Sampled inputs are selected by:
 
-Human docs:
+- sampler: `--sampler` / `-s`, e.g. `gleaner`, Gleaner paper variants, or `random`;
+- rate: `--sampling-rate`; if omitted, all available sampled rates are auto-discovered under the selected sampler scope;
+- mode: `--sampling-mode`; if omitted, all available sampled modes are auto-discovered under the selected sampler scope.
 
-- `docs/new-inputs.md`: two new-input paths, including TracePicker trace-only conversion through `make_tracepicker.py` and raw RCABench/ClickHouse OpenTelemetry conversion through `platform/rcabench-platform/cli/dataset_transform/make_rcabench.py`.
-- `docs/extending.md`: local `random` sampler/RCA smoke commands, sample/eval single and batch flows, perf-report commands, sampler contract, RCA contract, and report schemas.
-- `docs/troubleshooting.md`: setup, submodule, conversion, detector/conclusion, Drain3 template, optional dependency, and report-generation issues.
+For example, specifying `--sampler gleaner` without a rate or mode runs RCA on all existing `gleaner_<rate>_<mode>` sampled folders. Use `GLEANER_REDUCED_RATES` and `GLEANER_REDUCED_MODES` only to narrow the scope.
 
-Agent skills:
+More details are in `docs/RCABENCH_SAMPLE_CLI.md`.
 
-- `agent_skills/gleaner-new-inputs/SKILL.md`: inspect and convert new input datasets.
-- `agent_skills/gleaner-sampler/SKILL.md`: add/register/validate samplers.
-- `agent_skills/gleaner-rca/SKILL.md`: add/register/validate RCA algorithms.
+### Full Reproduction Path
 
-Minimal local reuse checks:
-
-```bash
-uv run python make_tracepicker.py local-test
-
-DATA_ROOT=temp/rcabench-platform-v2 \
-uv run python platform/rcabench-platform/cli/dataset_transform/make_rcabench.py run \
-  --parallel 4 \
-  --no-skip-finished
-
-GLEANER_PLATFORM_LOG_LEVEL=INFO \
-uv run python scripts/full/platform_cli.py sample show-samplers
-
-GLEANER_PLATFORM_LOG_LEVEL=INFO \
-uv run python scripts/full/platform_cli.py eval show-algorithms
-```
-
-For local offline sample/eval commands on this artifact branch, prefer `scripts/full/platform_cli.py` over root `main.py`; the wrapper avoids upstream online/container imports and focuses on local sample/eval workflows.
-
-## Data Format
-
-Gleaner consumes RCAbench Platform v2 datapacks with traces, metrics, logs, labels, and attributes where available. The reduced AE scripts primarily consume generated report files, while the reuse path can convert raw inputs into the platform layout.
-
-### Traces
-
-| Column | Type | Description |
-|---|---|---|
-| `time` | datetime | Span start time in UTC. |
-| `trace_id` | string | Unique trace identifier. |
-| `span_id` | string | Unique span identifier. |
-| `parent_span_id` | string | Parent span identifier. |
-| `service_name` | string | Service that generated the span. |
-| `span_name` | string | Operation represented by the span. |
-| `duration` | uint64 | Span duration in nanoseconds. |
-| `attr.*` | any | Additional span attributes. |
-
-### Metrics
-
-| Column | Type | Description |
-|---|---|---|
-| `time` | datetime | Metric timestamp in UTC. |
-| `metric` | string | Metric name. |
-| `value` | float64 | Metric value. |
-| `service_name` | string | Service that generated the metric. |
-| `attr.*` | any | Additional metric attributes. |
-
-### Logs
-
-| Column | Type | Description |
-|---|---|---|
-| `time` | datetime | Log timestamp in UTC. |
-| `trace_id` | string | Related trace identifier, when available. |
-| `span_id` | string | Related span identifier, when available. |
-| `service_name` | string | Service that generated the log. |
-| `level` | string | Log level. |
-| `message` | string | Log message. |
-| `attr.*` | any | Additional log attributes. |
-
-Report schemas consumed by reduced experiments are documented in `ARTIFACT_README.md` and `docs/extending.md`.
-
-## Troubleshooting
-
-Start with `docs/troubleshooting.md`. Common quick checks:
+Load the full image when launching the complete long-running setting:
 
 ```bash
-git submodule status --recursive
-uv lock --check
-bash scripts/smoke_test.sh
-bash scripts/prepare_reduced_data.sh
+gunzip -c gleaner-issta2026-ae-full-*.docker.tar.gz | docker load
 ```
 
-If expected-output comparison fails, inspect the path reported by `scripts/compare_expected.py` and compare generated files in `output/artifact/reduced/` with committed files in `artifact_expected/reduced/`.
+Run the guarded full path:
 
-## Citation
-
-If you use Gleaner in your research, please cite:
-
-```bibtex
-@misc{yang2026gleanersemanticallyrichefficientonline,
-  title={Gleaner: A Semantically-Rich and Efficient Online Sampler for Microservice Diagnostics},
-  author={Yifan Yang and Aoyang FANG and Songhan Zhang and Pinjia He},
-  year={2026},
-  eprint={2604.16810},
-  archivePrefix={arXiv},
-  primaryClass={cs.SE},
-  url={https://arxiv.org/abs/2604.16810},
-}
+```bash
+docker run --rm -e GLEANER_RUN_FULL=1 \
+  -v "$PWD/output:/artifact/output" \
+  gleaner-issta2026-ae:full-worktree \
+  bash scripts/run_full_all.sh
 ```
+
+Without `GLEANER_RUN_FULL=1`, the full command exits non-zero by design so placeholder full results cannot be mistaken for verified evidence. The full path uses complete Gleaner Dataset A, full baseline/RCA orchestration, paper sampling rates (`0.1%`, `1%`, `2.5%`, `5%`, `7.5%`, `10%`), RCA rates (`1%`, `10%`), and RQ4 online 5% efficiency reporting for Gleaner and Gleaner WL Kernel.
+
+## Requirements, Status, And License
+
+- `REQUIREMENTS.md` records architecture, hardware/software requirements, Docker/Python requirements, storage expectations, runtime notes, and parallel CPU behavior.
+- `STATUS.md` records the badges requested and the current justification/status for each badge.
+- `LICENSE` records the Gleaner artifact distribution terms. Third-party license notes are summarized in `docs/THIRD_PARTY.md`.
+
+## Data Provenance, Ethics, And Storage
+
+- The reduced image contains converted RCAbench Platform v2 reduced inputs: `gleaner_lite` and `tracepicker_lite`.
+- The full image additionally contains complete Gleaner Dataset A (`data/rcabench-platform-v2/data/gleaner`, `data/rcabench-platform-v2/meta/gleaner`) and the complete converted TracePicker Dataset B (`data/rcabench-platform-v2/data/tracepicker`, `data/rcabench-platform-v2/meta/tracepicker`).
+- The artifact does not require private credentials, commercial services, reviewer identity services, or network APIs after the image archive is available.
+- Commands write generated outputs under `output/`; packaging scripts write archives/checksums under `dist/`.
+- See `REQUIREMENTS.md` for storage estimates and `docs/THIRD_PARTY.md` for third-party source/license notes.
+
+## Project Layout And Reuse Documentation
+
+| Path | Purpose |
+|---|---|
+| `scripts/run_reduced_all.sh` | One-command reduced reproduction. |
+| `scripts/run_rq*.sh` | Individual reduced claim wrappers. |
+| `scripts/full/platform_cli.py` | Local RCAbench Platform sample/eval wrapper used by artifact scripts. |
+| `scripts/data/make_gleaner_lite.py` | Builds/applies the reduced Dataset A manifest. |
+| `scripts/data/make_tracepicker.py` | Builds TracePicker-format converted inputs. |
+| `configs/reduced/reduced20_datapacks.json` | Reduced Dataset A datapack manifest and fault-category counts. |
+| `docs/RCABENCH_SAMPLE_CLI.md` | Sampling/RCA CLI usage, `sample single`, `sample batch`, `-s`, rates, modes, CPU, and clear/rerun flags. |
+| `docs/new-inputs.md` | How to adapt new TracePicker or RCAbench/ClickHouse inputs. |
+| `docs/extending.md` | How to add samplers/RCA algorithms and expected schemas. |
+| `docs/troubleshooting.md` | Common setup, conversion, detector, and report issues. |
+| `docs/RELEASE_PACKAGING.md` | Docker image build/export details for submitters. |
+
+For local sample/eval commands, prefer `scripts/full/platform_cli.py` over root `main.py`; the wrapper avoids upstream online/container imports and focuses on the local artifact workflows.
+
+## Submitter Packaging Note
+
+Reviewers normally do not need to rebuild images. Submitters can rebuild and export the Docker archives with:
+
+```bash
+bash scripts/package_docker_images.sh
+```
+
+The packaging script uses `docker save | gzip` and writes reduced/full image archives plus `.sha256` files under `dist/`. Detailed local build/export instructions are in `docs/RELEASE_PACKAGING.md`.

@@ -25,7 +25,6 @@ plots/
 !data/
 !data/rcabench_dataset/**/*.parquet
 !data/rcabench-platform-v2/**/*.parquet
-!data/artifact/
-!data/artifact/reduced/
-!data/artifact/reduced/**
-!data/artifact/reduced/**/*.parquet
+
+data/rcabench-platform-v2/data/gleaner
+data/rcabench-platform-v2/meta/gleaner

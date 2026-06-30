@@ -11,6 +11,8 @@ cat <<'MSG'
 [full]   - Dataset B TracePicker cross-system evaluation over 5 systems
 [full]   - Baseline samplers: random, TracePicker, TraStrainer, Sifter, Sieve
 [full]   - RCA algorithms: MicroRCA, ShapleyIQ, Nezha
+[full]   - Sampler rates: 0.1%, 1%, 2.5%, 5%, 7.5%, 10%; RCA rates: 1%, 10%
+[full]   - Gleaner ablations: Table 5 variants only
 [full]   - Paper figures/tables: RQ1 Fig.4/Fig.5, RQ2 Fig.6/Fig.7/Table5, RQ3 Table6/Table7, RQ4 Table8
 [full] Expected runtime: long-running; depending on CPU count and baseline environments, this may take multiple days.
 MSG
@@ -51,7 +53,8 @@ printf '\n[full] == postcondition validation ==\n'
 uv run --package Gleaner python scripts/full/validate_full_outputs.py \
   --dataset-a "${GLEANER_FULL_DATASET_A:-gleaner}" \
   --dataset-b "${GLEANER_FULL_DATASET_B:-tracepicker}" \
-  --rates "${GLEANER_FULL_RATES:-0.005,0.01,0.1}" \
-  --modes "${GLEANER_FULL_MODES:-offline}"
+  --rates "${GLEANER_FULL_RATES:-0.001,0.01,0.025,0.05,0.075,0.1}" \
+  --rca-rates "${GLEANER_FULL_RCA_RATES:-0.01,0.1}" \
+  --modes "${GLEANER_FULL_MODES:-offline,online}"
 
 echo "[full] full reproduction pipeline finished"

@@ -1,81 +1,50 @@
 #!/usr/bin/env python3
-"""Generate reduced RQ1-B cross-system evidence for TracePicker Dataset B."""
+"""Summarize paper-style RQ1-B Dataset B trace pattern coverage."""
 
 from __future__ import annotations
 
 import argparse
 import json
+import math
 from pathlib import Path
 from typing import Any
 
 import matplotlib.pyplot as plt
-import pandas as pd
+import polars as pl
 
-DEFAULT_INPUT = Path("../TracePicker/TracePicker/data")
-DEFAULT_SUMMARY = Path("data/artifact/reduced/rq1b_tracepicker_cross_system_summary.csv")
+DEFAULT_INPUT = Path("output/rcabench-platform-v2/sampler_reports/tracepicker/detailed_perf.parquet")
 DEFAULT_OUTPUT = Path("output/artifact/reduced/rq1_cross_system")
-SYSTEMS = ["trainticket", "media", "onlineBoutique", "sockshop", "socialNetwork"]
+DEFAULT_SAMPLERS = ("gleaner_no_logs_no_ad",)
+DEFAULT_RATES = (0.1,)
 DISPLAY = {
     "trainticket": "Train Ticket",
     "media": "Media",
     "onlineBoutique": "Online Boutique",
     "sockshop": "Sock Shop",
     "socialNetwork": "Social Network",
+    "random": "Random",
+    "sifter": "Sifter",
+    "sieve": "Sieve",
+    "trastrainer_no_metrics": "TraStrainer w/o Metrics",
+    "tracepicker": "TracePicker",
+    "gleaner_no_logs_no_ad": "Gleaner w/o Logs & Alarms",
 }
+REQUIRED_COLUMNS = {"sampler", "sampling_rate", "mode", "datapack"}
 
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--input-root", type=Path, default=DEFAULT_INPUT)
-    parser.add_argument("--summary-input", type=Path, default=DEFAULT_SUMMARY, help="Portable precomputed reduced Dataset B summary CSV")
+    parser.add_argument("--input-parquet", type=Path, default=DEFAULT_INPUT)
     parser.add_argument("--output-dir", type=Path, default=DEFAULT_OUTPUT)
+    parser.add_argument("--sampler", action="append", default=None)
+    parser.add_argument("--sampling-rate", action="append", type=float, default=None)
+    parser.add_argument("--mode", default="offline")
+    parser.add_argument("--system", action="append", default=None, help="Dataset B system/datapack to include; repeatable. Defaults to all systems present in the input report; the reduced runner passes the two tracepicker_lite systems.")
     return parser.parse_args()
 
 
 def fail(msg: str) -> None:
     raise SystemExit(f"ERROR: {msg}")
-
-
-def read_csv(path: Path, columns: list[str] | None = None) -> pd.DataFrame:
-    if not path.exists():
-        fail(f"missing TracePicker Dataset B file: {path}")
-    return pd.read_csv(path, usecols=columns)
-
-
-def summarize_system(root: Path, system: str) -> dict[str, Any]:
-    folder = root / system
-    traces = read_csv(folder / "traces_traces.csv")
-    spans = read_csv(folder / "traces_spans.csv", columns=["traceID", "service", "operation", "statusCode"])
-    types = read_csv(folder / "type.csv", columns=["traceId", "pathId"])
-    nodes = read_csv(folder / "nodes.csv")
-
-    trace_count = int(traces["traceID"].nunique())
-    span_count = int(len(spans))
-    service_count = int(spans["service"].nunique(dropna=True))
-    node_count = int(nodes.iloc[:, 0].nunique(dropna=True))
-    operation_count = int((spans["service"].astype(str) + ":" + spans["operation"].astype(str)).nunique())
-    path_count = int(types["pathId"].nunique(dropna=True))
-    avg_spans = float(traces["span_count"].mean())
-    p95_spans = float(traces["span_count"].quantile(0.95))
-    error_rate = float(traces["isError"].mean()) if "isError" in traces else 0.0
-    abnormal_rate = float(traces["abnormal"].mean()) if "abnormal" in traces else 0.0
-    status_error_rate = float((pd.to_numeric(spans["statusCode"], errors="coerce") >= 400).mean())
-
-    return {
-        "system": system,
-        "display_name": DISPLAY.get(system, system),
-        "trace_count": trace_count,
-        "span_count": span_count,
-        "service_count": service_count,
-        "node_count": node_count,
-        "operation_count": operation_count,
-        "path_type_count": path_count,
-        "avg_spans_per_trace": avg_spans,
-        "p95_spans_per_trace": p95_spans,
-        "trace_error_rate": error_rate,
-        "trace_abnormal_rate": abnormal_rate,
-        "span_status_error_rate": status_error_rate,
-    }
 
 
 def fmt(v: Any) -> str:
@@ -84,64 +53,116 @@ def fmt(v: Any) -> str:
     return str(v)
 
 
-def make_markdown(rows: list[dict[str, Any]], input_root: Path, output_dir: Path) -> str:
+def finite(value: Any) -> float | None:
+    if value is None:
+        return None
+    number = float(value)
+    return number if math.isfinite(number) else None
+
+
+def pick_trace_pattern_column(df: pl.DataFrame) -> str:
+    # Platform-internal event coverage corresponds to the paper's EPS/trace-pattern coverage.
+    for col in ("event_coverage", "avg_event_coverage", "unique_trace_coverage", "avg_unique_trace_coverage"):
+        if col in df.columns:
+            return col
+    fail("input parquet has no trace-pattern coverage column; expected avg_event_coverage or equivalent")
+
+
+def load_rows(args: argparse.Namespace) -> list[dict[str, Any]]:
+    if not args.input_parquet.exists():
+        fail(f"missing Dataset B sampler report: {args.input_parquet}")
+    df = pl.read_parquet(args.input_parquet)
+    missing = sorted(REQUIRED_COLUMNS - set(df.columns))
+    if missing:
+        fail(f"input parquet is missing required columns: {', '.join(missing)}")
+    metric = pick_trace_pattern_column(df)
+    samplers = args.sampler or list(DEFAULT_SAMPLERS)
+    rates = args.sampling_rate or list(DEFAULT_RATES)
+    systems = args.system or ["trainticket", "media", "onlineBoutique", "sockshop", "socialNetwork"]
+    filtered = df.filter(
+        (pl.col("mode") == args.mode)
+        & pl.col("sampler").is_in(samplers)
+        & pl.col("sampling_rate").is_in(rates)
+        & pl.col("datapack").is_in(systems)
+    )
+    if filtered.is_empty():
+        available = df.select(["sampler", "sampling_rate", "mode"]).unique().sort(["sampler", "sampling_rate", "mode"])
+        fail(
+            "no Dataset B rows matched requested samplers/rates; available configurations: "
+            + json.dumps(available.to_dicts(), default=str)[:2000]
+        )
+    records: list[dict[str, Any]] = []
+    for row in filtered.sort(["sampler", "dataset", "sampling_rate"]).iter_rows(named=True):
+        system = row["datapack"]
+        records.append(
+            {
+                "system": system,
+                "system_name": DISPLAY.get(system, system),
+                "sampler": row["sampler"],
+                "sampler_name": DISPLAY.get(row["sampler"], row["sampler"]),
+                "sampling_rate": float(row["sampling_rate"]),
+                "trace_pattern_coverage": finite(row.get(metric)),
+                "source_metric": metric,
+            }
+        )
+    return records
+
+
+def make_markdown(rows: list[dict[str, Any]], input_parquet: Path, output_dir: Path) -> str:
     lines = [
-        "# RQ1-B: Dataset B Cross-System Evidence",
+        "# RQ1-B: Cross-System Trace Pattern Coverage",
         "",
         "## Configuration",
         "",
-        f"- Input root: `{input_root}`",
+        f"- Input parquet: `{input_parquet}`",
         f"- Output directory: `{output_dir}`",
-        "- Systems: " + ", ".join(row["display_name"] for row in rows),
-        "- Scope: reduced cross-system evidence from TracePicker Dataset B raw traces; full sampler-baseline cross-system reproduction is reserved for the full pipeline.",
+        "- Paper metric: Trace Pattern Coverage",
+        "- Platform source metric: `avg_event_coverage` when available",
+        "- Dataset: TracePicker Dataset B (five microservice systems)",
         "",
-        "## Cross-System Summary",
+        "## Trace Pattern Coverage",
         "",
+        "| System | Sampler | Rate | Trace Pattern Coverage |",
+        "|---|---|---:|---:|",
     ]
-    cols = [
-        ("display_name", "System"),
-        ("trace_count", "Traces"),
-        ("span_count", "Spans"),
-        ("service_count", "Services"),
-        ("operation_count", "Operations"),
-        ("path_type_count", "Path Types"),
-        ("avg_spans_per_trace", "Avg Spans/Trace"),
-        ("trace_error_rate", "Trace Error Rate"),
-    ]
-    lines.append("| " + " | ".join(label for _, label in cols) + " |")
-    lines.append("| " + " | ".join(["---"] * len(cols)) + " |")
     for row in rows:
-        lines.append("| " + " | ".join(fmt(row[key]) for key, _ in cols) + " |")
+        lines.append(
+            f"| {row['system_name']} | {row['sampler_name']} | {row['sampling_rate']:.3f} | {fmt(row['trace_pattern_coverage'])} |"
+        )
     lines += [
         "",
-        "## Interpretation",
+        "## Scope Note",
         "",
-        "- Dataset B spans five heterogeneous microservice systems with different trace volumes, service counts, path types, and span depths.",
-        "- This reduced evidence supports the cross-system part of RQ1 at the dataset-diversity/input-coverage level without rerunning expensive baseline samplers.",
-        "- Full paper-equivalent cross-system sampler comparison should use the full pipeline to regenerate TracePicker sampler reports and paper figures.",
+        "- The reduced live path reruns Gleaner w/o Logs & Alarms on Dataset B by default, matching the paper's log-free/alarm-free Dataset B setting.",
+        "- Baseline Dataset B rows are included only if their sampled reports are present or explicitly generated in the full path.",
         "",
     ]
     return "\n".join(lines)
 
 
 def plot(rows: list[dict[str, Any]], output_dir: Path) -> None:
-    df = pd.DataFrame(rows)
-    fig, axes = plt.subplots(1, 3, figsize=(13, 4))
-    x = range(len(df))
-    labels = df["display_name"].tolist()
-    specs = [
-        ("trace_count", "Traces"),
-        ("service_count", "Services"),
-        ("path_type_count", "Path Types"),
-    ]
-    colors = ["#2b6f6c", "#d58a2a", "#6f7d2b"]
-    for ax, (metric, title), color in zip(axes, specs, colors, strict=True):
-        ax.bar(x, df[metric], color=color, alpha=0.88)
-        ax.set_title(title, fontsize=12, weight="bold")
-        ax.set_xticks(list(x))
-        ax.set_xticklabels(labels, rotation=35, ha="right", fontsize=9)
-        ax.grid(axis="y", alpha=0.25, linestyle="--")
-    fig.suptitle("RQ1-B Dataset B Cross-System Scale", fontsize=14, weight="bold")
+    df = pl.DataFrame(rows).filter(pl.col("trace_pattern_coverage").is_not_null())
+    if df.is_empty():
+        return
+    samplers = df.get_column("sampler_name").unique(maintain_order=True).to_list()
+    systems = df.get_column("system_name").unique(maintain_order=True).to_list()
+    fig, ax = plt.subplots(figsize=(11, 4.5))
+    width = 0.8 / max(1, len(samplers))
+    x = list(range(len(systems)))
+    for idx, sampler in enumerate(samplers):
+        vals = []
+        for system in systems:
+            sub = df.filter((pl.col("system_name") == system) & (pl.col("sampler_name") == sampler))
+            vals.append(None if sub.is_empty() else sub.get_column("trace_pattern_coverage").mean())
+        offsets = [pos + (idx - (len(samplers)-1)/2) * width for pos in x]
+        ax.bar(offsets, vals, width=width, label=sampler)
+    ax.set_title("RQ1-B Dataset B Trace Pattern Coverage", fontsize=13, weight="bold")
+    ax.set_ylabel("Trace Pattern Coverage")
+    ax.set_xticks(x)
+    ax.set_xticklabels(systems, rotation=25, ha="right")
+    ax.set_ylim(0, 1)
+    ax.grid(axis="y", alpha=0.25, linestyle="--")
+    ax.legend(fontsize=8)
     fig.tight_layout()
     fig.savefig(output_dir / "rq1b_tracepicker_cross_system.png", dpi=200)
     plt.close(fig)
@@ -149,16 +170,15 @@ def plot(rows: list[dict[str, Any]], output_dir: Path) -> None:
 
 def main() -> None:
     args = parse_args()
-    if args.summary_input.exists():
-        rows = pd.read_csv(args.summary_input).to_dict(orient="records")
-    else:
-        rows = [summarize_system(args.input_root, system) for system in SYSTEMS]
+    rows = load_rows(args)
     args.output_dir.mkdir(parents=True, exist_ok=True)
-    pd.DataFrame(rows).to_csv(args.output_dir / "rq1b_tracepicker_cross_system_summary.csv", index=False, lineterminator="\n")
-    (args.output_dir / "rq1b_tracepicker_cross_system_summary.json").write_text(json.dumps({"config": {"input_root": str(args.input_root), "output_dir": str(args.output_dir)}, "summary": rows}, indent=2) + "\n")
-    (args.output_dir / "rq1b_tracepicker_cross_system_results.md").write_text(make_markdown(rows, args.input_root, args.output_dir), encoding="utf-8")
+    pl.DataFrame(rows).write_csv(args.output_dir / "rq1b_tracepicker_cross_system_summary.csv")
+    (args.output_dir / "rq1b_tracepicker_cross_system_summary.json").write_text(
+        json.dumps({"config": vars(args) | {"input_parquet": str(args.input_parquet), "output_dir": str(args.output_dir)}, "summary": rows}, indent=2, default=str) + "\n"
+    )
+    (args.output_dir / "rq1b_tracepicker_cross_system_results.md").write_text(make_markdown(rows, args.input_parquet, args.output_dir), encoding="utf-8")
     plot(rows, args.output_dir)
-    print(f"[rq1b] wrote cross-system evidence to {args.output_dir}")
+    print(f"[rq1b] wrote Dataset B trace-pattern coverage to {args.output_dir}")
 
 
 if __name__ == "__main__":

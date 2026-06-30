@@ -25,19 +25,17 @@ datasets:
 
 sampling:
   modes: [offline]
-  rates: [0.005, 0.01, 0.1]
+  rates: [0.001, 0.01, 0.025, 0.05, 0.075, 0.1]
   dataset_a_samplers:
     - gleaner
-    - gleaner_latency_dominate
-    - gleaner_log_dominate
-    - gleaner_no_ad
-    - gleaner_no_dpp
     - gleaner_no_logs
+    - gleaner_no_ad
     - gleaner_no_logs_no_ad
-    - gleaner_no_rebalance
+    - gleaner_wl_kernel
     - gleaner_pure_diversity
     - gleaner_top_score
-    - gleaner_wl_kernel
+    - gleaner_no_dpp
+    - gleaner_anomaly_pure_diversity
     - random
     - tracepicker
     - trastrainer
@@ -58,10 +56,13 @@ rca:
     - shapleyiq
     - nezha
   include_sampled: true
-  metrics:
+  paper_rates: [0.01, 0.1]
+  platform_metrics:
     - AC@1
     - AC@3
-    - MRR
+  paper_metrics:
+    - Accuracy@1
+    - Accuracy@3
 
 figures_and_tables:
   rq1:

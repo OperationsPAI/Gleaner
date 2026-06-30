@@ -4,6 +4,13 @@ These scripts describe the full paper setting, including full Dataset A, full Da
 
 The full path is intentionally not the reviewer-fast AE path. It can take days on CPU-only machines and depends on third-party baseline environments for TracePicker, TraStrainer, Sieve, Sifter, MicroRCA, ShapleyIQ, and Nezha.
 
+The default settings are paper-aligned:
+
+- Sampler quality/ablation rates: `0.001,0.01,0.025,0.05,0.075,0.1` (`0.1%` through `10%`).
+- Downstream RCA rates: `0.01,0.1` (`1%` and `10%`), controlled separately through `GLEANER_FULL_RCA_RATES`.
+- Efficiency target: `0.05` (`5%`) in online mode in `scripts/artifact/full_paper_outputs.py`.
+- Gleaner ablations: Full, w/o Logs, w/o Alarms, w/o Logs & Alarms, WL Kernel, Pure Diversity, Pure Anomaly, w/o Anomaly, and w/o Diversity.
+
 ## Baseline Environments
 
 Baseline samplers are not all installed into the same Python environment:

@@ -1,0 +1,37 @@
+{
+    "benchmark": "clickhouse",
+    "created_at": "2025-09-04T05:45:37.159Z",
+    "description": "Fault for task 44eddffa-ed17-4727-852f-d32d0a0266fa",
+    "display_config": "{\"duration\":4,\"injection_point\":{\"app_name\":\"ts-auth-service\",\"method\":\"GET\",\"route\":\"/api/v1/verifycode/verify/*\",\"server_address\":\"ts-verification-code-service\",\"server_port\":\"8080\"},\"namespace\":\"ts\"}",
+    "end_time": "2025-09-04T05:49:37Z",
+    "engine_config": "{\"name\":\"InjectionConf\",\"range\":[0,30],\"children\":{\"5\":{\"name\":\"5\",\"range\":[0,2],\"children\":{\"0\":{\"name\":\"0\",\"range\":[1,60],\"children\":null,\"description\":\"Time Unit Minute\",\"value\":4},\"1\":{\"name\":\"1\",\"range\":[0,0],\"children\":null,\"description\":\"{ts: 0}\",\"value\":0},\"2\":{\"name\":\"2\",\"range\":[0,67],\"children\":null,\"description\":\"Flattened HTTP Endpoint Index\",\"value\":0}},\"description\":\"\",\"value\":0}},\"description\":\"\",\"value\":5}",
+    "fault_type": 5,
+    "ground_truth": {
+        "container": [
+            "ts-auth-service",
+            "ts-verification-code-service"
+        ],
+        "function": null,
+        "metric": null,
+        "pod": [
+            "ts-auth-service-5dd97d5ccd-5xk4m",
+            "ts-verification-code-service-57cddfb855-x4crt"
+        ],
+        "service": [
+            "ts-auth-service",
+            "ts-verification-code-service"
+        ],
+        "span": [
+            "ts-auth-service",
+            "ts-verification-code-service"
+        ]
+    },
+    "id": 8462,
+    "injection_name": "ts5-ts-auth-service-request-abort-fkjx9w",
+    "pre_duration": 4,
+    "start_time": "2025-09-04T05:45:37Z",
+    "status": 2,
+    "task": null,
+    "task_id": "44eddffa-ed17-4727-852f-d32d0a0266fa",
+    "updated_at": "2025-09-04T05:50:38.089Z"
+}

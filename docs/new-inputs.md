@@ -70,7 +70,7 @@ Expected CSV columns:
 traceID, spanId, parentSpanId, startTime, duration, statusCode, service, operation, instance
 ```
 
-`make_tracepicker.py` converts this trace-only input to the platform layout by:
+`scripts/data/make_tracepicker.py` converts this trace-only input to the platform layout by:
 
 - mapping timestamps from microseconds to UTC datetimes;
 - mapping TracePicker span/service columns to RCAbench span columns;
@@ -83,7 +83,7 @@ Because this path has no true abnormal window, logs, alarms, or RCA labels, use 
 ### Local Smoke Test
 
 ```bash
-uv run python make_tracepicker.py local-test
+uv run python scripts/data/make_tracepicker.py local-test
 ```
 
 This reads `data/tracepicker/sockshop/traces_spans.csv` and prints converted columns, trace counts, and service distribution.
@@ -92,7 +92,7 @@ This reads `data/tracepicker/sockshop/traces_spans.csv` and prints converted col
 
 ```bash
 DATA_ROOT=temp/tracepicker-platform \
-uv run python make_tracepicker.py run \
+uv run python scripts/data/make_tracepicker.py run \
   --src-folder data/tracepicker \
   --dataset-name tracepicker
 ```
@@ -220,7 +220,7 @@ After conversion, use the commands in `docs/extending.md` to run sampler and RCA
 
 | Input | Use path | Recommended first command | Gleaner variant |
 |---|---|---|---|
-| Legacy TracePicker `traces_spans.csv` only | Path A | `uv run python make_tracepicker.py local-test` | `gleaner_no_logs_no_ad` |
+| Legacy TracePicker `traces_spans.csv` only | Path A | `uv run python scripts/data/make_tracepicker.py local-test` | `gleaner_no_logs_no_ad` |
 | Raw traces, logs, metrics, env, injection, detector conclusion | Path B | `make_rcabench.py run` | `gleaner` |
 | Raw traces/logs/metrics but missing or stale `conclusion.csv` | Path B with detector-first flow | `detector.py run --convert` | `gleaner` |
 

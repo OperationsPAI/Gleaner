@@ -1,0 +1,42 @@
+{
+    "benchmark": "clickhouse",
+    "created_at": "2025-07-21T08:45:13.622329Z",
+    "description": "Fault for task 54fb9f7f-cc62-44ff-bce1-b6c969513db5",
+    "display_config": "{\"correlation\":28,\"corrupt\":53,\"direction\":\"to\",\"duration\":4,\"injection_point\":{\"source_service\":\"mysql\",\"target_service\":\"ts-security-service\"},\"namespace\":\"ts\"}",
+    "end_time": "2025-07-21T08:49:13Z",
+    "engine_config": "{\"name\":\"InjectionConf\",\"range\":[0,30],\"children\":{\"20\":{\"name\":\"20\",\"range\":[0,5],\"children\":{\"0\":{\"name\":\"0\",\"range\":[1,60],\"children\":null,\"description\":\"Time Unit Minute\",\"value\":4},\"1\":{\"name\":\"1\",\"range\":[0,0],\"children\":null,\"description\":\"{ts: 0}\",\"value\":0},\"2\":{\"name\":\"2\",\"range\":[0,123],\"children\":null,\"description\":\"Flattened network pair index\",\"value\":8},\"3\":{\"name\":\"3\",\"range\":[1,100],\"children\":null,\"description\":\"Packet corruption percentage\",\"value\":53},\"4\":{\"name\":\"4\",\"range\":[0,100],\"children\":null,\"description\":\"Correlation percentage\",\"value\":28},\"5\":{\"name\":\"5\",\"range\":[1,3],\"children\":null,\"description\":\"Direction (1=to, 2=from, 3=both)\",\"value\":1}},\"description\":\"\",\"value\":0}},\"description\":\"\",\"value\":20}",
+    "fault_type": 20,
+    "ground_truth": {
+        "container": [
+            "mysql",
+            "ts-security-service"
+        ],
+        "function": null,
+        "metric": null,
+        "pod": [
+            "mysql-0",
+            "ts-security-service-744c867b88-hm8bt"
+        ],
+        "service": [
+            "mysql",
+            "ts-security-service"
+        ],
+        "span": [
+            "mysql",
+            "ts-security-service"
+        ],
+        "additional_properties": {}
+    },
+    "id": 1223,
+    "injection_name": "ts6-mysql-corrupt-tr9bts",
+    "labels": {
+        "batch": "bootstrap",
+        "env": "prod"
+    },
+    "pre_duration": 4,
+    "start_time": "2025-07-21T08:45:13Z",
+    "status": 2,
+    "task_id": "54fb9f7f-cc62-44ff-bce1-b6c969513db5",
+    "updated_at": "2025-07-21T08:49:14.020103Z",
+    "additional_properties": {}
+}

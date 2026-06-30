@@ -1,0 +1,31 @@
+{
+    "benchmark": "clickhouse",
+    "created_at": "2025-08-11T17:58:36.353Z",
+    "description": "Fault for task 917f0761-b8bd-4ead-b55b-20bfc977d007",
+    "display_config": "{\"duration\":4,\"injection_point\":{\"app_label\":\"ts-preserve-service\",\"container_name\":\"ts-preserve-service\",\"pod_name\":\"ts-preserve-service-7684df89bd-sk5cd\"},\"namespace\":\"ts\"}",
+    "end_time": "2025-08-11T18:02:36Z",
+    "engine_config": "{\"name\":\"InjectionConf\",\"range\":[0,30],\"children\":{\"2\":{\"name\":\"2\",\"range\":[0,2],\"children\":{\"0\":{\"name\":\"0\",\"range\":[1,60],\"children\":null,\"description\":\"Time Unit Minute\",\"value\":4},\"1\":{\"name\":\"1\",\"range\":[0,0],\"children\":null,\"description\":\"{ts: 0}\",\"value\":0},\"2\":{\"name\":\"2\",\"range\":[0,47],\"children\":null,\"description\":\"Container Index\",\"value\":27}},\"description\":\"\",\"value\":0}},\"description\":\"\",\"value\":2}",
+    "fault_type": 2,
+    "ground_truth": {
+        "container": [
+            "ts-preserve-service"
+        ],
+        "function": null,
+        "metric": null,
+        "pod": [
+            "ts-preserve-service-7684df89bd-sk5cd"
+        ],
+        "service": [
+            "ts-preserve-service"
+        ],
+        "span": null
+    },
+    "id": 4997,
+    "injection_name": "ts5-ts-preserve-service-container-kill-2pxkqk",
+    "pre_duration": 4,
+    "start_time": "2025-08-11T17:58:36Z",
+    "status": 2,
+    "task": null,
+    "task_id": "917f0761-b8bd-4ead-b55b-20bfc977d007",
+    "updated_at": "2025-08-11T18:04:36.62Z"
+}

@@ -1,150 +1,151 @@
 {
   "datapacks": [
     {
-      "datapack": "ts0-ts-basic-service-response-delay-5krk58",
-      "fault_category": "response-delay"
-    },
-    {
-      "datapack": "ts0-ts-seat-service-request-delay-tcwh2k",
-      "fault_category": "request-delay"
-    },
-    {
-      "datapack": "ts0-ts-security-service-request-replace-method-j6gpxx",
+      "datapack": "ts0-ts-basic-service-request-replace-method-z2nlcm",
       "fault_category": "replace-method"
     },
     {
-      "datapack": "ts1-ts-order-service-return-ntc7dv",
-      "fault_category": "return"
-    },
-    {
-      "datapack": "ts1-ts-preserve-service-delay-w7zb74",
-      "fault_category": "delay"
-    },
-    {
-      "datapack": "ts2-ts-basic-service-latency-ndg28l",
-      "fault_category": "latency"
-    },
-    {
-      "datapack": "ts2-ts-basic-service-response-delay-8s6m54",
-      "fault_category": "response-delay"
-    },
-    {
-      "datapack": "ts2-ts-inside-payment-service-exception-b4n728",
+      "datapack": "ts1-ts-order-service-exception-b25hld",
       "fault_category": "exception"
     },
     {
-      "datapack": "ts3-ts-food-service-response-replace-body-mn5pkz",
-      "fault_category": "replace-body"
-    },
-    {
-      "datapack": "ts3-ts-travel-plan-service-request-delay-2xpd97",
+      "datapack": "ts1-ts-travel-service-request-delay-w459t9",
       "fault_category": "request-delay"
     },
     {
-      "datapack": "ts4-ts-basic-service-request-abort-pxcfsp",
-      "fault_category": "other"
+      "datapack": "ts1-ts-travel2-service-response-delay-9kbhxd",
+      "fault_category": "response-delay"
     },
     {
-      "datapack": "ts4-ts-security-service-corrupt-9lndmd",
-      "fault_category": "corrupt"
+      "datapack": "ts3-ts-basic-service-response-replace-body-hd69sc",
+      "fault_category": "replace-body"
     },
     {
-      "datapack": "ts5-ts-order-service-partition-x8xglz",
+      "datapack": "ts3-ts-station-service-return-4z45w8",
+      "fault_category": "return"
+    },
+    {
+      "datapack": "ts4-ts-order-service-latency-l84kbb",
+      "fault_category": "latency"
+    },
+    {
+      "datapack": "ts4-ts-order-service-stress-m2b2wf",
+      "fault_category": "stress"
+    },
+    {
+      "datapack": "ts4-ts-preserve-service-partition-6jscrw",
       "fault_category": "partition"
     },
     {
-      "datapack": "ts5-ts-preserve-service-stress-845w52",
+      "datapack": "ts4-ts-seat-service-corrupt-swqg8x",
+      "fault_category": "corrupt"
+    },
+    {
+      "datapack": "ts4-ts-train-service-stress-htp8rz",
       "fault_category": "stress"
     },
     {
-      "datapack": "ts5-ts-station-service-container-kill-c99ccx",
-      "fault_category": "container-kill"
-    },
-    {
-      "datapack": "ts6-ts-basic-service-delay-6v4trr",
+      "datapack": "ts4-ts-travel-service-delay-zv2ntr",
       "fault_category": "delay"
     },
     {
-      "datapack": "ts7-ts-seat-service-stress-tzxh2f",
-      "fault_category": "stress"
+      "datapack": "ts5-ts-auth-service-request-abort-fkjx9w",
+      "fault_category": "other"
     },
     {
-      "datapack": "ts8-ts-basic-service-response-replace-code-w8c2xr",
-      "fault_category": "replace-code"
+      "datapack": "ts5-ts-order-service-loss-5r5z8b",
+      "fault_category": "loss"
     },
     {
-      "datapack": "ts9-ts-order-service-container-kill-bsh6lx",
+      "datapack": "ts5-ts-preserve-service-container-kill-2pxkqk",
       "fault_category": "container-kill"
     },
     {
-      "datapack": "ts9-ts-travel-plan-service-loss-nr7g2b",
-      "fault_category": "loss"
+      "datapack": "ts5-ts-preserve-service-partition-dkhqzh",
+      "fault_category": "partition"
+    },
+    {
+      "datapack": "ts5-ts-preserve-service-response-replace-body-wqn6rr",
+      "fault_category": "replace-body"
+    },
+    {
+      "datapack": "ts5-ts-travel-service-response-replace-code-m9pmws",
+      "fault_category": "replace-code"
+    },
+    {
+      "datapack": "ts6-mysql-corrupt-tr9bts",
+      "fault_category": "corrupt"
+    },
+    {
+      "datapack": "ts9-ts-price-service-delay-b9jxfr",
+      "fault_category": "delay"
     }
   ],
   "fault_category_counts": [
     {
-      "datapack_count": 2,
-      "fault_category": "container-kill"
+      "fault_category": "corrupt",
+      "datapack_count": 2
     },
     {
-      "datapack_count": 2,
-      "fault_category": "delay"
+      "fault_category": "delay",
+      "datapack_count": 2
     },
     {
-      "datapack_count": 2,
-      "fault_category": "request-delay"
+      "fault_category": "partition",
+      "datapack_count": 2
     },
     {
-      "datapack_count": 2,
-      "fault_category": "response-delay"
+      "fault_category": "replace-body",
+      "datapack_count": 2
     },
     {
-      "datapack_count": 2,
-      "fault_category": "stress"
+      "fault_category": "stress",
+      "datapack_count": 2
     },
     {
-      "datapack_count": 1,
-      "fault_category": "corrupt"
+      "fault_category": "container-kill",
+      "datapack_count": 1
     },
     {
-      "datapack_count": 1,
-      "fault_category": "exception"
+      "fault_category": "exception",
+      "datapack_count": 1
     },
     {
-      "datapack_count": 1,
-      "fault_category": "latency"
+      "fault_category": "latency",
+      "datapack_count": 1
     },
     {
-      "datapack_count": 1,
-      "fault_category": "loss"
+      "fault_category": "loss",
+      "datapack_count": 1
     },
     {
-      "datapack_count": 1,
-      "fault_category": "other"
+      "fault_category": "other",
+      "datapack_count": 1
     },
     {
-      "datapack_count": 1,
-      "fault_category": "partition"
+      "fault_category": "replace-code",
+      "datapack_count": 1
     },
     {
-      "datapack_count": 1,
-      "fault_category": "replace-body"
+      "fault_category": "replace-method",
+      "datapack_count": 1
     },
     {
-      "datapack_count": 1,
-      "fault_category": "replace-code"
+      "fault_category": "request-delay",
+      "datapack_count": 1
     },
     {
-      "datapack_count": 1,
-      "fault_category": "replace-method"
+      "fault_category": "response-delay",
+      "datapack_count": 1
     },
     {
-      "datapack_count": 1,
-      "fault_category": "return"
+      "fault_category": "return",
+      "datapack_count": 1
     }
   ],
-  "output_dir": "output/rcabench-platform-v2/sampler_reports/gleaner_reduced20",
+  "output_dir": "output/rcabench-platform-v2/sampler_reports/gleaner_lite",
   "schema_version": "1.0",
-  "source_detailed": "output/rcabench-platform-v2/sampler_reports/gleaner/detailed_perf.parquet",
+  "selection_objective": "fault-category coverage with reduced RCA Accuracy@1/Accuracy@3 trend matching against historical full Dataset A RCA results in rca/",
+  "source_detailed": "rca/*/sampler.detailed.perf.parquet and rca/*/datapack.perf.parquet",
   "subset_size": 20
 }

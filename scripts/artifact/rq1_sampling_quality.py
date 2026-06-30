@@ -6,6 +6,7 @@ from __future__ import annotations
 import argparse
 import json
 import math
+import os
 import sys
 from pathlib import Path
 from typing import Any, Iterable
@@ -13,10 +14,16 @@ from typing import Any, Iterable
 import polars as pl
 
 DEFAULT_INPUT_AGGREGATED = Path(
-    "output/rcabench-platform-v2/sampler_reports/gleaner_reduced20/aggregated_perf.parquet"
+    os.getenv(
+        "GLEANER_REDUCED_AGGREGATED",
+        "output/rcabench-platform-v2/sampler_reports/gleaner_lite/aggregated_perf.parquet",
+    )
 )
 DEFAULT_INPUT_DETAILED = Path(
-    "output/rcabench-platform-v2/sampler_reports/gleaner_reduced20/detailed_perf.parquet"
+    os.getenv(
+        "GLEANER_REDUCED_DETAILED",
+        "output/rcabench-platform-v2/sampler_reports/gleaner_lite/detailed_perf.parquet",
+    )
 )
 DEFAULT_OUTPUT_DIR = Path("output/artifact/reduced/rq1")
 DEFAULT_MODE = "offline"
@@ -24,17 +31,15 @@ DEFAULT_MODE = "offline"
 DISPLAY_NAMES = {
     "gleaner": "Gleaner",
     "gleaner_no_logs": "Gleaner w/o Logs",
-    "gleaner_no_ad": "Gleaner w/o AD",
-    "gleaner_no_logs_no_ad": "Gleaner w/o Logs + AD",
+    "gleaner_no_ad": "Gleaner w/o Alarms",
+    "gleaner_no_logs_no_ad": "Gleaner w/o Logs & Alarms",
     "gleaner_pure_diversity": "Gleaner Pure Diversity",
     "gleaner_small_batch": "Gleaner Small Batch",
     "gleaner_medium_batch": "Gleaner Medium Batch",
     "gleaner_unlimited_batch": "Gleaner Unlimited Batch",
-    "gleaner_no_dpp": "Gleaner w/o DPP",
-    "gleaner_no_rebalance": "Gleaner w/o Rebalance",
-    "gleaner_latency_dominate": "Gleaner Latency-Dominant",
-    "gleaner_log_dominate": "Gleaner Log-Dominant",
-    "gleaner_top_score": "Gleaner Top Score",
+    "gleaner_no_dpp": "Gleaner w/o Diversity",
+    "gleaner_anomaly_pure_diversity": "Gleaner w/o Anomaly",
+    "gleaner_top_score": "Gleaner Pure Anomaly",
     "gleaner_wl_kernel": "Gleaner WL Kernel",
     "tracepicker": "TracePicker",
     "trastrainer": "TrasTrainer",
@@ -49,34 +54,39 @@ REQUIRED_DETAILED_COLUMNS = {"sampler", "mode", "sampling_rate", "datapack"}
 SUMMARY_METRICS = [
     "avg_api_coverage",
     "avg_path_coverage_dedup",
-    "avg_path_coverage",
     "avg_event_coverage",
-    "avg_unique_trace_coverage",
     "avg_shannon_entropy",
     "avg_proportion_anomaly",
-    "avg_gt_trace_proportion",
+    "avg_proportion_rare",
 ]
 REQUIRED_METRIC_CANDIDATES = [
     "avg_api_coverage",
     "avg_path_coverage_dedup",
-    "avg_path_coverage",
     "avg_event_coverage",
-    "avg_unique_trace_coverage",
     "avg_shannon_entropy",
     "avg_proportion_anomaly",
+    "avg_proportion_rare",
 ]
 HIGHER_IS_BETTER = {
     "avg_api_coverage",
     "avg_path_coverage_dedup",
-    "avg_path_coverage",
     "avg_event_coverage",
-    "avg_unique_trace_coverage",
     "avg_shannon_entropy",
     "avg_proportion_anomaly",
-    "avg_gt_trace_proportion",
+    "avg_proportion_rare",
 }
+RQ1_SAMPLERS = {
+    "gleaner",
+    "random",
+    "tracepicker",
+    "trastrainer",
+    "trastrainer_no_metrics",
+    "sifter",
+    "sieve",
+}
+
 LIMITATIONS = [
-    "Reduced RQ1 currently summarizes existing Gleaner sampler variants.",
+    "Reduced RQ1 excludes Gleaner ablation variants; those are reported under the ablation workflow.",
     "Full cross-baseline sampler comparison needs additional TracePicker/TraStrainer/Sieve/Sifter reports.",
 ]
 
@@ -119,13 +129,11 @@ def fail(message: str) -> None:
 def metric_label(metric: str) -> str:
     labels = {
         "avg_api_coverage": "API Coverage",
-        "avg_path_coverage_dedup": "Path Coverage Dedup",
-        "avg_path_coverage": "Path Coverage",
-        "avg_event_coverage": "Event Coverage",
-        "avg_unique_trace_coverage": "Unique Trace Coverage",
+        "avg_path_coverage_dedup": "Path Coverage",
+        "avg_event_coverage": "Trace Pattern Coverage",
         "avg_shannon_entropy": "Shannon Entropy",
         "avg_proportion_anomaly": "Proportion Anomaly",
-        "avg_gt_trace_proportion": "GT Trace Proportion",
+        "avg_proportion_rare": "Proportion Rare",
     }
     return labels.get(metric, metric.replace("avg_", "").replace("_", " ").title())
 
@@ -160,9 +168,6 @@ def format_value(value: object) -> str:
 def available_metrics(columns: Iterable[str]) -> list[str]:
     column_set = set(columns)
     metrics = [metric for metric in SUMMARY_METRICS if metric in column_set]
-    # Prefer the de-duplicated path coverage column when both are available.
-    if "avg_path_coverage_dedup" in metrics and "avg_path_coverage" in metrics:
-        metrics.remove("avg_path_coverage")
     return metrics
 
 
@@ -218,11 +223,11 @@ def load_filtered(
     if not metrics:
         fail("aggregated input has no summary metrics available")
 
-    filtered = aggregated.filter(pl.col("mode") == mode)
-    detailed_filtered = detailed.filter(pl.col("mode") == mode)
+    filtered = aggregated.filter((pl.col("mode") == mode) & pl.col("sampler").is_in(RQ1_SAMPLERS))
+    detailed_filtered = detailed.filter((pl.col("mode") == mode) & pl.col("sampler").is_in(RQ1_SAMPLERS))
     if filtered.height == 0:
         fail(
-            f"no rows after filtering mode={mode!r}; available configurations: "
+            f"no rows after filtering mode={mode!r} and RQ1 samplers={sorted(RQ1_SAMPLERS)}; available configurations: "
             f"{available_configurations(aggregated) or 'none'}"
         )
     if detailed_filtered.height == 0:
@@ -378,9 +383,12 @@ def make_markdown(
     lines.append("## Limitations")
     lines.append("")
     lines.append(
-        "- Reduced RQ1 currently summarizes existing Gleaner sampler variants; full "
-        "cross-baseline sampler comparison needs additional "
-        "TracePicker/TraStrainer/Sieve/Sifter reports."
+        "- Reduced RQ1 excludes Gleaner ablation variants; ablation variants are "
+        "reported by `scripts/run_rq2_ablation.sh`."
+    )
+    lines.append(
+        "- Full cross-baseline sampler comparison needs additional "
+        "TracePicker/TraStrainer/Sieve/Sifter reports when those baselines are unavailable in the reduced reports."
     )
     lines.append("- Plot files are intentionally omitted to keep expected-output comparison stable.")
     lines.append("")

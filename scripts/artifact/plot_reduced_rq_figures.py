@@ -33,8 +33,8 @@ except Exception as exc:  # pragma: no cover - exercised only when env is broken
     raise SystemExit(1) from exc
 
 DEFAULT_RQ1 = Path("output/artifact/reduced/rq1/rq1_sampling_quality_summary.csv")
-DEFAULT_RQ2 = Path("output/artifact/reduced/rq2/rq2_rca_effectiveness_summary.csv")
-DEFAULT_RQ3 = Path("output/artifact/reduced/rq3/rq3_ablation_summary.csv")
+DEFAULT_RQ2 = Path("output/artifact/reduced/rq2/rq2_ablation_summary.csv")
+DEFAULT_RQ3 = Path("output/artifact/reduced/rq3/rq3_rca_effectiveness_summary.csv")
 DEFAULT_RQ4 = Path("output/artifact/reduced/rq4/rq4_efficiency_summary.csv")
 DEFAULT_FIGURE_DIR = Path("output/artifact/reduced/figures")
 DEFAULT_REPORT = Path("output/artifact/reduced/REPORT.md")
@@ -54,30 +54,28 @@ COLORS = ["#356f8c", "#f28e2b", "#4e9f3d", "#b35c1e", "#6b7280", "#8c6bb1"]
 RQ1_METRICS = [
     "avg_api_coverage",
     "avg_path_coverage_dedup",
-    "avg_unique_trace_coverage",
+    "avg_event_coverage",
     "avg_shannon_entropy",
     "avg_proportion_anomaly",
+    "avg_proportion_rare",
 ]
-RQ2_METRICS = ["ac_at_1_mean", "ac_at_3_mean"]
-RQ3_METRICS = [
+RQ2_METRICS = [
     "avg_api_coverage",
-    "avg_unique_trace_coverage",
+    "avg_event_coverage",
     "avg_shannon_entropy",
     "avg_proportion_anomaly",
-    "avg_path_coverage_dedup",
-    "avg_benefit_cost_ratio",
 ]
+RQ3_METRICS = ["accuracy_at_1_mean", "accuracy_at_3_mean"]
 RQ4_METRICS = [
     "avg_runtime_per_trace_ms",
-    "avg_benefit_cost_ratio",
     "avg_actual_sampling_rate",
-    "avg_controllability",
+    "avg_benefit_cost_ratio",
 ]
 
 PAPER_MAPPING = {
     "rq1": "Paper RQ1: Sampling Quality and Diversity (Fig. 4, Fig. 5, Finding 1)",
-    "rq2": "Paper RQ3: Impact on Downstream Root Cause Analysis (Table 6, Table 7, Finding 3)",
-    "rq3": "Paper RQ2: Ablation Study (Table 5, Fig. 6, Fig. 7, Table 7, Finding 2)",
+    "rq2": "Paper RQ2: Ablation Study (Table 5, Fig. 6, Fig. 7, Table 7, Finding 2)",
+    "rq3": "Paper RQ3: Impact on Downstream Root Cause Analysis (Table 6, Table 7, Finding 3)",
     "rq4": "Paper RQ4: Efficiency Analysis (Table 8, Finding 4)",
 }
 
@@ -126,17 +124,17 @@ def label_for_metric(metric: str) -> str:
     labels = {
         "avg_api_coverage": "API coverage",
         "avg_path_coverage_dedup": "Path coverage",
-        "avg_event_coverage": "Event coverage",
-        "avg_unique_trace_coverage": "Unique trace coverage",
+        "avg_event_coverage": "Trace pattern coverage",
+        "avg_unique_trace_coverage": "Trace pattern coverage",
         "avg_shannon_entropy": "Shannon entropy",
         "avg_proportion_anomaly": "Anomaly proportion",
+        "avg_proportion_rare": "Rare proportion",
         "avg_gt_trace_proportion": "GT trace proportion",
-        "avg_benefit_cost_ratio": "Benefit-cost ratio",
         "avg_runtime_per_trace_ms": "Runtime / trace (ms)",
         "avg_actual_sampling_rate": "Actual sampling rate",
-        "avg_controllability": "Controllability",
-        "ac_at_1_mean": "AC@1 mean",
-        "ac_at_3_mean": "AC@3 mean",
+        "avg_benefit_cost_ratio": "Benefit-cost ratio",
+        "accuracy_at_1_mean": "Accuracy@1 mean",
+        "accuracy_at_3_mean": "Accuracy@3 mean",
     }
     return labels.get(metric, metric.replace("_", " ").title())
 
@@ -174,9 +172,10 @@ def item_label(row: dict[str, object], columns: list[str]) -> str:
 
 def build_plot_rows(df: pl.DataFrame, spec: PlotSpec, metrics: list[str]) -> list[dict[str, str]]:
     rows: list[dict[str, str]] = []
-    source_rows = df.sort(spec.item_columns).iter_rows(named=True)
+    item_columns = [column for column in spec.item_columns if column in df.columns]
+    source_rows = df.sort(item_columns).iter_rows(named=True) if item_columns else df.iter_rows(named=True)
     for row in source_rows:
-        item = item_label(row, spec.item_columns)
+        item = item_label(row, item_columns)
         for metric in metrics:
             value = finite_float(row.get(metric))
             if value is None:
@@ -329,7 +328,7 @@ def write_report(path: Path, entries: list[dict[str, object]], summary_paths: li
             "- RQ summary generation: performed by `bash scripts/run_reduced_all.sh` before this plotting step.",
             "- Plot-data comparison: `scripts/run_reduced_plots.sh` compares CSV/JSON/Markdown outputs against `artifact_expected/reduced/figures/` when expected files are present.",
             "- Image validation: `scripts/run_reduced_plots.sh` checks each generated PNG exists and is non-empty; image bytes are not compared.",
-            "- Scope: reduced/offline artifact evidence only; full-dataset plotting and exact full-paper figure reproduction remain outside this snapshot.",
+            "- Scope: reduced artifact evidence only; full-dataset plotting and exact full-paper figure reproduction remain outside this snapshot.",
             "",
         ]
     )
@@ -352,23 +351,23 @@ def main() -> None:
         ),
         PlotSpec(
             "rq2",
-            "RQ2 Reduced RCA Effectiveness (Artifact RQ2 / Paper RQ3)",
+            "RQ2 Reduced Ablation Metrics",
             args.rq2_summary,
-            "rq2_rca_effectiveness_ac.png",
-            "rq2_rca_effectiveness_plot_data.csv",
+            "rq2_ablation_metrics.png",
+            "rq2_ablation_plot_data.csv",
             RQ2_METRICS,
-            ["algorithm", "sampler_name", "sampler_rate"],
-            max_items=24,
+            ["display_name"],
+            max_items=16,
         ),
         PlotSpec(
             "rq3",
-            "RQ3 Reduced Ablation Metrics (Artifact RQ3 / Paper RQ2)",
+            "RQ3 Reduced RCA Effectiveness",
             args.rq3_summary,
-            "rq3_ablation_metrics.png",
-            "rq3_ablation_plot_data.csv",
+            "rq3_rca_effectiveness_ac.png",
+            "rq3_rca_effectiveness_plot_data.csv",
             RQ3_METRICS,
-            ["display_name"],
-            max_items=16,
+            ["algorithm", "sampler_name", "sampler_rate", "sampler_mode"],
+            max_items=24,
         ),
         PlotSpec(
             "rq4",

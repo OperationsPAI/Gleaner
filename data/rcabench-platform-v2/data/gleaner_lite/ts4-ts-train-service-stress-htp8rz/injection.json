@@ -1,0 +1,35 @@
+{
+    "benchmark": "clickhouse",
+    "created_at": "2025-08-18T21:40:28.825Z",
+    "description": "Fault for task 4309d8c1-37d9-459f-8e0b-4283788f3f60",
+    "display_config": "{\"duration\":4,\"injection_point\":{\"app_name\":\"ts-train-service\",\"class_name\":\"train.controller.TrainController\",\"method_name\":\"update\"},\"mem_type\":2,\"namespace\":\"ts\"}",
+    "end_time": "2025-08-18T21:44:28Z",
+    "engine_config": "{\"name\":\"InjectionConf\",\"range\":[0,30],\"children\":{\"28\":{\"name\":\"28\",\"range\":[0,3],\"children\":{\"0\":{\"name\":\"0\",\"range\":[1,60],\"children\":null,\"description\":\"Time Unit Minute\",\"value\":4},\"1\":{\"name\":\"1\",\"range\":[0,0],\"children\":null,\"description\":\"{ts: 0}\",\"value\":0},\"2\":{\"name\":\"2\",\"range\":[0,887],\"children\":null,\"description\":\"Flattened app+method index\",\"value\":704},\"3\":{\"name\":\"3\",\"range\":[1,2],\"children\":null,\"description\":\"Memory Type (1=Heap, 2=Stack)\",\"value\":2}},\"description\":\"\",\"value\":0}},\"description\":\"\",\"value\":28}",
+    "fault_type": 28,
+    "ground_truth": {
+        "container": [
+            "ts-train-service"
+        ],
+        "function": [
+            "train.controller.TrainController.update"
+        ],
+        "metric": [
+            "memory"
+        ],
+        "pod": [
+            "ts-train-service-7b65db49f4-v9kkp"
+        ],
+        "service": [
+            "ts-train-service"
+        ],
+        "span": null
+    },
+    "id": 6225,
+    "injection_name": "ts4-ts-train-service-stress-htp8rz",
+    "pre_duration": 4,
+    "start_time": "2025-08-18T21:40:30Z",
+    "status": 2,
+    "task": null,
+    "task_id": "4309d8c1-37d9-459f-8e0b-4283788f3f60",
+    "updated_at": "2025-08-18T21:44:30.584Z"
+}

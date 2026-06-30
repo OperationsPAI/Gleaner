@@ -20,6 +20,7 @@ from tqdm.auto import tqdm
 ROOT = Path(__file__).resolve().parents[2]
 for path in [
     ROOT,
+    ROOT / "src",
     ROOT / "third_party" / "TraStrainer" / "src",
     ROOT / "third_party" / "ShapleyIQ" / "src",
     ROOT / "third_party" / "Nezha" / "src",
@@ -39,13 +40,10 @@ from rcabench_platform.v2.utils.env import getenv_bool
 from gleaner import (
     AnomalyPureDiversityVariant,
     GleanerSampler,
-    LatencyDominateVariant,
-    LogDominateVariant,
     NoAnomalyDetectionVariant,
     NoDPPVariant,
     NoLogsNoADVariant,
     NoLogsVariant,
-    NoRebalanceVariant,
     PureDiversityVariant,
     TopScoreVariant,
     WLKernelVariant,
@@ -81,9 +79,6 @@ def register_samplers() -> None:
             "gleaner_wl_kernel": WLKernelVariant,
             "gleaner_no_dpp": NoDPPVariant,
             "gleaner_top_score": TopScoreVariant,
-            "gleaner_log_dominate": LogDominateVariant,
-            "gleaner_latency_dominate": LatencyDominateVariant,
-            "gleaner_no_rebalance": NoRebalanceVariant,
             "gleaner_anomaly_pure_diversity": AnomalyPureDiversityVariant,
         }
     )

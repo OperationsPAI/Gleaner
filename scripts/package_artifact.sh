@@ -22,7 +22,6 @@ ARCHIVE_PATH="${DIST_DIR}/${ARCHIVE_NAME}"
 SHA_PATH="${ARCHIVE_PATH}.sha256"
 
 REQUIRED_PATHS=(
-  "ARTIFACT_README.md"
   "REQUIREMENTS.md"
   "STATUS.md"
   "README.md"
@@ -33,15 +32,13 @@ REQUIRED_PATHS=(
   "src"
   "scripts"
   "configs"
-  "agent_skills/gleaner-new-inputs/SKILL.md"
-  "agent_skills/gleaner-sampler/SKILL.md"
-  "agent_skills/gleaner-rca/SKILL.md"
+  "docs/agent_skills/gleaner-new-inputs/SKILL.md"
+  "docs/agent_skills/gleaner-sampler/SKILL.md"
+  "docs/agent_skills/gleaner-rca/SKILL.md"
   "docs"
   "artifact_expected/reduced"
-  "data/artifact/reduced/MANIFEST.json"
-  "data/artifact/reduced/SHA256SUMS"
-  "data/artifact/reduced/rq1/gleaner_source.aggregated_perf.parquet"
-  "data/artifact/reduced/rq1/gleaner_source.detailed_perf.parquet"
+  "data/rcabench-platform-v2/meta/gleaner_lite/index.parquet"
+  "data/rcabench-platform-v2/meta/tracepicker_lite/index.parquet"
 )
 
 THIRD_PARTY_DIRS=(
@@ -76,6 +73,10 @@ copy_path() {
       --exclude='.mypy_cache/*' \
       --exclude='.cache' \
       --exclude='.cache/*' \
+      --exclude='sampled' \
+      --exclude='sampled/*' \
+      --exclude='*/sampled' \
+      --exclude='*/sampled/*' \
       --exclude='*.pyc' \
       --exclude='*.pyo' \
       --exclude='*.tmp' \
@@ -139,7 +140,6 @@ STAGE="${TMP_DIR}/${PACKAGE_BASENAME}"
 mkdir -p "${STAGE}"
 
 TOP_LEVEL_FILES=(
-  "ARTIFACT_README.md"
   "REQUIREMENTS.md"
   "STATUS.md"
   "README.md"
@@ -152,7 +152,7 @@ TOP_LEVEL_FILES=(
   ".gitmodules"
   "main.py"
 )
-TOP_LEVEL_DIRS=("src" "scripts" "configs" "docs" "agent_skills")
+TOP_LEVEL_DIRS=("src" "scripts" "configs" "docs")
 
 for rel in "${TOP_LEVEL_FILES[@]}"; do
   [[ -e "${ROOT}/${rel}" ]] && copy_path "${rel}"
@@ -162,7 +162,7 @@ for rel in "${TOP_LEVEL_DIRS[@]}"; do
 done
 
 copy_path "artifact_expected/reduced"
-copy_path "data/artifact/reduced"
+copy_path "data/rcabench-platform-v2"
 for rel in "${THIRD_PARTY_DIRS[@]}"; do
   copy_path "${rel}"
 done
@@ -226,16 +226,14 @@ require_absent_regex() {
   fi
 }
 
-require_in_archive "ARTIFACT_README.md"
 require_in_archive "ARCHIVE_MANIFEST.tsv"
-require_in_archive "agent_skills/gleaner-new-inputs/SKILL.md"
-require_in_archive "agent_skills/gleaner-sampler/SKILL.md"
-require_in_archive "agent_skills/gleaner-rca/SKILL.md"
+require_in_archive "docs/agent_skills/gleaner-new-inputs/SKILL.md"
+require_in_archive "docs/agent_skills/gleaner-sampler/SKILL.md"
+require_in_archive "docs/agent_skills/gleaner-rca/SKILL.md"
 require_in_archive "third_party/Nezha/"
 require_in_archive "platform/rcabench-platform/"
-require_in_archive "data/artifact/reduced/MANIFEST.json"
-require_in_archive "data/artifact/reduced/rq1/gleaner_source.aggregated_perf.parquet"
-require_in_archive "data/artifact/reduced/rq1/gleaner_source.detailed_perf.parquet"
+require_in_archive "data/rcabench-platform-v2/meta/gleaner_lite/index.parquet"
+require_in_archive "data/rcabench-platform-v2/meta/tracepicker_lite/index.parquet"
 require_absent_regex '(^|/)\.git(/|$)' '.git/'
 require_absent_regex '(^|/)\.venv(/|$)' '.venv/'
 require_absent_regex '^dist(/|$)' 'dist/'

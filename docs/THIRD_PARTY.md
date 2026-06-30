@@ -1,6 +1,6 @@
 # Third-party Components
 
-The artifact vendors baseline samplers and RCA algorithms as git submodules pinned to the exact commits used by the AE workspace. It also includes the shared `rcabench-platform` runtime as a first-class platform submodule under `platform/`. These repositories are included in the local archive as file contents, not as bare gitlinks, so reviewers can inspect the referenced code from the package.
+The artifact vendors baseline samplers and RCA algorithms as git submodules pinned to the exact commits used by the AE workspace. It also includes the shared `rcabench-platform` runtime as a first-class platform submodule under `platform/`. These repositories are included in the Docker image archives as file contents, not as bare gitlinks, so reviewers can inspect the referenced code from the package.
 
 ## Pinned Sources And Access Checks
 
@@ -36,16 +36,16 @@ License status is based only on files present in the vendored submodule director
 - importability of the local `gleaner` package;
 - installed `rcabench-platform` package metadata.
 
-The reduced RQ wrappers exercise committed reduced reports and RCA evidence, but they do not execute the full TracePicker, TraStrainer, Nezha, MicroRCA, or ShapleyIQ upstream training/inference pipelines. Nezha, ShapleyIQ/MicroRCA, and TraStrainer/Sifter/Sieve are available as uv workspace members for full-path development; TracePicker is intentionally isolated in its own Python 3.12 environment. Full component-level execution is outside the reviewer-verified reduced scope because the full raw datasets are not packaged and TracePicker has a separate runtime stack.
+The reduced RQ wrappers regenerate Gleaner sampler summaries, TracePicker Dataset B trace-pattern-coverage summaries, and RQ2 RCA summaries from packaged converted datasets, but they do not execute the full upstream training/inference pipelines for every baseline. Nezha, ShapleyIQ/MicroRCA, and TraStrainer/Sifter/Sieve are available as uv workspace members for full-path development; TracePicker is intentionally isolated in its own Python 3.12 environment. Full component-level execution is outside the <=1-day reduced reviewer scope because the full path is long-running and TracePicker has a separate runtime stack.
 
 ## Dependency-risk Decisions
 
-Nezha, ShapleyIQ/MicroRCA, and TraStrainer/Sifter/Sieve are added as uv workspace members because their updated top-level `pyproject.toml` files align with `rcabench-platform==0.4.1`. TracePicker is intentionally excluded from the workspace and should use a separate Python 3.12 uv environment. The reduced/offline artifact path consumes committed parquet reports and expected outputs instead of rebuilding every baseline environment.
+Nezha, ShapleyIQ/MicroRCA, and TraStrainer/Sifter/Sieve are added as uv workspace members because their updated top-level `pyproject.toml` files align with `rcabench-platform==0.4.1`. TracePicker is intentionally excluded from the workspace and should use a separate Python 3.12 uv environment. The reduced live-input artifact path reruns portable platform commands on packaged converted datasets instead of rebuilding every full upstream baseline environment.
 
 Known risks that remain outside the reduced reviewer path:
 
 - TracePicker requests Python `==3.12.*` in `third_party/TracePicker/pyproject.toml`, while this artifact environment uses Python 3.13.
 - TracePicker pins heavy CUDA-oriented dependencies through direct wheel URLs, including `torch==2.4.0`, `dgl`, and `geatpy==2.7.0`.
-- The older ShapleyIQ internal requirements file under `third_party/ShapleyIQ/ShapleyIQ/requirements.txt` contains a legacy Python stack; the artifact uses the top-level workspace `pyproject.toml` and committed reduced RCA evidence for the verified path.
+- The older ShapleyIQ internal requirements file under `third_party/ShapleyIQ/ShapleyIQ/requirements.txt` contains a legacy Python stack; the artifact uses the top-level workspace `pyproject.toml` and live reduced RCA reruns for the verified path.
 
 A future full-path artifact should add component-level smoke tests for the workspace baselines and the isolated TracePicker environment after the full raw-data runners are pinned and verified.

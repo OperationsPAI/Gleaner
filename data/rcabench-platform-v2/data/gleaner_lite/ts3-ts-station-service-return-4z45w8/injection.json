@@ -1,0 +1,33 @@
+{
+    "benchmark": "clickhouse",
+    "created_at": "2025-09-02T04:32:36.087Z",
+    "description": "Fault for task 25b7fb67-19cb-43ac-bfc6-6d9aef3f7f10",
+    "display_config": "{\"duration\":4,\"injection_point\":{\"app_name\":\"ts-station-service\",\"class_name\":\"fdse.microservice.StationApplication\",\"method_name\":\"main\"},\"namespace\":\"ts\",\"return_type\":1,\"return_value_opt\":0}",
+    "end_time": "2025-09-02T04:36:36Z",
+    "engine_config": "{\"name\":\"InjectionConf\",\"range\":[0,30],\"children\":{\"24\":{\"name\":\"24\",\"range\":[0,4],\"children\":{\"0\":{\"name\":\"0\",\"range\":[1,60],\"children\":null,\"description\":\"Time Unit Minute\",\"value\":4},\"1\":{\"name\":\"1\",\"range\":[0,0],\"children\":null,\"description\":\"{ts: 0}\",\"value\":0},\"2\":{\"name\":\"2\",\"range\":[0,887],\"children\":null,\"description\":\"Flattened app+method index\",\"value\":659},\"3\":{\"name\":\"3\",\"range\":[1,2],\"children\":null,\"description\":\"Return Type (1=String, 2=Int)\",\"value\":1},\"4\":{\"name\":\"4\",\"range\":[0,1],\"children\":null,\"description\":\"Return value option (0=Default, 1=Random)\",\"value\":0}},\"description\":\"\",\"value\":0}},\"description\":\"\",\"value\":24}",
+    "fault_type": 24,
+    "ground_truth": {
+        "container": [
+            "ts-station-service"
+        ],
+        "function": [
+            "fdse.microservice.StationApplication.main"
+        ],
+        "metric": null,
+        "pod": [
+            "ts-station-service-7ff47b8db8-6s9tr"
+        ],
+        "service": [
+            "ts-station-service"
+        ],
+        "span": null
+    },
+    "id": 7709,
+    "injection_name": "ts3-ts-station-service-return-4z45w8",
+    "pre_duration": 4,
+    "start_time": "2025-09-02T04:32:37Z",
+    "status": 2,
+    "task": null,
+    "task_id": "25b7fb67-19cb-43ac-bfc6-6d9aef3f7f10",
+    "updated_at": "2025-09-02T04:36:37.676Z"
+}

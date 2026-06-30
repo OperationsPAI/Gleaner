@@ -1,0 +1,10 @@
+{
+    "normal_start_time": "2022-01-31 16:00:03.090000+00:00",
+    "normal_end_time": "2022-02-28 02:00:02.006000+00:00",
+    "abnormal_start_time": "2022-02-28 02:00:02.006000+00:00",
+    "abnormal_end_time": "2022-02-28 02:00:02.006000+00:00",
+    "injection_name": "none",
+    "fault_type": "none",
+    "data_type": "normal_only",
+    "source": "tracepicker"
+}
